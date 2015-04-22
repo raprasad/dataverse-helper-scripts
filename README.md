@@ -14,7 +14,7 @@ Scripts for two basic tasks:
   1. Update EZID target urls for migrated datasets.  
   2. Quality check: Verify that the DOIs point to the correct url.
 
-### Input
+### Input File
 
 - Pipe ```|``` delimited .csv file with the following data:
   1.  Dataset id (pk from the 4.0 db table *dataset*)
@@ -27,6 +27,22 @@ Scripts for two basic tasks:
 66318|doi|10.7910/DVN|29117
 66317|doi|10.7910/DVN|28746
 66316|doi|10.7910/DVN|29559
+```
+
+#### Input file creation
+
+The input file is the result of a query from the postres psql shell:
+
+* Basic query
+```sql
+select id, protocol, authority, identifier from dataset where protocol='doi' and authority='10.7910/DVN' order by id desc;
+```
+
+* Basic query to pipe ```|``` delimited text file
+
+```sql
+COPY (select id, protocol, authority, identifier from dataset where protocol='doi' and authority='10.7910/DVN' order by id desc) TO
+'/tmp/file-name-with-dataset-ids.csv' (format csv, delimiter '|')
 ```
 
 ### Running the script
