@@ -1,0 +1,16 @@
+53231|doi|10.7910/DVN1|22630|test dataset
+55840|doi|10.7910/DVN1|22644|looks like a test ds
+56412|doi|10.7910/DVN|28031|not registered
+56413|doi|10.7910/DVN|28029|not registered 
+56417|doi|10.7910/DVN|28022|not registered 
+56430|doi|10.7910/DVN|28032|not registered 
+56432|doi|10.7910/DVN|28030|not registered 
+56434|doi|10.7910/DVN|28024|not registered 
+56438|doi|10.7910/DVN|28027|not registered 
+56440|doi|10.7910/DVN|28026|not registered 
+56442|doi|10.7910/DVN|28019|not registered 
+56446|doi|10.7910/DVN|28021|not registered 
+56447|doi|10.7910/DVN|28033|not registered 
+56762|doi|10.7910/DVN|26235|not registered
+59833|doi|10.7910/DVN|25329|not registered
+64946|doi|10.7910/DVN|26305|not registered

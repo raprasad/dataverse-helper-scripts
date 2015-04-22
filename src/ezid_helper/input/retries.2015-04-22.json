@@ -1,0 +1,275 @@
+{
+    "56016": {
+        "success": false,
+        "input_line": "56016|doi|10.7910/DVN|24042",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/24042",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/24042",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=56016"
+    },
+    "60522": {
+        "success": false,
+        "input_line": "60522|doi|10.7910/DVN|29426",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29426",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29426",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60522"
+    },
+    "59017": {
+        "input_line": "59017|doi|10.7910/DVN|26601",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/26601",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/26601",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=59017"
+    },
+    "53065": {
+        "input_line": "53065|doi|10.7910/DVN|29316",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29316",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29316",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=53065"
+    },
+    "56555": {
+        "input_line": "56555|doi|10.7910/DVN|30001",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/30001",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/30001",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=56555"
+    },
+    "59542": {
+        "success": false,
+        "input_line": "59542|doi|10.7910/DVN|XVSRN",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/XVSRN",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XVSRN",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=59542"
+    },
+    "60665": {
+        "success": false,
+        "input_line": "60665|doi|10.7910/DVN|29961",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29961",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29961",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60665"
+    },
+    "60663": {
+        "input_line": "60663|doi|10.7910/DVN|29960",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29960",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29960",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60663"
+    },
+    "60669": {
+        "input_line": "60669|doi|10.7910/DVN|29962",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29962",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29962",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60669"
+    },
+    "66093": {
+        "input_line": "66093|doi|10.7910/DVN|29521",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29521",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29521",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=66093"
+    },
+    "53320": {
+        "success": false,
+        "input_line": "53320|doi|10.7910/DVN|28634",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/28634",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/28634",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=53320"
+    },
+    "52982": {
+        "input_line": "52982|doi|10.7910/DVN|29996",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29996",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29996",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=52982"
+    },
+    "52440": {
+        "success": false,
+        "input_line": "52440|doi|10.7910/DVN|29772",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29772",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29772",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=52440"
+    },
+    "53011": {
+        "success": false,
+        "input_line": "53011|doi|10.7910/DVN|29679",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29679",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29679",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=53011"
+    },
+    "60683": {
+        "success": false,
+        "input_line": "60683|doi|10.7910/DVN|29690",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29690",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29690",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60683"
+    },
+    "53014": {
+        "input_line": "53014|doi|10.7910/DVN|29809",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29809",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29809",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=53014"
+    },
+    "53035": {
+        "input_line": "53035|doi|10.7910/DVN|29933",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29933",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29933",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=53035"
+    },
+    "65121": {
+        "success": false,
+        "input_line": "65121|doi|10.7910/DVN|29569",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29569",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29569",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=65121"
+    },
+    "46667": {
+        "input_line": "46667|doi|10.7910/DVN|29455",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29455",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29455",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=46667"
+    },
+    "47727": {
+        "success": false,
+        "input_line": "47727|doi|10.7910/DVN|29964",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29964",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29964",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=47727"
+    },
+    "46667": {
+        "input_line": "46667|doi|10.7910/DVN|29455",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29455",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29455",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=46667"
+    },
+    "58847": {
+        "input_line": "58847|doi|10.7910/DVN|16624",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/16624",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/16624",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=58847"
+    },
+    "53052": {
+        "success": false,
+        "input_line": "53052|doi|10.7910/DVN|29636",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29636",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29636",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=53052"
+    },
+    "48908": {
+        "input_line": "48908|doi|10.7910/DVN|29428",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29428",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29428",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=48908"
+    },
+    "55684": {
+        "input_line": "55684|doi|10.7910/DVN|29442",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29442",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29442",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=55684"
+    },
+    "52976": {
+        "success": false,
+        "input_line": "52976|doi|10.7910/DVN|29499",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29499",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29499",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=52976"
+    },
+    "56772": {
+        "success": false,
+        "input_line": "56772|doi|10.7910/DVN|27315",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/27315",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/27315",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=56772"
+    },
+    "60141": {
+        "success": false,
+        "input_line": "60141|doi|10.7910/DVN|29156",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29156",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29156",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60141"
+    },
+    "60398": {
+        "input_line": "60398|doi|10.7910/DVN|29113",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29113",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29113",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60398"
+    },
+    "60614": {
+        "input_line": "60614|doi|10.7910/DVN|28756",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/28756",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/28756",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60614"
+    },
+    "60659": {
+        "success": false,
+        "input_line": "60659|doi|10.7910/DVN|29970",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29970",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29970",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=60659"
+    },
+    "52939": {
+        "input_line": "52939|doi|10.7910/DVN|29614",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29614",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29614",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=52939"
+    },
+    "58897": {
+        "success": false,
+        "input_line": "58897|doi|10.7910/DVN|29029",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29029",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29029",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=58897"
+    },
+    "52934": {
+        "success": false,
+        "input_line": "52934|doi|10.7910/DVN|29932",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29932",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29932",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=52934"
+    },
+    "66114": {
+        "success": false,
+        "input_line": "66114|doi|10.7910/DVN|26306",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/26306",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/26306",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=66114"
+    },
+    "52891": {
+        "input_line": "52891|doi|10.7910/DVN|29505",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29505",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29505",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=52891"
+    },
+    "53026": {
+        "success": false,
+        "input_line": "53026|doi|10.7910/DVN|29495",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29495",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29495",
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=53026"
+    },
+    "61293": {
+        "input_line": "61293|doi|10.7910/DVN|29910",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/29910",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/29910",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=61293"
+    },
+    "59543": {
+        "input_line": "59543|doi|10.7910/DVN|R6S2P",
+        "expected_url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/R6S2P",
+        "current_url": "http://thedata.harvard.edu/dvn/study?globalId=doi:10.7910/DVN/R6S2P",
+        "success": false,
+        "direct_db_url": "https://dataverse.harvard.edu/dataset.xhtml?id=59543"
+    }
+}

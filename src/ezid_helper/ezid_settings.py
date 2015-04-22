@@ -17,10 +17,19 @@ from helper_utils.msg_util import *
 # Set input/output files/directories
 # ----------------------------
 
-INPUT_FILE = join(EZID_DIR, 'input', 'dvn-vm5.rprasad.2015-04-21.csv')
+#INPUT_FILE = join(EZID_DIR, 'input', 'dvn-vm5.rprasad.2015-04-21.csv')
 
 OUTPUT_DIRECTORY = join(EZID_DIR, 'output')
 DOI_OUTPUT_FOLDER = join(OUTPUT_DIRECTORY, 'doi-responses')
+
+INPUT_FILE_RETRIES_01 = join(EZID_DIR, 'input', 'retries.2015-04-22.json')
+
+#INPUT_FILE = join(EZID_DIR, 'input', 'input-not-registered-2015-0422.txt')
+#INPUT_FILE = join(EZID_DIR, 'input', 'prod.landreev.2015-04-22.csv')
+INPUT_FILE = join(EZID_DIR, 'input', 'updates.landreev.2015-04-22.txt')
+
+OUTPUT_FILE_FOR_UPDATES = join(OUTPUT_DIRECTORY, 'updates-diff-prod.landreev.2015-04-22.csv')
+
 
 for outdir in (OUTPUT_DIRECTORY, DOI_OUTPUT_FOLDER):
     if not isdir(outdir):
@@ -28,7 +37,8 @@ for outdir in (OUTPUT_DIRECTORY, DOI_OUTPUT_FOLDER):
         msg('Directory created: %s' % outdir)
 
 VERIFY_OUTPUT_FILE = join(OUTPUT_DIRECTORY, 'verified-dois.json')
-VERIFY_NOT_FOUND_FILE = join(OUTPUT_DIRECTORY, 'not-found-dois.json')
+VERIFY_NOT_FOUND_FILE = join(OUTPUT_DIRECTORY, 'verify-not-found-dois.json')
+
 
 # ----------------------------
 # Any needed credentials -

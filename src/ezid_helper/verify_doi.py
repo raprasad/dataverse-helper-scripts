@@ -80,9 +80,8 @@ def check_doi_files(start_num=1, end_num=9999):
         if not isfile(DOI_OUTPUT_FNAME):
             not_found_doi = { int(dataset_id) : dict(input_line=fline,
                                                   dv_url=expected_text,
-                                                  dv_url2=direct_db_link,
-                                              )
-                        }
+                                                  direct_db_url=direct_db_link)
+                            }
             save_verified_doi_info(not_found_doi, VERIFY_NOT_FOUND_FILE)
             msgt("Info file not found: %s" % DOI_OUTPUT_FNAME)
             continue
@@ -91,21 +90,25 @@ def check_doi_files(start_num=1, end_num=9999):
         if content.find(expected_text) > -1:
             single_doi = { int(dataset_id) : dict(success=True,
                                               current_url=expected_text,
-                                              expected_url=expected_text)
+                                              expected_url=expected_text,
+                                              direct_db_url=direct_db_link,
+                                              input_line=fline)
                         }
         else:
             actual_url = 'unknown'
-            for fline in content.split('\n'):
+            for ezid_line in content.split('\n'):
                 #_target: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0NMD8
-                items = fline.split(":", 1)
+                items = ezid_line.split(":", 1)
                 if len(items)==2 and items[0]=='_target':
                     actual_url = items[1].strip()
 
-            single_doi = dict(dataset_id=dict(success=False,
+            single_doi ={ int(dataset_id) : dict(success=False,
                                               current_url=actual_url,
-                                              expected_url=expected_text),
-                              )
-        save_verified_doi_info(single_doi, VERIFY_OUTPUT_FILE)
+                                              expected_url=expected_text,
+                                              direct_db_url=direct_db_link,
+                                              input_line=fline)
+                          }
+            save_verified_doi_info(single_doi, VERIFY_OUTPUT_FILE)
 
 
 def download_doi_metadata(start_num=1, end_num=9999):
@@ -179,7 +182,7 @@ def download_doi_metadata(start_num=1, end_num=9999):
             msgt('Failed at line %s\n%s' % (cnt, fline))
 
 if __name__=='__main__':
-    check_doi_files(start_num=1, end_num=1000)
+    check_doi_files(start_num=1, end_num=8000)
     #download_doi_metadata(start_num=3001, end_num=8000)
 
 
@@ -193,11 +196,6 @@ http://ezid.cdlib.org/lookup
 """
 
 """
-login_url = 'https://ezid.cdlib.org/login'
-sess = requests.Session()
-sess.auth = ('user', 'pass')
-msgt('login: %s' % login_url)
-r = sess.get(login_url)
 
 print r.status_code
 print r.text
