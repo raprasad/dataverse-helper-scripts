@@ -1,0 +1,7 @@
+{
+  "API_KEY" : "-dataverse-api-key-for-ezid-update-",
+  "SERVER" : "http://dv-server-url.harvard.edu",
+  "EZID_USERNAME" : "for-verify-script",
+  "EZID_PASSWORD" : "for-verify-script"
+}
+ 

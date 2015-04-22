@@ -1,3 +1,9 @@
+.idea
+.idea/*
+src/ezid_helper/creds.json
+src/ezid_helper/creds-*.json
+src/ezid_helper/output/doi-responses/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
