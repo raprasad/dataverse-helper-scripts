@@ -3,7 +3,7 @@
 This repository contains a variety of not-often-used scripts used for Dataverse related work.
 
 
-1.  EZID DOI update/verify - Update EZID target urls for migrated datasets.  Verify that the DOIs point to the correct url.
+1.  [EZID DOI update/verify](#ezid-doi-updateverify) - Update EZID target urls for migrated datasets.  Verify that the DOIs point to the correct url.
 
 
 ## EZID DOI update/verify
