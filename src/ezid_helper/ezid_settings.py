@@ -22,13 +22,14 @@ from helper_utils.msg_util import *
 OUTPUT_DIRECTORY = join(EZID_DIR, 'output')
 DOI_OUTPUT_FOLDER = join(OUTPUT_DIRECTORY, 'doi-responses')
 
-INPUT_FILE_RETRIES_01 = join(EZID_DIR, 'input', 'retries.2015-04-22.json')
+#INPUT_FILE_RETRIES_01 = join(EZID_DIR, 'input', 'retries.2015-04-22.json')
+INPUT_FILE_RETRIES_02 = join(EZID_DIR, 'input', 'retries02.2015-04-22.json')
 
 #INPUT_FILE = join(EZID_DIR, 'input', 'input-not-registered-2015-0422.txt')
 #INPUT_FILE = join(EZID_DIR, 'input', 'prod.landreev.2015-04-22.csv')
-INPUT_FILE = join(EZID_DIR, 'input', 'updates.landreev.2015-04-22.txt')
-
-OUTPUT_FILE_FOR_UPDATES = join(OUTPUT_DIRECTORY, 'updates-diff-prod.landreev.2015-04-22.csv')
+#INPUT_FILE = join(EZID_DIR, 'input', 'updates.landreev.2015-04-22.txt')
+INPUT_FILE = join(EZID_DIR, 'input', 'only-registered.kmiller.2015-04-22.csv')
+OUTPUT_FILE_FOR_UPDATES = join(OUTPUT_DIRECTORY, 'updates-only-registered.kmiller.2015-04-22.csv')
 
 
 for outdir in (OUTPUT_DIRECTORY, DOI_OUTPUT_FOLDER):
@@ -36,8 +37,8 @@ for outdir in (OUTPUT_DIRECTORY, DOI_OUTPUT_FOLDER):
         makedirs(outdir)
         msg('Directory created: %s' % outdir)
 
-VERIFY_OUTPUT_FILE = join(OUTPUT_DIRECTORY, 'verified-dois.json')
-VERIFY_NOT_FOUND_FILE = join(OUTPUT_DIRECTORY, 'verify-not-found-dois.json')
+VERIFY_OUTPUT_FILE = join(OUTPUT_DIRECTORY, 'prod-verified-dois.json')
+VERIFY_NOT_FOUND_FILE = join(OUTPUT_DIRECTORY, 'prod-verify-not-found-dois.json')
 
 
 # ----------------------------

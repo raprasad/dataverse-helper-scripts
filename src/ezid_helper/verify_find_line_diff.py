@@ -18,10 +18,14 @@ def find_diffs():
 
     same.discard('\n')
 
+    fnames = []
     for line in same:
         print line.strip()
-            #file_out.write(line)
-            
+        fname = join(DOI_OUTPUT_FOLDER, '%s.txt' % line.split('|')[0])
+        if isfile(fname):
+            fnames.append(fname)
+
+    print '\n'.join(fnames)
 
 
 if __name__=='__main__':

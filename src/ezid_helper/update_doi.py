@@ -1,5 +1,5 @@
 from ezid_settings import *
-
+import os
 import json
 import requests
 
@@ -30,10 +30,10 @@ def get_modify_doi_url(dataset_id):
 
 
 
-def run_direct_ezid_doi_update():
-    assert isfile(INPUT_FILE_RETRIES_01), "file not found: %s" % INPUT_FILE_RETRIES_01
+def run_direct_ezid_doi_update_on_json_file(json_fname):
+    assert isfile(json_fname), "file not found: %s" % json_fname
 
-    json_info = json.loads(open(INPUT_FILE_RETRIES_01, 'r').read())
+    json_info = json.loads(open(json_fname, 'r').read())
 
     cnt = 0
     for dataset_id, dict in json_info.items():
@@ -44,6 +44,11 @@ def run_direct_ezid_doi_update():
         msgt('(%s) update: %s' % (cnt, info_line))
         dataset_id, protocol, authority, identifier = info_line.split('|')
 
+
+        #DOI_OUTPUT_FNAME = join(DOI_OUTPUT_FOLDER, '%s.json' % dataset_id)
+        #if isfile(DOI_OUTPUT_FNAME):
+        #    os.remove(DOI_OUTPUT_FNAME) 
+        #continue
         api_url = 'https://ezid.cdlib.org/id/doi:%s/%s' % (authority, identifier)
 
         payload = '_target=https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:%s/%s' % (authority, identifier)
@@ -54,6 +59,7 @@ def run_direct_ezid_doi_update():
         r = requests.post(api_url, data=payload, auth=sess_auth)
         msg('status_code: %s' % r.status_code)
         msg('text: %s' % r.text)
+
 
 def run_direct_ezid_doi_update(protocol, authority, identifier):
 
@@ -167,8 +173,8 @@ def run_doi_update(start_num=1, end_num=9999):
         
 
 if __name__=='__main__':
-    run_doi_update(start_num=1, end_num=7900)
-    #run_direct_ezid_doi_update()
+    #run_doi_update(start_num=1, end_num=7900)
+    run_direct_ezid_doi_update_on_json_file(INPUT_FILE_RETRIES_02)
     
 """
 pip install requests[security]

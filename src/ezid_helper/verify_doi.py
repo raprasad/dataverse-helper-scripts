@@ -95,6 +95,9 @@ def check_doi_files(start_num=1, end_num=9999):
                                               input_line=fline)
                         }
         else:
+            #os.remove(DOI_OUTPUT_FNAME)
+            #print 'file deleted: %s' % DOI_OUTPUT_FNAME
+            #continue
             actual_url = 'unknown'
             for ezid_line in content.split('\n'):
                 #_target: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0NMD8
@@ -182,8 +185,8 @@ def download_doi_metadata(start_num=1, end_num=9999):
             msgt('Failed at line %s\n%s' % (cnt, fline))
 
 if __name__=='__main__':
-    check_doi_files(start_num=1, end_num=8000)
-    #download_doi_metadata(start_num=3001, end_num=8000)
+    #check_doi_files(start_num=1, end_num=9999)
+    download_doi_metadata(start_num=1, end_num=9999)
 
 
 """
