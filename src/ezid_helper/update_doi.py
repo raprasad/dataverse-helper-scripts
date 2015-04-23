@@ -61,6 +61,48 @@ def run_direct_ezid_doi_update_on_json_file(json_fname):
         msg('text: %s' % r.text)
 
 
+def run_dataverse_doi_update_on_json_file(json_fname):
+    assert isfile(json_fname), "file not found: %s" % json_fname
+
+    json_info = json.loads(open(json_fname, 'r').read())
+
+    cnt = 0
+    for dataset_id, dict in json_info.items():
+        info_line = dict.get('input_line', None)
+        if info_line is None:
+            msgx("info line not found in dict: %s for database_id %s" % (dict, dataset_id))
+        cnt += 1
+        msgt('(%s) update: %s' % (cnt, info_line))
+        dataset_id, protocol, authority, identifier = info_line.split('|')
+
+        DOI_OUTPUT_FNAME = join(DOI_OUTPUT_FOLDER, '%s.json' % dataset_id)
+        if isfile(DOI_OUTPUT_FNAME):
+            os.remove(DOI_OUTPUT_FNAME) 
+            msg('removed: %s' % DOI_OUTPUT_FNAME)
+            continue
+        
+        #------------------------------------
+        # Run against dataverse API
+        #------------------------------------                
+        api_url = get_modify_doi_url(dataset_id)
+        msg('api_url: %s' % api_url)
+
+        r = requests.get(api_url)
+        msgd('r.status_code: %s' % r.status_code)
+        msgd('r.text: %s' % r.text)
+
+        msg('get_dataset_api_url:\n%s' % get_dataset_api_url(dataset_id))
+        if r.status_code == 200:
+            fh = open(OUTPUT_FILE_FOR_UPDATES, 'a')
+            fh.write('%s|%s\n' % (info_line, 'true'))
+            msg('file updated')
+        else:    
+            FAIL_LINES.append(cnt)
+            #msgx('Failed at line %s\n%s' % (cnt, fline))
+        
+        msgd('FAIL_LINES: %s' % FAIL_LINES)
+        
+
 def run_direct_ezid_doi_update(protocol, authority, identifier):
 
     assert protocol is not None, 'protocol cannot be None'
@@ -130,6 +172,7 @@ def run_doi_update(start_num=1, end_num=9999):
         #------------------------------------
         # Run against EZID API directly
         #------------------------------------
+        """
         success = run_direct_ezid_doi_update(protocol, authority, identifier)
         if success:
             fh = open(OUTPUT_FILE_FOR_UPDATES, 'a')
@@ -143,7 +186,7 @@ def run_doi_update(start_num=1, end_num=9999):
         
         
         continue
-
+        """
 
         # !!!!!!!!!!!!!!!!!!!!!
         # For now, skip the code below
@@ -173,9 +216,9 @@ def run_doi_update(start_num=1, end_num=9999):
         
 
 if __name__=='__main__':
-    #run_doi_update(start_num=1, end_num=7900)
-    run_direct_ezid_doi_update_on_json_file(INPUT_FILE_RETRIES_02)
-    
+    #run_doi_update(start_num=7716, end_num=7716)
+    #run_direct_ezid_doi_update_on_json_file(INPUT_FILE_RETRIES_03)
+    run_dataverse_doi_update_on_json_file(INPUT_FILE_RETRIES_03)
 """
 pip install requests[security]
 """    

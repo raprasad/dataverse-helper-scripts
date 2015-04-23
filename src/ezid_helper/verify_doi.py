@@ -4,6 +4,7 @@ import json
 import time
 import requests
 
+from update_doi import get_dataset_api_url
 from ezid_settings import * # includes file and directory settings
 
 
@@ -47,8 +48,36 @@ def save_verified_doi_info(single_doi, output_file_fname):
     fh.close()
     msg('file update')
     
+    
+def get_version_state(db_id):
+    """
+    Use the dataverse native API to get latest version state
+    """
+    api_url = get_dataset_api_url(db_id)
 
-def check_doi_files(start_num=1, end_num=9999):
+    try:
+        r = requests.get(api_url)
+    except Exception, e:
+        msgd('Bad call to native API! %s' % e)
+        return None
+        
+    if not r.status_code == 200:
+        msg('text: %s' % r.text)
+        msg('status code: %s' % r.status_code)
+        return None
+    else:        
+        rjson = r.json()    # let it blow up...
+        try:
+            persistentURL = rjson['data']['persistentUrl']
+            versionState = rjson['data']['latestVersion']['versionState']
+            return dict(persistentURL=persistentURL,
+                        versionState=versionState)
+        except:
+            msg('text: %s' % r.text)
+            #msgx('status code: %s' % r.status_code)
+            return 'Unknown version state: %s' % r.text
+            
+def check_doi_files(start_num=1, end_num=9999, prune_fail_files=False):
     # Iterate through input lines
     assert isfile(INPUT_FILE), 'File not found: %s' % INPUT_FILE
 
@@ -78,9 +107,13 @@ def check_doi_files(start_num=1, end_num=9999):
         DOI_OUTPUT_FNAME = join(DOI_OUTPUT_FOLDER, '%s.json' % dataset_id)
 
         if not isfile(DOI_OUTPUT_FNAME):
+            version_state = get_version_state(dataset_id)
+            if version_state is None:
+                version_state = 'unknown: native API fail'
             not_found_doi = { int(dataset_id) : dict(input_line=fline,
                                                   dv_url=expected_text,
-                                                  direct_db_url=direct_db_link)
+                                                  direct_db_url=direct_db_link,
+                                                  version_state_from_native_api=version_state)
                             }
             save_verified_doi_info(not_found_doi, VERIFY_NOT_FOUND_FILE)
             msgt("Info file not found: %s" % DOI_OUTPUT_FNAME)
@@ -95,9 +128,10 @@ def check_doi_files(start_num=1, end_num=9999):
                                               input_line=fline)
                         }
         else:
-            #os.remove(DOI_OUTPUT_FNAME)
-            #print 'file deleted: %s' % DOI_OUTPUT_FNAME
-            #continue
+            if prune_fail_files:
+                os.remove(DOI_OUTPUT_FNAME)
+                print 'file deleted: %s' % DOI_OUTPUT_FNAME
+                continue
             actual_url = 'unknown'
             for ezid_line in content.split('\n'):
                 #_target: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0NMD8
@@ -105,11 +139,16 @@ def check_doi_files(start_num=1, end_num=9999):
                 if len(items)==2 and items[0]=='_target':
                     actual_url = items[1].strip()
 
+            version_state = get_version_state(dataset_id)
+            if version_state is None:
+                version_state = 'unknown: native API fail'
+                
             single_doi ={ int(dataset_id) : dict(success=False,
                                               current_url=actual_url,
                                               expected_url=expected_text,
                                               direct_db_url=direct_db_link,
-                                              input_line=fline)
+                                              input_line=fline,
+                                              version_state_from_native_api=version_state)
                           }
             save_verified_doi_info(single_doi, VERIFY_OUTPUT_FILE)
 
@@ -142,6 +181,8 @@ def download_doi_metadata(start_num=1, end_num=9999):
         msgx('Failed to log into EZID.  Check your creds JSON file for EZID_USERNAME/EZID_PASSWORD')
 
     # Iterate through input lines
+    num_files_written = 0
+    flines_retrieved = []
     for fline in flines:
         cnt += 1
 
@@ -179,13 +220,20 @@ def download_doi_metadata(start_num=1, end_num=9999):
         if r.status_code == 200:
             open(DOI_OUTPUT_FNAME, 'w').write(r.text.encode('utf-8'))
             msg('file written: %s' % DOI_OUTPUT_FNAME)
+            num_files_written+=1
+            flines_retrieved.append(fline) 
         else:    
             if isfile(DOI_OUTPUT_FNAME):
                 os.remove(DOI_OUTPUT_FNAME)
             msgt('Failed at line %s\n%s' % (cnt, fline))
 
+    msgd('summary')
+    msg('\n'.join(flines_retrieved))
+    msgt('num_files_written: %s' % num_files_written)
+    
 if __name__=='__main__':
-    #check_doi_files(start_num=1, end_num=9999)
+    #check_doi_files(start_num=1, end_num=9999, prune_fail_files=True)
+    #check_doi_files(start_num=1, end_num=9999, prune_fail_files=False)
     download_doi_metadata(start_num=1, end_num=9999)
 
 

@@ -44,8 +44,8 @@ def check_wrong_urls():
 
             #msg(json.dumps(wrong_url_json[ds_id], indent=4))
 
-        if no_doi_json.has_key(ds_id):
-            no_doi_json.pop(ds_id)
+        #if no_doi_json.has_key(ds_id):
+        #    no_doi_json.pop(ds_id)
             
     
     msgt(json.dumps(no_doi_json, indent=4))

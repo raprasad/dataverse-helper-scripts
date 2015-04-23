@@ -23,13 +23,14 @@ OUTPUT_DIRECTORY = join(EZID_DIR, 'output')
 DOI_OUTPUT_FOLDER = join(OUTPUT_DIRECTORY, 'doi-responses')
 
 #INPUT_FILE_RETRIES_01 = join(EZID_DIR, 'input', 'retries.2015-04-22.json')
-INPUT_FILE_RETRIES_02 = join(EZID_DIR, 'input', 'retries02.2015-04-22.json')
+#INPUT_FILE_RETRIES_02 = join(EZID_DIR, 'input', 'retries02.2015-04-22.json')
+INPUT_FILE_RETRIES_03 = join(EZID_DIR, 'input', 'retries03.2015-04-22.json')
 
 #INPUT_FILE = join(EZID_DIR, 'input', 'input-not-registered-2015-0422.txt')
-#INPUT_FILE = join(EZID_DIR, 'input', 'prod.landreev.2015-04-22.csv')
+INPUT_FILE = join(EZID_DIR, 'input', 'prod.landreev.2015-04-22.csv')
 #INPUT_FILE = join(EZID_DIR, 'input', 'updates.landreev.2015-04-22.txt')
-INPUT_FILE = join(EZID_DIR, 'input', 'only-registered.kmiller.2015-04-22.csv')
-OUTPUT_FILE_FOR_UPDATES = join(OUTPUT_DIRECTORY, 'updates-only-registered.kmiller.2015-04-22.csv')
+#INPUT_FILE = join(EZID_DIR, 'input', 'only-registered.kmiller.2015-04-22.csv')
+OUTPUT_FILE_FOR_UPDATES = join(OUTPUT_DIRECTORY, 'mostly-dvn1-last32.2015-04-22.csv')
 
 
 for outdir in (OUTPUT_DIRECTORY, DOI_OUTPUT_FOLDER):
