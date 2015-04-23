@@ -46,7 +46,7 @@ def save_verified_doi_info(single_doi, output_file_fname):
     fh = open(output_file_fname, 'w')
     fh.write(as_json)
     fh.close()
-    msg('file update')
+    msg('file update: %s' % output_file_fname)
     
     
 def get_version_state(db_id):
@@ -85,7 +85,9 @@ def check_doi_files(start_num=1, end_num=9999, prune_fail_files=False):
     flines = [ x.strip() for x in flines if len(x.strip()) > 0]
 
     cnt = 0
-
+    
+    DOI_SUCCESS_DICT = {}
+    
     for fline in flines:
         cnt += 1
 
@@ -127,6 +129,8 @@ def check_doi_files(start_num=1, end_num=9999, prune_fail_files=False):
                                               direct_db_url=direct_db_link,
                                               input_line=fline)
                         }
+            if single_doi:
+                DOI_SUCCESS_DICT.update(single_doi)  
         else:
             if prune_fail_files:
                 os.remove(DOI_OUTPUT_FNAME)
@@ -150,8 +154,10 @@ def check_doi_files(start_num=1, end_num=9999, prune_fail_files=False):
                                               input_line=fline,
                                               version_state_from_native_api=version_state)
                           }
-            save_verified_doi_info(single_doi, VERIFY_OUTPUT_FILE)
+            save_verified_doi_info(single_doi, VERIFY_FAIL_OUTPUT_FILE)
 
+    # save successes
+    save_verified_doi_info(DOI_SUCCESS_DICT, VERIFY_SUCCESS_OUTPUT_FILE)
 
 def download_doi_metadata(start_num=1, end_num=9999):
     """
@@ -233,8 +239,8 @@ def download_doi_metadata(start_num=1, end_num=9999):
     
 if __name__=='__main__':
     #check_doi_files(start_num=1, end_num=9999, prune_fail_files=True)
-    #check_doi_files(start_num=1, end_num=9999, prune_fail_files=False)
-    download_doi_metadata(start_num=1, end_num=9999)
+    check_doi_files(start_num=1, end_num=9999, prune_fail_files=False)
+    #download_doi_metadata(start_num=1, end_num=9999)
 
 
 """

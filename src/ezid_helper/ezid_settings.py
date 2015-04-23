@@ -38,9 +38,9 @@ for outdir in (OUTPUT_DIRECTORY, DOI_OUTPUT_FOLDER):
         makedirs(outdir)
         msg('Directory created: %s' % outdir)
 
-VERIFY_OUTPUT_FILE = join(OUTPUT_DIRECTORY, 'prod-verified-dois.json')
+VERIFY_FAIL_OUTPUT_FILE = join(OUTPUT_DIRECTORY, 'prod-failed-to-verify-dois.json')
 VERIFY_NOT_FOUND_FILE = join(OUTPUT_DIRECTORY, 'prod-verify-not-found-dois.json')
-
+VERIFY_SUCCESS_OUTPUT_FILE = join(OUTPUT_DIRECTORY, 'prod-verified-dois.json')
 
 # ----------------------------
 # Any needed credentials -
