@@ -31,6 +31,7 @@ def get_modify_doi_url(dataset_id):
 
 
 def run_direct_ezid_doi_update_on_json_file(json_fname):
+    msgx('NEED TO REDO - WASN\'T MAKING UPDATE')
     assert isfile(json_fname), "file not found: %s" % json_fname
 
     json_info = json.loads(open(json_fname, 'r').read())
@@ -104,6 +105,7 @@ def run_dataverse_doi_update_on_json_file(json_fname):
         
 
 def run_direct_ezid_doi_update(protocol, authority, identifier):
+    msgx('NEED TO REDO - WASN\'T MAKING UPDATE')
 
     assert protocol is not None, 'protocol cannot be None'
     assert authority is not None, 'authority cannot be None'
@@ -166,31 +168,7 @@ def run_doi_update(start_num=1, end_num=9999):
         
         update_cnt +=1
         msgt('(%s)(%s) process: %s' % (update_cnt, cnt, fline))
-
-
-        # run_direct_ezid_doi_update(protocol, authority, identifier)
-        #------------------------------------
-        # Run against EZID API directly
-        #------------------------------------
-        """
-        success = run_direct_ezid_doi_update(protocol, authority, identifier)
-        if success:
-            fh = open(OUTPUT_FILE_FOR_UPDATES, 'a')
-            fh.write('%s|%s\n' % (fline, 'true'))
-            msg('file updated')
-        else:    
-            FAIL_LINES.append(cnt)
-            msg('failed!')
-        msgd('FAIL_LINES: %s' % FAIL_LINES)
-        
-        
-        
-        continue
-        """
-
-        # !!!!!!!!!!!!!!!!!!!!!
-        # For now, skip the code below
-
+       
         #------------------------------------
         # Run against dataverse API
         #------------------------------------                
@@ -217,7 +195,7 @@ def run_doi_update(start_num=1, end_num=9999):
 
 if __name__=='__main__':
     #run_doi_update(start_num=7716, end_num=7716)
-    #run_direct_ezid_doi_update_on_json_file(INPUT_FILE_RETRIES_03)
+    #Xrun_direct_ezid_doi_update_on_json_file(INPUT_FILE_RETRIES_03)
     run_dataverse_doi_update_on_json_file(INPUT_FILE_RETRIES_03)
 """
 pip install requests[security]

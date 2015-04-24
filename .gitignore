@@ -3,7 +3,8 @@
 src/ezid_helper/creds.json
 src/ezid_helper/creds-*.json
 src/ezid_helper/output/doi-responses/*
-
+creds.json
+*/creds.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
