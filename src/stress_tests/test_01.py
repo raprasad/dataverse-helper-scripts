@@ -10,6 +10,8 @@ class UserBehavior(TaskSet):
         pass
         #self.login()
 
+
+    @task(0)
     def login(self):
         r = self.client.post('/loginpage.xhtml?redirectPage=/dataverse.xhtml'\
                         , {"loginForm:credentialsContainer2:0:credValue":"admin"

@@ -4,7 +4,7 @@ This repository contains a variety of not-often-used scripts used for Dataverse 
 
 
 1.  [EZID DOI update/verify](#ezid-doi-updateverify) - Update EZID target urls for migrated datasets.  Verify that the DOIs point to the correct url.
-2. [Basic Stress Test](#stress-test) - Run basic browsing scenarios
+2. [Basic Stress Test](#stress-tests) - Run basic browsing scenarios
 
 ## EZID DOI update/verify
 
