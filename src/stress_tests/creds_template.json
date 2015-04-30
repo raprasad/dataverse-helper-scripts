@@ -1,3 +1,24 @@
 {
-  "SERVER" : "http://dv-server-url.harvard.edu-"
-}
+  "SERVER" : "http://dv-server-url.harvard.edu-",
+  "PERSISTENT_IDS" : [ 
+                        "doi:10.7910/DVN/29669",
+                        "doi:10.7910/DVN/55LJ9P",
+                        "doi:10.7910/DVN/6AOL3H",
+                        "doi:10.7910/DVN/DDDOKP",
+                        "doi:10.7910/DVN/MPU019",
+                        "doi:10.7910/DVN/OJZKKP",
+                        "doi:10.7910/DVN/VZLVVI",
+                        "doi:10.7910/DVN/ZJNG1N"
+                    ],
+   "USERS" : [ 
+                  { 
+                      "username" : "--1st username--",
+                      "password" : "--password--"
+                  },
+                  { 
+                      "username" : "--2nd username--",
+                      "password" : "--password--"
+                  }
+              ]
+ }
+
