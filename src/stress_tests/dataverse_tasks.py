@@ -91,7 +91,7 @@ def login_fail_with_random_user_pw(l):
         msg('login fail')
 
 
-def download_file(l):
+def random_download_file(l):
     """
     http://dvn-vm5.hmdc.harvard.edu:8080/api/access/datafile/2670610
     """

@@ -76,8 +76,8 @@ These are basic tests using [locustio](http://docs.locust.io/en/latest/quickstar
 
 ### Run a script
 
-1. Set your server in ```creds.son```
+1. Set your server and other information in ```creds.son```
 1. cd into ```src/stress_tests```
-1. Run a test script.  In this example run **test_01.py**
-    - From the Terminal: ```locust -f test_01.py```
+1. Run a test script.  In this example run **basic_test_01.py**
+    - From the Terminal: ```locust -f basic_test_01.py```
 1. Open a browser and go to: ```http://127.0.0.1:8089/```    
