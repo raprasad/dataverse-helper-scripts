@@ -94,6 +94,8 @@ placeholder="Enter title...">
 
 ## (3) No Peer Usage, and Little Usage in General
 
+### "You're cut off from the rest of the web community"
+
 * We do no have any academic partners developing new software using Primefaces
 * Job sites such as indeed.com only list 147 Primefaces jobs in the country.
    * The combined total for MA, CA, and NY is 24
@@ -106,8 +108,8 @@ placeholder="Enter title...">
 
 **Bottom Line**: 
   1. There are very few industry or academic users of Primefaces
-  1. This leads to less information documentation.  e.g. StackOverflow
-  1. It deters collaborators 
+  1. This leads to less information/documentation.  e.g. StackOverflow
+  1. Using marginal/unintuitive software deters collaborators 
 
 ## Future Use of Primefaces
 
