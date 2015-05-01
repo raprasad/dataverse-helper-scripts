@@ -2,6 +2,7 @@
 
 
 ## Incompatible with Common Javascript Libraries
+---
 ### *This Includes Bootstrap*
 
 Sequence on most Dataverse pages:
@@ -13,9 +14,11 @@ Sequence on most Dataverse pages:
 
 **Bottom Line**: *Every page* implements a major hack to make boostrap work.
 
-## Cannot Use Common Testing Tools
 
-## Primeface Generated HTML Lengthens Developer/Designer Time
+#### Primeface Generated HTML Lengthens Development and Testing
+---
+## Cannot Use Common Testing Tools
+## Hard to Assign Styles
 
 Dataverse developer last summer laughing in frustration: *I'm just trying to make a checkbox!  Look at this!*
 
