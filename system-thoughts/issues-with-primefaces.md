@@ -40,18 +40,16 @@ Primefaces checkbox:
     <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
     <span class="ui-chkbox-icon ui-c"></span>
     </div>
-</div>```
+</div>
+```
 
-
-## Issues with the Primefaces checkbox:
+#### Issues with the Primefaces checkbox:
 
 1.  The ```<input type="checkbox"...>``` element itself is not visible to the user.
 1.  The element is not available to standard testing tools or packages which depend on visibility and names.
 1.  Designers/Developers need extra work to style this item
 
-
-
-## Implications
+#### Implications
 
 * Over the course of a large project, the inability to do standard automated testing can minimally lead to tens of thousands of dollars in lost staff time.
 * For example:
