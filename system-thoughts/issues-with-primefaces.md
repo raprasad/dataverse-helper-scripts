@@ -99,6 +99,8 @@ placeholder="Enter title...">
 * We do no have any academic partners developing new software using Primefaces
 * Job sites such as indeed.com only list 147 Primefaces jobs in the country.
    * The combined total for MA, CA, and NY is 24
+   * For Java Server Faces, the total for MA, CA, and NY is 200 to 400
+      * Depending on whether the search is for "Java Server Faces" or "Java JSF"
    * Compared to 147 national Primefaces listings on indeed.com, there are:
       - 6,000+ for angular
       - 5,000+ for backbone
