@@ -10,7 +10,7 @@ Sequence on most Dataverse pages:
 3. **This breaks bootstrap**
 4. Custom javascript is called again to rebind bootstrap components.
 
-- Implications: **Every page** implements a major hack to make boostrap work.
+**Bottom Line**: *Every page* implements a major hack to make boostrap work.
 
 ## Cannot Use Common Testing Tools
 
