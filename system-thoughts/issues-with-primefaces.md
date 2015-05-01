@@ -1,4 +1,4 @@
-(notesin progress)
+(notes in progress)
 # Thoughts on Primefaces
 
 ## (1) Primefaces is Incompatible with Bootstrap (and other JS libraries)
