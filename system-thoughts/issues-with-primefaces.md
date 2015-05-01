@@ -1,10 +1,8 @@
-(in progress)
+(notesin progress)
+# Thoughts on Primefaces
 
-
-## Incompatible with Common Javascript Libraries
+## (1) Incompatible with Bootstrap (and other JS libraries)
 ---
-### *This Includes Bootstrap*
-
 Sequence on most Dataverse pages:
 
 1. Page loads.  Custom javascript executes to bind bootstrap components.
@@ -15,12 +13,16 @@ Sequence on most Dataverse pages:
 **Bottom Line**: *Every page* implements a major hack to make boostrap work.
 
 
-#### Primeface Generated HTML Lengthens Development and Testing
----
-## Cannot Use Common Testing Tools
-## Hard to Assign Styles
+## Primefaces HTML: Lengthens Development and Testing
 
-Dataverse developer last summer laughing in frustration: *I'm just trying to make a checkbox!  Look at this!*
+- Dataverse developer last summer laughing in frustration: *I'm just trying to make a checkbox!  Look at this!*
+
+Main Points:
+ 1. Cannot Use Common Testing Tools
+ 2. Hard to Develop/Design Pages -- start using hacking css/js
+ 
+
+### Example 1: Primefaces checkbox
 
 Standard HTML checkbox:  
 
@@ -39,6 +41,7 @@ Primefaces checkbox:
     <span class="ui-chkbox-icon ui-c"></span>
     </div>
 </div>```
+
 
 ## Issues with the Primefaces checkbox:
 
