@@ -17,7 +17,7 @@ Sequence on most Dataverse pages:
 
 - Dataverse developer (PhD candidate) laughing in disbelief/frustration: *I'm just trying to make a checkbox!  Look at this!*
 
-Main Points:
+#### Main Points:
  1. Cannot Use Common Testing Tools
  2. Hard to Develop/Design Pages -- start using hackish css/js
  
