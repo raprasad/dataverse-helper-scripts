@@ -1,4 +1,5 @@
 (notes in progress)
+
 # Thoughts on Primefaces
 
 ## (1) Primefaces is Incompatible with Bootstrap (and other JS libraries)
@@ -19,7 +20,7 @@ Sequence on most Dataverse pages:
 
 #### Main Points:
  1. Cannot Use Common Testing Tools
- 2. Hard to Develop/Design Pages -- start using hackish css/js
+ 2. Hard to Develop/Design Pages -- hackish css/js
  
 
 ### Example 1: Primefaces checkbox
@@ -115,7 +116,8 @@ placeholder="Enter title...">
 ## Future Use of Primefaces
 
 * To keep the Dataverse platform useful, we should explore the use of alternative, well-known libraries.
-* The continued use of Primefaces is a detriment to future development and the team's ability to productively add new functionality.  Other teams/partners (e.g. OSF and others) can and are doubly productive simply because of better, widely used, battle-tested open source tools which offer documentation, strong user communities, and the ability to accomplish world class work.
+* The continued use of Primefaces is a detriment to future development and the team's ability to productively add new functionality.  
+* Other teams/partners can and are doubly productive simply because of better, widely used, battle-tested open source tools that offer strong user communities and the ability to accomplish world class work.
 
 
 
