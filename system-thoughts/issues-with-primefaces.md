@@ -96,7 +96,7 @@ placeholder="Enter title...">
 
 ### "You're cut off from the rest of the web community"
 
-* We do no have any academic partners developing new software using Primefaces
+* We do not have any academic partners developing new software using Primefaces
 * Job sites such as indeed.com only list 147 Primefaces jobs in the country.
    * The combined total for MA, CA, and NY is 24
    * For Java Server Faces, the total for MA, CA, and NY is 200 to 400
