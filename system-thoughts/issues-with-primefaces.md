@@ -7,8 +7,10 @@ Sequence on most Dataverse pages:
 
 1. Page loads.  Custom javascript executes to bind bootstrap components.
 2. A Primefaces AJAX function reloads part of the page.
-3. This breaks bootstrap.
+3. **This breaks bootstrap**
 4. Custom javascript is called again to rebind bootstrap components.
+
+### Implications: **Every page** implements a major hack to make boostrap work.
 
 ## Cannot Use Common Testing Tools
 
