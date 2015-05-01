@@ -4,7 +4,7 @@
 
 ## (1) Primefaces is Incompatible with Bootstrap (and other JS libraries)
 
-Sequence on most Dataverse pages:
+Sequence of events on most Dataverse pages:
 
 1. Page loads.  Custom javascript executes to bind bootstrap components.
 2. User action triggers Primefaces AJAX to reload part of the page.
