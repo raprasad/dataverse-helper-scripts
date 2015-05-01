@@ -11,7 +11,7 @@ Sequence of events on most Dataverse pages:
 3. **This breaks bootstrap**
 4. Custom javascript is called again to rebind bootstrap components.
 
-**Bottom Line**: *Every page* implements a major hack to make boostrap work.
+**Bottom Line**: *Every major dataverse page* implements a major hack to make boostrap work.
 
 
 ## (2) Primefaces HTML: Lengthens Development and Testing Time
