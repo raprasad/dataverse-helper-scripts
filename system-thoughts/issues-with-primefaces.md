@@ -58,7 +58,7 @@ Primefaces checkbox:
     - These tests bases grow to handle complex user scenarios
 * The current use of PrimeFaces does not allow the use of modern testing tools.  
 
-### Example 1: Primefaces input boxes for Metadata
+### Example 2: Primefaces input boxes for Metadata
 
 Standard HTML text input tag for Dataset Title:  
 
