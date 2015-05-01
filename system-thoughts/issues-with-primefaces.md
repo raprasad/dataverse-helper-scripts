@@ -2,11 +2,11 @@
 # Thoughts on Primefaces
 
 ## (1) Incompatible with Bootstrap (and other JS libraries)
----
+
 Sequence on most Dataverse pages:
 
 1. Page loads.  Custom javascript executes to bind bootstrap components.
-2. A Primefaces AJAX function reloads part of the page.
+2. User action triggers Primefaces AJAX to reload part of the page.
 3. **This breaks bootstrap**
 4. Custom javascript is called again to rebind bootstrap components.
 
@@ -19,7 +19,7 @@ Sequence on most Dataverse pages:
 
 Main Points:
  1. Cannot Use Common Testing Tools
- 2. Hard to Develop/Design Pages -- start using hacking css/js
+ 2. Hard to Develop/Design Pages -- start using hackish css/js
  
 
 ### Example 1: Primefaces checkbox
@@ -46,8 +46,8 @@ Primefaces checkbox:
 #### Issues with the Primefaces checkbox:
 
 1.  The ```<input type="checkbox"...>``` element itself is not visible to the user.
-1.  The element is not available to standard testing tools or packages which depend on visibility and names.
-1.  Designers/Developers need extra work to style this item
+1.  The element is not available to standard testing tools or packages which depend on visibility and ```name``` and/or ```id``` attributes.
+1.  Designers/Developers need extra work to access this item via css or javascript
 
 #### Implications
 
