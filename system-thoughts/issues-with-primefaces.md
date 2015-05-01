@@ -15,7 +15,7 @@ Sequence on most Dataverse pages:
 
 ## (2) Primefaces HTML: Lengthens Development and Testing Time
 
-- Dataverse developer last summer laughing in frustration: *I'm just trying to make a checkbox!  Look at this!*
+- Dataverse developer (PhD candidate) laughing in disbelief/frustration: *I'm just trying to make a checkbox!  Look at this!*
 
 Main Points:
  1. Cannot Use Common Testing Tools
