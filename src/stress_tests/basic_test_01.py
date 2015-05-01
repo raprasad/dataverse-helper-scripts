@@ -7,22 +7,25 @@ from dataverse_tasks import homepage,\
     login_attempt_with_user1_from_creds,\
     login_attempt_with_random_user_from_creds,\
     random_download_file,\
-    profile_page
+    profile_page,\
+    download_1g_file
 
 
 from locust import HttpLocust, TaskSet
 
 
 class BrowseAndDownloadBehavior(TaskSet):
-    tasks = {homepage: 25,
-             random_dataset_page: 25,
-             profile_page: 5,
-             homepage_files_facet: 10, # heavier hit on homepage
-             random_download_file: 10,
+    tasks = {#homepage: 25,
+             #random_dataset_page: 25,
+             #profile_page: 5,
+             #homepage_files_facet: 20, # heavier hit on homepage
+             #random_download_file: 10,
+             download_1g_file: 20,
             }
 
     def on_start(self):
         login_attempt_with_random_user_from_creds(self)
+
 
 class WebsiteUser(HttpLocust):
     host = get_creds_info('SERVER')

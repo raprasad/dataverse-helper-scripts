@@ -3,6 +3,16 @@ import random, string
 #from bs4 import BeautifulSoup
 
 
+FILE_ID_MAP = dict(k_250=2670610,
+                  k_500=2670615,
+                  mb_1=2670612,
+                  mb_2=2670613,
+                  mb_5=2670608,
+                  mb_10=2670609,
+                  mb_50=2670614,
+                  mb_100=2670611,
+                  gb_1=2670827)
+
 def get_locust_request_kwargs():
     return dict(verify=False,)   # allow a self-signed certificate
 
@@ -90,28 +100,30 @@ def login_fail_with_random_user_pw(l):
     else:
         msg('login fail')
 
+def download_1g_file(l):
+
+    download_url = '/api/access/datafile/%s' % FILE_ID_MAP.get('gb_1')
+
+    msg("> Download 1gb file: %s " % (download_url))
+
+    l.client.get(download_url, **get_locust_request_kwargs())
+
+
 
 def random_download_file(l):
     """
     http://dvn-vm5.hmdc.harvard.edu:8080/api/access/datafile/2670610
     """
+    global FILE_ID_MAP
 
-    id_map = dict(mb_1=2670612,
-                  mb_2=2670613,
-                  mb_5=2670608,
-                  mb_10=2670609,
-                  mb_50=2670614,
-                  mb_100=2670611,
-                  k_250=2670610,
-                  k_500=2670615,)
     #gb_1=
 
-    rand_selection = random.choice(id_map.keys())
+    rand_selection = random.choice(FILE_ID_MAP.keys())
     #rand_selection = "mb_100"
         
-    assert rand_selection in id_map, "file size key not found.  Valid values: %s" % id_map.keys()
+    assert rand_selection in FILE_ID_MAP, "file size key not found.  Valid values: %s" % id_map.keys()
     
-    download_url = '/api/access/datafile/%s' % id_map.get(rand_selection)
+    download_url = '/api/access/datafile/%s' % FILE_ID_MAP.get(rand_selection)
 
     msg("> Download file (%s): %s " % (rand_selection, download_url))
 
