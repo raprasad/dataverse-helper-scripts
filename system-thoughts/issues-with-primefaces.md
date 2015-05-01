@@ -51,7 +51,7 @@ Primefaces checkbox:
 
 #### Implications
 
-* Money and Bugs.  In the course of a large project, the inability to do standard automated testing can minimally lead to tens of thousands of dollars in lost staff time.
+* **Money and Bugs.**  In the course of a large project, the inability to do standard automated testing can minimally lead to tens of thousands of dollars in lost staff time.
 * For example:
     - Most tools allow the recording and replaying of a series of actions.  This recording/replaying is based on the use of standard HTML elements with stable ```id``` or ```name``` tags.
     - When code changes, actions may be easily replayed to check for errors.
@@ -69,7 +69,12 @@ Standard HTML text input tag for Dataset Title:
 Primefaces HTML text input tag for Dataset Title:   
 
 ```html
-<input id="datasetForm:tabView:j_idt706:0:j_idt709:0:j_idt716:0:j_idt718:0:inputText" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" type="text" tabindex="1" value="File Test 2" name="datasetForm:tabView:j_idt706:0:j_idt709:0:j_idt716:0:j_idt718:0:inputText" role="textbox" aria-disabled="false" aria-readonly="false" aria-multiline="false" placeholder="Enter title...">
+<input id="datasetForm:tabView:j_idt706:0:j_idt709:0:j_idt716:0:j_idt718:0:inputText" 
+class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" 
+type="text" tabindex="1" value="File Test 2" 
+name="datasetForm:tabView:j_idt706:0:j_idt709:0:j_idt716:0:j_idt718:0:inputText" 
+role="textbox" aria-disabled="false" aria-readonly="false" aria-multiline="false" 
+placeholder="Enter title...">
 ```
 
 #### Explanation 
