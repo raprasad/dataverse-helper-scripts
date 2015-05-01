@@ -18,9 +18,10 @@ Sequence of events on most Dataverse pages:
 
 - Dataverse developer (PhD candidate) laughing in disbelief/frustration: *I'm just trying to make a checkbox!  Look at this!*
 
-#### Main Points:
+#### Primefaces auto-generates HTML thate lengthens development cycle. Specifically:
  1. Cannot Use Common Testing Tools
  2. Hard to Develop/Design Pages -- hackish css/js
+ 3. Difficult to write pages that pass W3C Validation (Dataverse currently does not pass)
  
 
 ### Example 1: Primefaces checkbox
@@ -80,11 +81,11 @@ placeholder="Enter title...">
 
 #### Explanation 
 - What is ```datasetForm:tabView:j_idt706:0:j_idt709:0:j_idt716:0:j_idt718:0:inputText```?
-* Part of the reason for the unusual ```id``` and ```name``` attributes is dynamic nature of the underlying metadata data model.
+* Part of the reason for the unusual ```id``` and ```name``` attributes is the dynamic nature of the underlying metadata data model.
 * Primefaces generates unique/incomprehensible ```id``` and ```name``` combinations for the form fields.
 
 #### Implications
-- Again, this makes styling difficult and does not allow easy use of modern testing tools.
+- Again, this makes css/js more difficult and does not allow easy use of modern testing tools.
 
 **Bottom Line**: 
   1. Cannot use standard automated testing tools
@@ -110,14 +111,14 @@ placeholder="Enter title...">
 
 **Bottom Line**: 
   1. There are very few industry or academic users of Primefaces
-  1. This leads to less information/documentation.  e.g. StackOverflow
+  1. This leads to less information/documentation.  e.g. sparse/outdated StackOverflow compared to other software
   1. **Bad Open Source**: Using older/harder to use software means less collaborators 
 
 ## Future Use of Primefaces
 
-* To keep the Dataverse platform useful, we should explore the use of alternative, well-known libraries.
+* To keep the Dataverse platform current, we should explore the use of alternative, well-known libraries.
 * The continued use of Primefaces is a detriment to future development and the team's ability to productively add new functionality.  
-* Other teams/partners can and are doubly productive simply because of better, widely used, battle-tested open source tools that offer strong user communities and the ability to accomplish world class work.
+* Other teams/partners can and are significantly more productive simply because of better, widely used, battle-tested open source tools that offer strong user communities and the ability to accomplish world class work.
 
 
 
