@@ -87,6 +87,7 @@ placeholder="Enter title...">
 
 **Bottom Line**: 
   1. Cannot use standard automated testing tools
+    - Kevin and Elda had to abandon use of Sauce Labs last summer because of this
   2. More difficult to develop HTML/JS/CSS
   3. **More money spent on development and bug testing**
   4. **Unusual constraints/stress placed on Designers and QA staff**
@@ -94,6 +95,12 @@ placeholder="Enter title...">
 ## (3) No Peer Usage, and Little Usage in General
 
 * We do no have any academic partners developing new software using Primefaces
-
-
-
+* Job sites such as indeed.com only list 147 Primefaces jobs in the country.
+   * The combined total for MA, CA, and NY is 24
+   * Compared to 147 national Primefaces listings on indeed.com, there are:
+      - 6,000+ for angular
+      - 5,000+ for backbone
+      - 2,000+ for ember
+      - 1,700+ for knockout
+* The expertise in these frameworks is quite heavy in academia as well as industry, including adaption by Harvard/MIT projects such as EdX and IQSS's HWP project
+* S
