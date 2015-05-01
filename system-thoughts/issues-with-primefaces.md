@@ -107,5 +107,14 @@ placeholder="Enter title...">
 **Bottom Line**: 
   1. There are very few industry or academic users of Primefaces
   1. This leads to less information documentation.  e.g. StackOverflow
-  2. It deters collaborators 
-  
+  1. It deters collaborators 
+
+## Future Use of Primefaces
+
+* To keep the Dataverse platform useful, we should using alternative/well-known libraries.
+* The continued use of Primefaces is a detriment to future development and the team's ability to productively add new functionality.  Other teams/partners (e.g. OSF and others) can and are doubly productive simply because of better, widely used, battle-tested open source tools which offer documentation, strong user communities, and the ability to accomplish world class work.
+
+
+
+
+
