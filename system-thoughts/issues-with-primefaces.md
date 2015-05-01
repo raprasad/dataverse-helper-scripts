@@ -1,7 +1,8 @@
 (in progress)
 
 
-## Incompatible with Common Javascript Libraries - Including Bootstrap
+## Incompatible with Common Javascript Libraries
+### *This Includes Bootstrap*
 
 Sequence on most Dataverse pages:
 
