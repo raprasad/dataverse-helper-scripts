@@ -11,7 +11,8 @@ FILE_ID_MAP = dict(k_250=2670610,
                   mb_10=2670609,
                   mb_50=2670614,
                   mb_100=2670611,
-                  gb_1=2670827)
+                  #gb_1=2670827
+                  )
 
 def get_locust_request_kwargs():
     return dict(verify=False,)   # allow a self-signed certificate

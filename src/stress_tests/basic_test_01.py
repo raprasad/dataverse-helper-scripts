@@ -10,17 +10,19 @@ from dataverse_tasks import homepage,\
     profile_page,\
     download_1g_file
 
+import requests
+requests.packages.urllib3.disable_warnings()
 
 from locust import HttpLocust, TaskSet
 
 
 class BrowseAndDownloadBehavior(TaskSet):
-    tasks = {#homepage: 25,
-             #random_dataset_page: 25,
-             #profile_page: 5,
-             #homepage_files_facet: 20, # heavier hit on homepage
-             #random_download_file: 10,
-             download_1g_file: 20,
+    tasks = {homepage: 25,
+             random_dataset_page: 25,
+             profile_page: 5,
+             homepage_files_facet: 20, # heavier hit on homepage
+             random_download_file: 10,
+             #download_1g_file: 1,
             }
 
     def on_start(self):
