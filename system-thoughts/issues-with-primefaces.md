@@ -92,9 +92,7 @@ placeholder="Enter title...">
   3. **More money spent on development and bug testing**
   4. **Unusual constraints/stress placed on Designers and QA staff**
 
-## (3) No Peer Usage, and Little Usage in General
-
-### "You're cut off from the rest of the web community"
+## (3) No Peer Usage, Cut off from the rest of the web community
 
 * We do not have any academic partners developing new software using Primefaces
 * Job sites such as indeed.com only list 147 Primefaces jobs in the country.
@@ -106,16 +104,17 @@ placeholder="Enter title...">
       - 5,000+ for backbone
       - 2,000+ for ember
       - 1,700+ for knockout
-* The expertise in these frameworks is quite heavy in academia as well as industry, including adaption by Harvard/MIT projects such as EdX and IQSS's HWP project
+* The expertise in these frameworks is quite heavy in academia as well as industry.
+* Expertise in modern javascript frameworks is next store: HWP project (adapting angular), EdX, etc
 
 **Bottom Line**: 
   1. There are very few industry or academic users of Primefaces
   1. This leads to less information/documentation.  e.g. StackOverflow
-  1. Using marginal/unintuitive software deters collaborators 
+  1. **Bad Open Source**: Using older/harder to use software means less collaborators 
 
 ## Future Use of Primefaces
 
-* To keep the Dataverse platform useful, we should using alternative, well-known libraries.
+* To keep the Dataverse platform useful, we should explore the use of alternative, well-known libraries.
 * The continued use of Primefaces is a detriment to future development and the team's ability to productively add new functionality.  Other teams/partners (e.g. OSF and others) can and are doubly productive simply because of better, widely used, battle-tested open source tools which offer documentation, strong user communities, and the ability to accomplish world class work.
 
 
