@@ -103,4 +103,9 @@ placeholder="Enter title...">
       - 2,000+ for ember
       - 1,700+ for knockout
 * The expertise in these frameworks is quite heavy in academia as well as industry, including adaption by Harvard/MIT projects such as EdX and IQSS's HWP project
-* S
+
+**Bottom Line**: 
+  1. There are very few industry or academic users of Primefaces
+  1. This leads to less information documentation.  e.g. StackOverflow
+  2. It deters collaborators 
+  
