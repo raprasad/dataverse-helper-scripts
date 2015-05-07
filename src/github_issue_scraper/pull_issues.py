@@ -21,9 +21,12 @@ REPO = get_repository_repo('dataverse')#'iqss/dataverse'  # format is username/r
 AUTH = get_repository_creds('dataverse')  #(GITHUB_USER, GITHUB_PASSWORD)
 
 
-
 ISSUES_FOR_REPO_URL = 'https://api.github.com/repos/%s/issues?assignee=raprasad' % REPO #'?milestone=4.0.3' % REPO
 ISSUES_FOR_REPO_URL = 'https://api.github.com/repos/%s/issues?labels=%s' % (REPO, urllib.quote('Component: UX & Upgrade'))
+ISSUES_FOR_REPO_URL = 'https://api.github.com/repos/%s/issues?assignee=%s' % (REPO, urllib.quote('mheppler'))
+
+OUTPUT_CSV_FILE_NAME = join(OUTPUT_DIR, 'issues-mheppler-2016-0507.csv')
+
 #ISSUES_FOR_REPO_URL = 'https://api.github.com/repos/%s/issues?milestone=3' % (REPO)
 #'?milestone=4.0.3' % REPO
 
@@ -82,7 +85,7 @@ def write_issues(response, csvout):
 
 def make_api_call(to_csv=True):
 
-    csvfile = 'UX-upgrade-issues-2016-0507.csv' #% (REPO.replace('/', '-'))
+    csvfile = OUTPUT_CSV_FILE_NAME #'UX-upgrade-issues-2016-0507.csv' #% (REPO.replace('/', '-'))
     csvout = csv.writer(open(csvfile, 'wb'))
     csvout.writerow(('Ticket #',
                      'Title',
@@ -103,7 +106,7 @@ def make_api_call(to_csv=True):
         os.makedirs(OUTPUT_DIR)
 
     r = requests.get(ISSUES_FOR_REPO_URL, auth=AUTH)
-    print r.text
+    #print r.text
     print r.headers
     print r.status_code
 
@@ -112,6 +115,11 @@ def make_api_call(to_csv=True):
     else:
         open(output_fname, 'w').write(json.dumps(r.json(), indent=4))
         print 'file written: %s' % output_fname
+
+    # Are there additional pages?
+    #
+    if not 'link' in r.headers:
+        return
 
     current_link = ISSUES_FOR_REPO_URL
     pages=dict(next='next', last='last')
