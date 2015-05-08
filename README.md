@@ -13,7 +13,7 @@ Use the github API to pull Issues into a CSV file
 
 ### Initial Setup
 
-- Requires (virtualenvwrapper)[https://virtualenvwrapper.readthedocs.org/en/latest/install.html]
+- Requires [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/install.html)
     - OS X install: ```sudo pip install virtualenvwrapper```
 
 1. Open a Terminal    
@@ -91,7 +91,7 @@ These are basic tests using [locustio](http://docs.locust.io/en/latest/quickstar
 ### Initial Setup
 
 
-- Requires (virtualenvwrapper)[https://virtualenvwrapper.readthedocs.org/en/latest/install.html]
+- Requires [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/install.html)
     - OS X install: ```sudo pip install virtualenvwrapper```
 
 1. Open a Terminal    
