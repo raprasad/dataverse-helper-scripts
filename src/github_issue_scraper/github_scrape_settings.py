@@ -3,14 +3,18 @@ from os.path import isdir, isfile, join, dirname, abspath
 from os import makedirs
 import json
 import sys
-import random
 
-STRESS_TEST_DIR = dirname(abspath(__file__))
+GITHUB_ISSUE_SCRAPER_DIR = dirname(abspath(__file__))
+
+OUTPUT_DIR = join(GITHUB_ISSUE_SCRAPER_DIR, 'output')
+if not isdir(OUTPUT_DIR):
+    makedirs(OUTPUT_DIR)
+
 
 # ----------------------------
 # Pull in util scripts
 # ----------------------------
-HELPER_SCRIPTS_DIR = join(dirname(STRESS_TEST_DIR))#, 'helper_utils')
+HELPER_SCRIPTS_DIR = join(dirname(GITHUB_ISSUE_SCRAPER_DIR))
 sys.path.append(HELPER_SCRIPTS_DIR)
 print HELPER_SCRIPTS_DIR
 from helper_utils.msg_util import *
@@ -20,7 +24,7 @@ from helper_utils.msg_util import *
 # Any needed credentials -
 #  stored in a JSON file
 # ----------------------------
-CREDS_FNAME = join(STRESS_TEST_DIR, 'creds.json')
+CREDS_FNAME = join(GITHUB_ISSUE_SCRAPER_DIR, 'creds.json')
 CREDS_LOOKUP = {}
 def get_creds_info(key_name):
     global CREDS_LOOKUP

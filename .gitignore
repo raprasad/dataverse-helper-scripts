@@ -3,6 +3,8 @@
 src/ezid_helper/creds.json
 src/ezid_helper/creds-*.json
 src/ezid_helper/output/doi-responses/*
+src/github_issue_scraper/output/*
+
 creds.json
 */creds.json
 # Byte-compiled / optimized / DLL files
