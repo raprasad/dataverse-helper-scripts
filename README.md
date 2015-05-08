@@ -31,9 +31,9 @@ Use the github API to pull Issues into a CSV file
 
 ### Run a script
 
-1. Set your repository, token information, output file name, and filters in ```creds.son```
+1. Set your repository, token information, output file name, and filters in ```creds.json```
 1. cd into ```src/github_issue_scraper```
-1. Run a the program
+1. Run the program
     - From the Terminal: ```python pull_issues.py```
 1. An output file will be written to ```src/github_issue_scraper/output/[file specified in creds.json]```
 
