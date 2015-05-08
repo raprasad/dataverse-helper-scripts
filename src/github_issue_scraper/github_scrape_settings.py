@@ -42,35 +42,3 @@ def get_creds_info(key_name):
     CREDS_LOOKUP[key_name] = cred_value
 
     return cred_value
-    
-def get_repository_creds(repo_nickname):
-    
-    token_lookup = get_creds_info('GITHUB_API_ACCESS_TOKENS')
-
-    assert repo_nickname in token_lookup\
-                , "Repository nickname '%s' not found.  Available names: %s" % (repo_nickname, token_lookup.keys()) 
-    
-    
-    api_creds = token_lookup[repo_nickname]
-    assert 'API_USERNAME' in api_creds\
-                , '"API_USERNAME key not found in creds: %s' % (repo_nickname, api_creds) 
-    assert 'API_ACCESS_TOKEN' in api_creds\
-                , '"API_ACCESS_TOKEN key not found in creds: %s' % (repo_nickname, api_creds) 
-
-    return (api_creds['API_USERNAME'], api_creds['API_ACCESS_TOKEN'])
-    
-
-def get_repository_repo(repo_nickname):
-
-    token_lookup = get_creds_info('GITHUB_API_ACCESS_TOKENS')
-
-    assert repo_nickname in token_lookup\
-                , "Repository nickname '%s' not found.  Available names: %s" % (repo_nickname, token_lookup.keys()) 
-
-    api_creds = token_lookup[repo_nickname]
-    assert 'REPOSITORY_NAME' in api_creds\
-                , '"REPOSITORY_NAME key not found in creds: %s' % (repo_nickname, api_creds) 
- 
-    return api_creds['REPOSITORY_NAME']
-
-    

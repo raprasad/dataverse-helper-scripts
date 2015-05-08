@@ -4,21 +4,25 @@ import requests
 import json
 import csv
 import urllib
-
+import dateutil.parser
 from github_scrape_settings import *
 
 
-REPO = get_repository_repo('dataverse')
-AUTH = get_repository_creds('dataverse')
+REPO = get_creds_info('REPOSITORY_NAME')
+AUTH = (get_creds_info('API_USERNAME'), get_creds_info('API_ACCESS_TOKEN'))
+OUTPUT_FILE_NAME_FROM_CREDS = get_creds_info('OUTPUT_FILE_NAME')
+GITHUB_ISSUE_FILTERS_FROM_CREDS = get_creds_info('GITHUB_ISSUE_FILTERS')
 
 
 class GithubIssueToCSV(object):
 
-    def __init__(self, output_file_name, **kwargs):
+    def __init__(self, output_file_name, print_issues=False, **kwargs):
 
-        self.print_issue = kwargs.pop('print_issue', False)
+        self.issue_count = 0
+        self.print_issues = print_issues
+        self.labels_to_exclude = kwargs.get('labels_to_exclude', None)
 
-        self.output_file_name = join(OUTPUT_DIR, output_file_name)
+        self.csv_output_fname = join(OUTPUT_DIR, output_file_name)
 
         self.csv_writer = None
 
@@ -26,6 +30,18 @@ class GithubIssueToCSV(object):
         self.query_str = ''
 
         self.set_query_string_filters(kwargs)
+        self.format_labels_to_exclude()
+
+    def format_labels_to_exclude(self):
+
+        if self.labels_to_exclude is None or len(self.labels_to_exclude.strip()) == '':
+            self.labels_to_exclude = None
+            return
+
+        self.labels_to_exclude = [label.strip() for label in self.labels_to_exclude.split(',')]
+
+
+
 
     def set_query_string_filters(self, kwarg_dict):
         """
@@ -38,8 +54,9 @@ class GithubIssueToCSV(object):
             return
 
         qstr_parts = []
-        for k, v in kwarg_dict.items():
-            if v is not None:
+        for k in self.query_filter_attrs:
+            v = kwarg_dict.get(k, None)
+            if v not in ('', None):
                 qstr_parts.append('%s=%s' % (k, urllib.quote(v)))
 
         if len(qstr_parts) > 0:
@@ -69,14 +86,33 @@ class GithubIssueToCSV(object):
     def initialize_output_file(self):
 
         # Remove existing output file, if it exists
-        if isfile(self.output_file_name):
-            os.remove(self.output_file_name)
+        if isfile(self.csv_output_fname):
+            os.remove(self.csv_output_fname)
 
         # Init the csv writer
-        self.csv_writer = csv.writer(open(self.output_file_name, 'wb'))
+        self.csv_writer = csv.writer(open(self.csv_output_fname, 'wb'))
 
         # Write the header row
         self.csv_writer.writerow(self.get_csv_header_row())
+
+
+    def does_issue_have_label_to_exclude(self, issue):
+        if self.labels_to_exclude is None:
+            return False
+
+        assert isinstance(issue, dict), "Issue must be a dict"
+        assert 'labels' in issue, "'labels' not found in issue dict: %s" % issue
+
+        label_list = issue['labels']
+        if label_list is None or len(label_list) == 0:
+            return False
+
+        for label in label_list:
+            if label['name'] in self.labels_to_exclude:
+                return True
+
+        return False
+
 
 
     def format_label_str(self, issue):
@@ -115,6 +151,17 @@ class GithubIssueToCSV(object):
         else:
             return 'Not assigned'
 
+    def format_time_str(self, time_str):
+        assert time_str is not None, 'time_str cannot be None'
+
+        # Let this blow up
+        fmtdate = dateutil.parser.parse(time_str)
+        return fmtdate.strftime('%Y-%m-%d %H:%M:%S')
+
+        #msg(fmtdate)
+        #msgx(fmtdate.__class__.__name__)
+
+
 
     def write_issues(self, response):
         """Write a list of issues to CSV"""
@@ -126,6 +173,9 @@ class GithubIssueToCSV(object):
 
         # Iterate through issues
         for issue in response.json():
+
+            if self.does_issue_have_label_to_exclude(issue):
+                continue    # skip this issue
 
             # Format individual issue and write to CSV
             label_str = self.format_label_str(issue)    # Format Labels
@@ -139,31 +189,44 @@ class GithubIssueToCSV(object):
                             milestone_title,
                             issue['user']['login'].encode('utf-8'),
                             assignee_str,
-                            issue['created_at'],
-                            issue['updated_at'],
+                            self.format_time_str(issue['created_at']),
+                            self.format_time_str(issue['updated_at']),
                             issue['html_url']
                             #'<a href="%s">github link</a>' % issue['html_url']
                             ])
-            if self.print_issue:
+            self.issue_count += 1
+
+            if self.print_issues:
                 msg(json.dumps(issue, indent=4))
 
+        msg('File updated: %s' % self.csv_output_fname)
+        msg('Total Issue Count: %d' % self.issue_count)
 
     def get_pages_dict_from_headers(self, headers):
-
+        """
+        Parse headers 'link' value
+        """
         assert headers is not None, "headers cannot be None"
 
         if 'link' not in headers:
             return None
 
+        """Example of 'link' in headers dict
+        {'link': '<https://api.github.com/repositories/14051004/issues?labels=Priority%3A+Critical&page=2>; rel="next",
+         <https://api.github.com/repositories/14051004/issues?labels=Priority%3A+Critical&page=2>; rel="last"'
+        }
+        """
         link_list = [link.split(';') for link in headers['link'].split(',')]
         rel_url_pairs_list = [(rel[6:-1], url[url.index('<')+1:-1]) for url, rel in link_list]
         page_dict = dict(rel_url_pairs_list)
 
+        """Example page_dict
+        {'last': 'https://api.github.com/repositories/14051004/issues?labels=Priority%3A+Critical&page=2',
+         'next': 'https://api.github.com/repositories/14051004/issues?labels=Priority%3A+Critical&page=2'}
+        """
+
         return page_dict
-        #pages = dict(
-        #            [(rel[6:-1], url[url.index('<')+1:-1]) for url, rel in
-        #                [link.split(';') for link in
-        #                    r.headers['link'].split(',')]])
+
 
     def run_csv_maker(self, to_csv=True):
 
@@ -188,12 +251,7 @@ class GithubIssueToCSV(object):
         msgt('(%s) %s'% (page_num, api_url))
         self.write_issues(r)
 
-        # Are there additional pages?
-        #
-        #if not 'link' in r.headers:
-        #    return
-
-        # Iterate through additional pages
+        # Iterate through additional pages (if they exist)
         #
         pages_dict = self.get_pages_dict_from_headers(r.headers)
         while pages_dict is not None:
@@ -208,208 +266,27 @@ class GithubIssueToCSV(object):
                 pages_dict = self.get_pages_dict_from_headers(r.headers)
             else:
                 break
-        return
-        pages=dict(next='next', last='last')
-
-        while not pages['next'] == pages['last']:
-
-            if 'link' in r.headers:
-                pages = dict(
-                    [(rel[6:-1], url[url.index('<')+1:-1]) for url, rel in
-                        [link.split(';') for link in
-                            r.headers['link'].split(',')]])
-                if 'next' in pages and not pages['next'] == api_url:
-                    page_num+=1
-                    msgt('(%s) %s'% (page_num, pages['next']))
-                    output_fname = join(OUTPUT_DIR, 'scrape_%s.json' % (str(page_num).zfill(2)))
-
-                    r = requests.get(pages['next'], auth=AUTH)
-                    if to_csv:
-                        write_issues(r, csvout)
-                    else:
-                        open(output_fname, 'w').write(json.dumps(r.json(), indent=4))
-                        print 'file written: %s' % output_fname
-
-        return
-        #-----------------------
-        """
-        page_num = 1
-
-        print r.text
-        print r.headers
-        print r.status_code
-
-        if to_csv:
-            write_issues(r, csvout)
-        else:
-            open(output_fname, 'w').write(json.dumps(r.json(), indent=4))
-            print 'file written: %s' % output_fname
-
-        # Are there additional pages?
-        #
-        if not 'link' in r.headers:
-            return
-
-        current_link = ISSUES_FOR_REPO_URL
-        pages=dict(next='next', last='last')
-
-        while not pages['next'] == pages['last']:
-
-            if 'link' in r.headers:
-                pages = dict(
-                    [(rel[6:-1], url[url.index('<')+1:-1]) for url, rel in
-                        [link.split(';') for link in
-                            r.headers['link'].split(',')]])
-                if 'next' in pages and not pages['next'] == ISSUES_FOR_REPO_URL:
-                    page_num+=1
-                    msgt('(%s) %s'% (page_num, pages['next']))
-                    output_fname = join(OUTPUT_DIR, 'scrape_%s.json' % (str(page_num).zfill(2)))
-
-                    r = requests.get(pages['next'], auth=AUTH)
-                    if to_csv:
-                        write_issues(r, csvout)
-                    else:
-                        open(output_fname, 'w').write(json.dumps(r.json(), indent=4))
-                        print 'file written: %s' % output_fname
-        """
-
-#ISSUES_FOR_REPO_URL = 'https://api.github.com/repos/%s/issues?milestone=3' % (REPO)
-#'?milestone=4.0.3' % REPO
-
-def write_issues(response, csvout):
-    "output a list of issues to csv"
-    if not response.status_code == 200:
-        raise Exception(r.status_code)
-    for issue in response.json():
-
-        # Labels
-        label_names = []
-        for label in issue['labels']:
-            label_names.append(label['name'])
-        if len(label_names) == 0:
-            label_str = ''
-        else:
-            label_str = ', '.join(label_names)
-
-        # Milestone
-        if 'milestone' in issue and issue['milestone'] is not None:#and 'title' in issue['milestone']:
-            mstone_title = issue['milestone']['title'].encode('utf-8')
-        else:
-            mstone_title = 'no milestone assigned'
-        
-        if 'assignee' in issue and issue['assignee'] is not None:#and 'title' in issue['milestone']:
-            assignee = issue['assignee']['login'].encode('utf-8')
-        else:
-            assignee = 'Not assigned'
-        
-        csvout.writerow([issue['number'], 
-                        issue['title'].encode('utf-8'), 
-                        label_str.encode('utf-8'),
-                        issue['body'].encode('utf-8'), 
-                        mstone_title, 
-                        issue['user']['login'].encode('utf-8'),
-                        assignee,
-                        issue['created_at'], 
-                        issue['updated_at'],
-                        issue['html_url']
-                        #'<a href="%s">github link</a>' % issue['html_url']
-                        ])
-        print json.dumps(issue, indent=4)
-    """
-    Ticket #
-    Ticket Name
-    Labels
-    Description
-    Milestone
-    Assignee
-    """ 
-
-
-
-def make_api_call(to_csv=True):
-
-    csvfile = OUTPUT_CSV_FILE_NAME #'UX-upgrade-issues-2016-0507.csv' #% (REPO.replace('/', '-'))
-    csvout = csv.writer(open(csvfile, 'wb'))
-    csvout.writerow(('Ticket #',
-                     'Title',
-                     'Labels',
-                     'Description',
-                     'Milestone',
-                     'Creator',
-                     'Assignee',
-                     'Created At',
-                     'Updated At',
-                     'HTML URL'))
-
-    msgt('make_api_call: %s' % ISSUES_FOR_REPO_URL)
-    msg(AUTH)
-    page_num = 1
-    output_fname = join(OUTPUT_DIR, 'scrape_%s.json' % (str(page_num).zfill(2)))
-    if not isdir(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-
-    r = requests.get(ISSUES_FOR_REPO_URL, auth=AUTH)
-    #print r.text
-    print r.headers
-    print r.status_code
-
-    if to_csv:
-        write_issues(r, csvout)
-    else:
-        open(output_fname, 'w').write(json.dumps(r.json(), indent=4))
-        print 'file written: %s' % output_fname
-
-    # Are there additional pages?
-    #
-    if not 'link' in r.headers:
-        return
-
-    current_link = ISSUES_FOR_REPO_URL
-    pages=dict(next='next', last='last')
-
-    while not pages['next'] == pages['last']:
-
-        if 'link' in r.headers:
-            pages = dict(
-                [(rel[6:-1], url[url.index('<')+1:-1]) for url, rel in
-                    [link.split(';') for link in
-                        r.headers['link'].split(',')]])
-            if 'next' in pages and not pages['next'] == ISSUES_FOR_REPO_URL:
-                page_num+=1
-                msgt('(%s) %s'% (page_num, pages['next']))
-                output_fname = join(OUTPUT_DIR, 'scrape_%s.json' % (str(page_num).zfill(2)))
-
-                r = requests.get(pages['next'], auth=AUTH)
-                if to_csv:
-                    write_issues(r, csvout)
-                else:
-                    open(output_fname, 'w').write(json.dumps(r.json(), indent=4))
-                    print 'file written: %s' % output_fname
-
 
 
 if __name__=='__main__':
+
     # ---------------------------------
-    # (1) Output file
+    # (1) csv output file name
     # ---------------------------------
-    output_file_name = 'github-critical.csv'
+    #output_file_name = 'github-issues.csv'
 
     # ---------------------------------
     # (2) github filters (optional)
     # ---------------------------------
     #github_filters = {}    # no filters
-    github_filters = dict(assignee='username',
-                          labels='Component: API,Priority: Critical')
-    github_filters = dict(labels='Priority: Critical')
+    #github_filters = dict(assignee='username',
+    #                      labels='Component: API,Priority: Critical')
+    #github_filters = dict(labels='Component: API,Priority: Critical')
+
 
     # ---------------------------------
-    # (3) kwargs (github filters + debug, e.g. print JSON to screen)
+    # (3) Retrieve issues and write to file
     # ---------------------------------
-    kwargs = dict(print_issues=False) # show github JSON
-    kwargs.update(github_filters)
-
-    # ---------------------------------
-    # (4) Retrieve issues and write to file
-    # ---------------------------------
-    github2csv = GithubIssueToCSV(output_file_name, **kwargs)
+    github2csv = GithubIssueToCSV(OUTPUT_FILE_NAME_FROM_CREDS, **GITHUB_ISSUE_FILTERS_FROM_CREDS)
+    #github2csv = GithubIssueToCSV(output_file_name, print_issues=True, **github_filters)
     github2csv.run_csv_maker()

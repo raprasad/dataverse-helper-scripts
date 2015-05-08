@@ -2,9 +2,41 @@
 
 This repository contains a variety of not-often-used scripts used for Dataverse related work.
 
+1. [Github Issues to CSV](#github-issues-to-csv) - Pull selected github issues into a CSV file
+2. [EZID DOI update/verify](#ezid-doi-updateverify) - Update EZID target urls for migrated datasets.  Verify that the DOIs point to the correct url.
+3. [Basic Stress Test](#stress-tests) - Run basic browsing scenarios
 
-1.  [EZID DOI update/verify](#ezid-doi-updateverify) - Update EZID target urls for migrated datasets.  Verify that the DOIs point to the correct url.
-2. [Basic Stress Test](#stress-tests) - Run basic browsing scenarios
+
+## Github Issues to CSV
+
+Use the github API to pull Issues into a CSV file
+
+### Initial Setup
+
+- Requires (virtualenvwrapper)[https://virtualenvwrapper.readthedocs.org/en/latest/install.html]
+    - OS X install: ```sudo pip install virtualenvwrapper```
+
+1. Open a Terminal    
+1. cd into ```src/github_issue_scraper```
+1. Make a virtualenv: ```mkvirtualenv github_issue_scraper```
+1. Install packages (fast): ```pip install -r requirements/base.txt```
+1. Within ```src/github_issue_scraper```, copy ```creds-template.json``` to ```creds.json``` (in the same folder)
+1. Change the ```creds.json``` settings appropriately.
+
+### Setup (2nd time around)
+
+1. Open a Terminal    
+1. cd into ```src/github_issue_scraper```
+1. Type ```workon github_issue_scraper``` (and press Return)
+
+### Run a script
+
+1. Set your repository, token information, output file name, and filters in ```creds.son```
+1. cd into ```src/github_issue_scraper```
+1. Run a the program
+    - From the Terminal: ```python pull_issues.py```
+1. An output file will be written to ```src/github_issue_scraper/output/[file specified in creds.json]```
+
 
 ## EZID DOI update/verify
 
@@ -46,8 +78,10 @@ COPY (select id, protocol, authority, identifier from dataset where protocol='do
 ```
 
 ### Running the script
+(to do)
 
 ### Output
+(to do)
 
 
 ## Stress Tests

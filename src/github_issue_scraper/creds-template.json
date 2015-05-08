@@ -1,0 +1,14 @@
+{       
+    "REPOSITORY_NAME" : "iqss/actual-name",
+    "API_USERNAME" : "api-username",
+    "API_ACCESS_TOKEN" : "* API Personal Access Token, see https://github.com/blog/1509-personal-api-tokens *",
+
+    "OUTPUT_FILE_NAME" : "github-issues.csv",
+    "GITHUB_ISSUE_FILTERS" : {
+        "labels" : "bugs,critical",
+        "assignee" : "github-username",
+        "creator" : "github-username"
+    }
+}
+
+ 
