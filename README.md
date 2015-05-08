@@ -37,6 +37,44 @@ Use the github API to pull Issues into a CSV file
     - From the Terminal: ```python pull_issues.py```
 1. An output file will be written to ```src/github_issue_scraper/output/[file specified in creds.json]```
 
+### Creds.json file notes
+
+- Sample file
+
+```json
+{       
+  "REPOSITORY_NAME" : "iqss/dataverse",
+  "API_USERNAME" : "jsmith",
+  "API_ACCESS_TOKEN" : "access-token-for-your-repo",
+
+  "OUTPUT_FILE_NAME" : "github-issues.csv",
+  "GITHUB_ISSUE_FILTERS" : {
+        "labels" : "Component: API",
+        "assignee" : "",
+        "creator" : "",
+        "labels_to_exclude" : "Status: QA"
+    }
+}
+```
+
+- ```API_USERNAME``` - your github username without the ```@```
+- ```API_ACCESS_TOKEN``` - see: https://github.com/blog/1509-personal-api-tokens
+- ```OUTPUT_FILE_NAME``` - Always written to ```src/github_issue_scraper/output/(file name)```
+- ```GITHUB_ISSUE_FILTERS```
+  - Leave filters blank to exclude them.  
+    - JSON below would include all ``assignee`` values
+
+```json
+  "assignee" : "",
+```
+
+  - Comma separate ```labels``` and ```labels_to_exclude```
+    - Example of issues matching two labels: ```Component: API``` and ```Priority: Medium```
+  
+```json
+  "labels" : "Component: API, Priority: Medium",
+```
+
 
 ## EZID DOI update/verify
 
