@@ -55,9 +55,11 @@ class GithubIssueToCSV(object):
 
         qstr_parts = []
         for k in self.query_filter_attrs:
-            v = kwarg_dict.get(k, None)
-            if v not in ('', None):
-                qstr_parts.append('%s=%s' % (k, urllib.quote(v)))
+            val_str = kwarg_dict.get(k, None)
+            if val_str not in ('', None):
+                vlist = [val.strip() for val in val_str.split(',')]
+                val_str = ','.join(vlist)
+                qstr_parts.append('%s=%s' % (k, urllib.quote(val_str)))
 
         if len(qstr_parts) > 0:
             self.query_str = '?%s' % ('&'.join(qstr_parts))

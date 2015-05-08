@@ -70,7 +70,7 @@ Use the github API to pull Issues into a CSV file
 
   - Comma separate multiple ```labels``` and ```labels_to_exclude```
     - Example of issues matching 3 labels: ```Component: API```, ```Priority: Medium``` and ```Status: Design```
-  
+      - (spaces between commas are stripped before attaching to api url)
 ```json
   "labels" : "Component: API, Priority: Medium, Status: Design",
 ```
