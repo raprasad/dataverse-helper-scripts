@@ -68,11 +68,11 @@ Use the github API to pull Issues into a CSV file
   "assignee" : "",
 ```
 
-  - Comma separate ```labels``` and ```labels_to_exclude```
-    - Example of issues matching two labels: ```Component: API``` and ```Priority: Medium```
+  - Comma separate multiple ```labels``` and ```labels_to_exclude```
+    - Example of issues matching 3 labels: ```Component: API```, ```Priority: Medium``` and ```Status: Design```
   
 ```json
-  "labels" : "Component: API, Priority: Medium",
+  "labels" : "Component: API, Priority: Medium, Status: Design",
 ```
 
 
