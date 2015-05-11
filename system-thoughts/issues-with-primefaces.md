@@ -22,6 +22,7 @@ The remainder of this page three ways in which Primefaces has a negative effect 
     - There are very few academic/peer users of Primefaces.  
     - This leads to less information/documentation.  e.g. sparse/outdated StackOverflow compared to other software
     - **Bad Open Source**: Using older/harder to use software means fewer collaborators 
+    - click to enlarge: <a href="https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/primefaces-jobs.png?raw=true"><img src="https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/primefaces-jobs.png?raw=true" width="200" /></a>
 
 The document ends with a note a on examining technology to *incrementally* explore Primefaces alternatives. 
 
