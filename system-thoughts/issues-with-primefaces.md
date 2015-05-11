@@ -2,6 +2,31 @@
 
 # Thoughts on Primefaces
 
+In general, the benefits of using Primefaces include:
+
+- "hide complexity but keep the flexibility"
+- Reduce development time  
+- **Shield developers from having to write Javascript**
+
+However, in *highly customized user interfaces for public websites*, Primefaces may have the opposite effect.  For the Dataverse project in particular, the benefits have been negated.  
+
+This page describes three ways in which Primefaces has a negative effect on the development process:
+
+1. [Primefaces is Incompatible with Bootstrap (and other JS libraries)](#1-primefaces-is-incompatible-with-bootstrap-and-other-js-libraries)
+    -  *Every major dataverse page* implements a major hack to make boostrap work.
+2. [Primefaces Creates Non-Standard HTML: Lengthening Development and Testing Time](#2-primefaces-html-lengthens-development-and-testing-time)
+    - Cannot use standard automated testing tools
+    - Kevin and Elda had to abandon use of Sauce Labs last summer because of this
+    - More difficult to develop HTML/JS/CSS
+    - **More money spent on development and bug testing**
+    - **Unusual constraints/stress placed on Designers and QA staff**
+3. [No Peer Usage, Cut off from the rest of the web community](#3-no-peer-usage-cut-off-from-the-rest-of-the-web-community)
+    - There are very few academic/peer users of Primefaces.  
+    - This leads to less information/documentation.  e.g. sparse/outdated StackOverflow compared to other software
+    - **Bad Open Source**: Using older/harder to use software means fewer collaborators 
+
+
+
 ## (1) Primefaces is Incompatible with Bootstrap (and other JS libraries)
 
 Sequence of events on most Dataverse pages:
@@ -14,7 +39,7 @@ Sequence of events on most Dataverse pages:
 **Bottom Line**: *Every major dataverse page* implements a major hack to make boostrap work.
 
 
-## (2) Primefaces HTML: Lengthens Development and Testing Time
+## (2) Primefaces Creates Non-Standard HTML: Lengthening Development and Testing Time
 
 - Dataverse developer (PhD candidate) laughing in disbelief/frustration: *I'm just trying to make a checkbox!  Look at this!*
 
@@ -110,9 +135,9 @@ placeholder="Enter title...">
 * Expertise in modern javascript frameworks is next store: HWP project (adapting angular), EdX, etc
 
 **Bottom Line**: 
-  1. There are very few industry or academic users of Primefaces
+  1. There are very few academic/peer users of Primefaces.  
   1. This leads to less information/documentation.  e.g. sparse/outdated StackOverflow compared to other software
-  1. **Bad Open Source**: Using older/harder to use software means less collaborators 
+  1. **Bad Open Source**: Using older/harder to use software means fewer collaborators 
 
 ## Future Use of Primefaces
 
