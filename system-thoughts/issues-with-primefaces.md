@@ -10,21 +10,24 @@ In general, the benefits of using Primefaces include:
 
 However, in *highly customized user interfaces for public websites*, Primefaces may have the opposite effect.  For the Dataverse project in particular, the benefits have been negated.  
 
-This page describes three ways in which Primefaces has a negative effect on the development process:
+The remainder of this page three ways in which Primefaces has a negative effect on the development process:
 
 1. [Primefaces is Incompatible with Bootstrap (and other JS libraries)](#1-primefaces-is-incompatible-with-bootstrap-and-other-js-libraries)
-    -  *Every major dataverse page* implements a major hack to make boostrap work.
+    -  *Every dataverse page* implements a major hack to make boostrap work.
 2. [Primefaces Creates Non-Standard HTML: Lengthening Development and Testing Time](#2-primefaces-html-lengthens-development-and-testing-time)
+    - More difficult to customize HTML/JS/CSS
     - Cannot use standard automated testing tools
-    - Kevin and Elda had to abandon use of Sauce Labs last summer because of this
-    - More difficult to develop HTML/JS/CSS
     - **More money spent on development and bug testing**
-    - **Unusual constraints/stress placed on Designers and QA staff**
 3. [No Peer Usage, Cut off from the rest of the web community](#3-no-peer-usage-cut-off-from-the-rest-of-the-web-community)
     - There are very few academic/peer users of Primefaces.  
     - This leads to less information/documentation.  e.g. sparse/outdated StackOverflow compared to other software
     - **Bad Open Source**: Using older/harder to use software means fewer collaborators 
 
+Main take-away:
+
+* To keep the Dataverse platform current, we should explore the use of alternative, well-known javascript libraries.
+* **Other teams/partners are significantly more productive** simply because of better known and more widely-used open source tools that offer strong user communities and the ability to accomplish world class work.
+* The continued use of Primefaces is detrimental to the team's ability to productively add new functionality.  
 
 
 ## (1) Primefaces is Incompatible with Bootstrap (and other JS libraries)
@@ -36,7 +39,7 @@ Sequence of events on most Dataverse pages:
 3. **This breaks bootstrap**
 4. Custom javascript is called again to rebind bootstrap components.
 
-**Bottom Line**: *Every major dataverse page* implements a major hack to make boostrap work.
+**Bottom Line**: *Every  dataverse page* implements a major hack to make boostrap work.
 
 
 ## (2) Primefaces Creates Non-Standard HTML: Lengthening Development and Testing Time
