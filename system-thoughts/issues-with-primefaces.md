@@ -7,7 +7,7 @@ In general, the advertised benefits of using Primefaces include:
 - Reducing development time  
 - Shielding developers from having to write Javascript
 
-However, in *highly customized user interfaces for public websites*, Primefaces may have the opposite effect.  For the Dataverse project in particular, the benefits have been nearly negated.  
+However, in *highly customized user interfaces*, Primefaces may have the opposite effect.  For the Dataverse project in particular, the benefits have been nearly negated.  
 
 The remainder of this page three ways in which Primefaces has a negative effect on the development process:
 
