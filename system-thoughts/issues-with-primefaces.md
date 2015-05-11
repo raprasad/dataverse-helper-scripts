@@ -129,7 +129,7 @@ placeholder="Enter title...">
       - 5,000+ for backbone
       - 2,000+ for ember
       - 1,700+ for knockout
-   * Chart: (https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/primefaces-jobs.png?raw=true)
+   * Chart: ![Primefaces Job Chart](https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/primefaces-jobs.png?raw=true)
 * The expertise in these frameworks is quite heavy in academia as well as industry.
 * Expertise in modern javascript frameworks is next store: HWP project (adapting angular), EdX, etc
 
