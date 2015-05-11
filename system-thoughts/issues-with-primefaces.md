@@ -2,11 +2,11 @@
 
 # Thoughts on Primefaces
 
-In general, the benefits of using Primefaces include:
+In general, the advertised benefits of using Primefaces include:
 
-- "hide complexity but keep the flexibility"
-- Reduce development time  
-- **Shield developers from having to write Javascript**
+- Hiding complexity but keeping flexibility
+- Reducing development time  
+- Shielding developers from having to write Javascript
 
 However, in *highly customized user interfaces for public websites*, Primefaces may have the opposite effect.  For the Dataverse project in particular, the benefits have been negated.  
 
@@ -23,12 +23,7 @@ The remainder of this page three ways in which Primefaces has a negative effect 
     - This leads to less information/documentation.  e.g. sparse/outdated StackOverflow compared to other software
     - **Bad Open Source**: Using older/harder to use software means fewer collaborators 
 
-Main take-away:
-
-* To keep the Dataverse platform current, we should explore the use of alternative, well-known javascript libraries.
-* **Other teams/partners are significantly more productive** simply because of better known and more widely-used open source tools that offer strong user communities and the ability to accomplish world class work.
-* The continued use of Primefaces is detrimental to the team's ability to productively add new functionality.  
-
+The document ends with a note a on examining technology to *incrementally* explore Primefaces alternatives. 
 
 ## (1) Primefaces is Incompatible with Bootstrap (and other JS libraries)
 
@@ -144,12 +139,10 @@ placeholder="Enter title...">
 
 ## Future Use of Primefaces
 
-* To keep the Dataverse platform current, we should explore the use of alternative, well-known libraries.
-* The continued use of Primefaces is a detriment to future development and the team's ability to productively add new functionality.  
-* Other teams/partners can and are significantly more productive simply because of better, widely used, battle-tested open source tools that offer strong user communities and the ability to accomplish world class work.
-
-
-
+* To keep the Dataverse platform current, we should explore the use of alternative, well-known javascript libraries.
+* **Other teams/partners are significantly more productive** simply because they take advantage of more widely-used open source tools that offer strong user communities and the ability to accomplish world class work.
+* The continued use of Primefaces is detrimental to the team's ability to productively add new functionality.  
+s
 
 
 
