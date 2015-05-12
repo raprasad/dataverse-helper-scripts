@@ -1,4 +1,4 @@
-(to prompt discussion)
+(to prompt future thinking on the Dataverse UI)
 # Thoughts on Primefaces
 
 In general, the advertised benefits of using Primefaces include:
