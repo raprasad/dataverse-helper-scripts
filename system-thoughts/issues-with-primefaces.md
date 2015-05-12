@@ -13,7 +13,7 @@ The remainder of this page details three ways in which Primefaces has a negative
 
 1. [Primefaces is Incompatible with Bootstrap (and other JS libraries)](#1-primefaces-is-incompatible-with-bootstrap-and-other-js-libraries)
     -  *Every dataverse page* implements a major hack to make boostrap work.
-2. [Primefaces Creates Non-Standard HTML: Lengthening Development and Testing Time](#2-primefaces-html-lengthens-development-and-testing-time)
+2. [Primefaces Creates Non-Standard HTML: Lengthening Development and Testing Time](#2-primefaces-creates-non-standard-html-lengthening-development-and-testing-time)
     - More difficult to customize HTML/JS/CSS
     - Cannot use standard automated testing tools
     - **More money spent on development and bug testing**
