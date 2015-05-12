@@ -9,7 +9,7 @@ In general, the advertised benefits of using Primefaces include:
 
 However, in *highly customized user interfaces*, Primefaces may have the opposite effect.  For the Dataverse project in particular, the benefits have not been as promised.  
 
-The remainder of this page three ways in which Primefaces has a negative effect on the development process:
+The remainder of this page details three ways in which Primefaces has a negative effect on the development process:
 
 1. [Primefaces is Incompatible with Bootstrap (and other JS libraries)](#1-primefaces-is-incompatible-with-bootstrap-and-other-js-libraries)
     -  *Every dataverse page* implements a major hack to make boostrap work.
