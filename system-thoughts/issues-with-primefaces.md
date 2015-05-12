@@ -70,8 +70,8 @@ Primefaces checkbox:
 #### Issues with the Primefaces checkbox:
 
 1.  The ```<input type="checkbox"...>``` element itself is not visible to the user.
-1.  The element is not available to standard testing tools or packages which depend on visibility and ```name``` and/or ```id``` attributes.
-1.  Designers/Developers need extra work to access this item via css or javascript
+1.  In addition, the element is not available to standard testing tools or packages which depend on visibility and ```name``` and/or ```id``` attributes.
+1.  Designers/Developers need extra work to access this item via css or javascript. For example, to apply a style or access data via jquery, considerable extra time is spent creating relative selectors that can navigate the Primefaces HTML.
 
 #### Implications
 
@@ -80,7 +80,7 @@ Primefaces checkbox:
     - Most tools allow the recording and replaying of a series of actions.  This recording/replaying is based on the use of standard HTML elements with stable ```id``` or ```name``` tags.
     - When code changes, actions may be easily replayed to check for errors.
     - These tests bases grow to handle complex user scenarios
-* The current use of PrimeFaces does not allow the use of modern testing tools.  
+* The current use of PrimeFaces does not allow the use of modern testing tools without considerable custom programming.  
 
 ### Example 2: Primefaces input boxes for Metadata
 
@@ -107,14 +107,14 @@ placeholder="Enter title...">
 * Primefaces generates unique/incomprehensible ```id``` and ```name``` combinations for the form fields.
 
 #### Implications
-- Again, this makes css/js more difficult and does not allow easy use of modern testing tools.
+- Again, this makes custom css/js more difficult and does not allow easy use of modern testing tools.
 
 **Bottom Line**: 
-  1. Cannot use standard automated testing tools
+  1. Cannot use standard automated testing tools without considerable extra programming
     - Kevin and Elda had to abandon use of Sauce Labs last summer because of this
-  2. More difficult to develop HTML/JS/CSS
+  2. More difficult to develop (and debug) HTML/JS/CSS
   3. **More money spent on development and bug testing**
-  4. **Unusual constraints/stress placed on Designers and QA staff**
+  4. **Unusual constraints/stress placed on Designers and QA**
 
 ## (3) No Peer Usage, Cut off from the rest of the web community
 
@@ -124,25 +124,25 @@ placeholder="Enter title...">
    * For Java Server Faces, the total for MA, CA, and NY is 200 to 400
       * Depending on whether the search is for "Java Server Faces" or "Java JSF"
    * Compared to 147 national Primefaces listings on indeed.com, there are:
-      - 6,000+ for angular
-      - 5,000+ for backbone
-      - 2,000+ for ember
-      - 1,700+ for knockout
+      - 6,000+ for angular (started 2009)
+      - 5,000+ for backbone (started 2010)
+      - 2,000+ for ember (started 2011)
+      - 1,700+ for knockout (started 2010)
    * Chart: ![Primefaces Job Chart](https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/primefaces-jobs.png?raw=true)
-* The expertise in these frameworks is quite heavy in academia as well as industry.
-* Expertise in modern javascript frameworks is next store: HWP project (adapting angular), EdX, etc
+* The expertise in these "newer" frameworks is quite heavy in academia as well as industry.  (Angular was
+* Developers with expertise in modern javascript frameworks are right next store: HWP project (adapting angular), HarvardX, Museums, etc
 
 **Bottom Line**: 
-  1. There are very few academic/peer users of Primefaces.  
+  1. There are very few academic/peer users of Primefaces.  In addition, the total number of Primefaces users *appears* to be dwindling.
   1. This leads to less information/documentation.  e.g. sparse/outdated StackOverflow compared to other software
-  1. **Bad Open Source**: Using older/harder to use software means fewer collaborators 
+  1. **Bad Open Source**: Using older/harder to use software means fewer potential collaborators 
 
 ## Future Use of Primefaces
 
 * To keep the Dataverse platform current, we should explore the use of alternative, well-known javascript libraries.
 * **Other teams/partners are significantly more productive** simply because they take advantage of more widely-used open source tools that offer strong user communities and the ability to accomplish world class work.
 * The continued use of Primefaces is detrimental to the team's ability to productively add new functionality.  
-s
+
 
 
 
