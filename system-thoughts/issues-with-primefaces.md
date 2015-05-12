@@ -1,4 +1,4 @@
-(draft)
+(to prompt discussion)
 # Thoughts on Primefaces
 
 In general, the advertised benefits of using Primefaces include:
