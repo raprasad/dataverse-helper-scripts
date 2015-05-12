@@ -41,12 +41,11 @@ Sequence of events on most Dataverse pages:
 
 - Dataverse developer (PhD candidate) laughing in disbelief/frustration: *I'm just trying to make a checkbox!  Look at this!*
 
-#### Primefaces auto-generates HTML thate lengthens development cycle. Specifically:
+#### Primefaces auto-generates HTML that lengthens the development cycle. Specifically:
  1. Cannot Use Common Testing Tools
  2. Hard to Develop/Design Pages -- hackish css/js
  3. Difficult to write pages that pass W3C Validation (Dataverse currently does not pass)
  
-
 ### Example 1: Primefaces checkbox
 
 Standard HTML checkbox:  
