@@ -34,7 +34,9 @@ Sequence of events on most Dataverse pages:
 3. **This breaks bootstrap**
 4. Custom javascript is called again to rebind bootstrap components.
 
-**Bottom Line**: *Every  dataverse page* implements a major hack to make boostrap work.
+Primefaces does have a "Twitter Boostrap" theme--meaning that Primefaces adds an extra layer of complexity by wrapping Bootstrap's functionality.  This extra layer means that any Bootstrap upgrades need to be "re-wrapped"/integrated into the Primefaces theme before being made available.  (We do not use this theme.)
+
+**Bottom Line**: *Every  dataverse page* implements a major hack to make native boostrap work.
 
 
 ## (2) Primefaces Creates Non-Standard HTML: Lengthening Development and Testing Time
