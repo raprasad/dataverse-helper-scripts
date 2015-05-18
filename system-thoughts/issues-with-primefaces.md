@@ -1,4 +1,5 @@
-(to prompt future thinking on the Dataverse UI)
+(reference by creator of primefaces/angular: http://www.beyondjava.net/blog/angularfaces-jsf-beyond-ajax/)
+
 # Thoughts on Primefaces
 
 In general, the advertised benefits of using Primefaces include:
