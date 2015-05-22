@@ -1,3 +1,6 @@
+"""
+Quick script to help with adding @Index annotations to Java code
+"""
 from msg_util import *
 
 xindex_list = """Object|Cols to Index
@@ -43,12 +46,29 @@ HarvestingDataverseConfig|dataverse_id,harvesttype,harveststyle,harvestingurl
 PersistedGlobalGroup|persistedgroupalias,dtype
 RoleAssignment|assigneeidentifier,definitionpoint_id,role_id
 ForeignMetadataFieldMapping|foreignmetadataformatmapping_id,foreignfieldxpath,parentfieldmapping_id
+ForeignMetadataFormatMapping|name
+MapLayerMetadata|dataset_id,datafile_id
+MetadataBlock|name,owner_id
+SavedSearch|definitionpoint_id,creator_id
+IPv4Range|owner_id
+IPv6Range|owner_id
+Template|dataverse_id
+SavedSearchFilterQuery|savedsearch_id
+PasswordResetData|token,builtinuser_id
+WorldMapToken,worldmapauth_token|application_id,datafile_id,dataverseuser_id
 """.split('\n')
 
 
 #@JoinTable(indexes = {@Index(columnList="filecategories_id"),@Index(columnList="filemetadatas_id")})
 
-ALL_CREATE_STMTS = []
+ALL_CREATE_STMTS_BY_TBL = {} # { tbl_name : [stmt1, stmt2, etc] }
+def update_create_stmts(tbl_name, m):
+    global ALL_CREATE_STMTS_BY_TBL
+    assert tbl_name is not None
+    assert m is not None
+    
+    ALL_CREATE_STMTS_BY_TBL.setdefault(tbl_name, []).append(m)
+
 def show_annotate(**kwargs):
     global index_list
     
@@ -66,11 +86,22 @@ def show_annotate(**kwargs):
         msgt('(%s) %s' % (cnt, line))
         
         obj_name, attrs = line.split('|')
+        
+        # obj_name may have Java object name and a different table name
+        #   e.g. WorldMapToken,worldmapauth_token|application_id,datafile_id,dataverseuser_id
+        obj_name_items = obj_name.split(',')
+        if len(obj_name_items) == 2:
+            obj_name = obj_name_items[0]
+            tbl_name = obj_name_items[1]    # separate table name
+        else:
+            obj_name = obj_name_items[0]
+            tbl_name = obj_name.lower()     # table name is object name in lowercase
+        
         print obj_name, attrs
         col_names = attrs.split(',')
         col_names = [ c.strip() for c in col_names ]
     
-        tbl_name = obj_name.lower()
+        
         
         # Create annotation
         if show_annotate:
@@ -89,18 +120,21 @@ def show_annotate(**kwargs):
         if show_direct_sql:
             msgd('> create sql')                
             
-            ALL_CREATE_STMTS.append('/* %s' % ('-' * 40 ))
+            # Create note for SQL stmts
+            update_create_stmts(tbl_name, '/* %s' % ('-' * 40 ))
+
             if len(col_names) == 1:                    
-                ALL_CREATE_STMTS.append('    %s index (%s.java)' % (tbl_name, obj_name))
+                update_create_stmts(tbl_name, '    %s index (%s.java)' % (tbl_name, obj_name))
             else:
-                ALL_CREATE_STMTS.append('   %s indices (%s.java)' % (tbl_name, obj_name))
-            ALL_CREATE_STMTS.append('*/ %s' % ('-' * 40 ))
+                update_create_stmts(tbl_name, '   %s indices (%s.java)' % (tbl_name, obj_name))
+
+            update_create_stmts(tbl_name, '*/ %s' % ('-' * 40 ))
             
             for c in col_names:
                 index_name = 'index_%s_%s' % (tbl_name, c.lower())
                 create_stmt = 'CREATE INDEX %s ON %s (%s);'\
                         % (index_name, tbl_name, c.lower())
-                ALL_CREATE_STMTS.append(create_stmt)
+                update_create_stmts(tbl_name, create_stmt)
                 print create_stmt
         if show_drop_sql:
             msgd('> drop index sql')            
@@ -121,13 +155,32 @@ def show_annotate(**kwargs):
             print 'git commit -m "#1880, Add index for %s.java"' % obj_name
             print 'git pull origin 4.0.1'
 # @JoinTable(indexes = {@Index(columnList="filecategories_id"),@Index(columnList="filemetadatas_id")})
-            
-                        
+
+def print_create_stmts(fname):
+    global ALL_CREATE_STMTS_BY_TBL
+    
+    outlines = []
+    tbl_names = ALL_CREATE_STMTS_BY_TBL.keys()
+    tbl_names.sort()
+    for tname in tbl_names:
+        for line in ALL_CREATE_STMTS_BY_TBL[tname]:
+            outlines.append(line) 
+
+    stmts = '\n'.join(outlines)
+
+    # print
+    msg(stmts)        
+           
+    # write to file
+    open(fname, 'w').write(stmts)
+    msgt('file written: %s' % fname)
+
+
+
 if __name__=='__main__':
     show_annotate(show_annotate=True,
                 show_direct_sql=True, 
                 show_drop_sql=False, 
                 show_drop_table=True,
                 show_git_commands=True)
-                
-#print '\n'.join(ALL_CREATE_STMTS)
+    print_create_stmts('output/create_index_stmts.sql')
