@@ -146,6 +146,15 @@ placeholder="Enter title...">
 * **Other teams/partners are significantly more productive** simply because they take advantage of more widely-used open source tools that offer strong user communities and the ability to accomplish world class work.
 * The continued use of Primefaces is detrimental to the team's ability to productively add new functionality.  
 
+## More JSF drawbacks 
+
+source: http://blog.trifork.com/2014/03/20/web-forms-with-java-angularjs-and-other-approaches/
+
+(emphasis added)
+
+    All these components and other declarative stuff like converters and validators work really well and are really simple **as long as you can afford to stay with what is already available**. As soon as you need to have something that is not readily available, or need real control over your HTML/JavaScript, things start to change. You will have to write custom-components, custom-converters, use explicit component binding rather than the automatic data binding, etc. Lots of the **elegance and simplicity of the model gets lost in this case**.
+    
+    JSF has been a framework for generating full pages from a component tree, and has been extended to support Ajax by generating partial page updates from the component tree. **This architecture has negative consequences for performance in several ways. Server-side memory consumption is high because the component tree has to be kept in memory while a user is Ajax-interacting with a page. Network bandwidth consumption is high as well because entire chunks of HTML get retransmitted rather than just the data.**
 
 
 
