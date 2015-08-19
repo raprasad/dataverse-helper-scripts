@@ -100,9 +100,11 @@ CREATE INDEX index_dataverserole_alias ON dataverserole (alias);
    dvobject indices (DvObject.java)
 */ ----------------------------------------
 CREATE INDEX index_dvobject_dtype ON dvobject (dtype);
+/*  Should already exist:
 CREATE INDEX index_dvobject_owner_id ON dvobject (owner_id);
 CREATE INDEX index_dvobject_creator_id ON dvobject (creator_id);
 CREATE INDEX index_dvobject_releaseuser_id ON dvobject (releaseuser_id);
+*/
 /* ----------------------------------------
    explicitgroup indices (ExplicitGroup.java)
 */ ----------------------------------------
