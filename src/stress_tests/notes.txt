@@ -2,3 +2,17 @@
 # Test 1
 
 - 20 users, homepage, dataset, profile, random download
+
+
+# 4.1 (VM 6)
+- 50 users, 5 minutes
+    - 1 min left, run curl command
+
+https://github.com/IQSS/dataverse/issues/2599
+
+curl -u 49263cd6-03c6-4849-a7dd-e6b3edd5a5a4: http://dvn-vm6.hmdc.harvard.edu:8080/dvn/api/data-deposit/v1/swordv2/collection/dataverse/antislaverypetitionsma
+
+# file counts by persistentID
+select protocol, authority, identifier, count(dv.id) as cnt from dataset, dvobject as dv where dv.owner_id=dataset.id group by protocol, authority, identifier order by cnt desc limit 400;
+
+

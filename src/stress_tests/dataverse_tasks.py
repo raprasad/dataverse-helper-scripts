@@ -21,6 +21,11 @@ def login_page_but_no_login(l):
     msg('> login page (but no login)')
     l.client.get('/loginpage.xhtml', **get_locust_request_kwargs())
 
+def harvested_page(l):
+    msg('> harvested_page')
+    l.client.get('/dataverse/harvested', **get_locust_request_kwargs())
+    #rhttps://dataverse.harvard.edu/dataverse/harvested
+    
 def homepage(l):
     msg('> homepage')
     l.client.get('/', **get_locust_request_kwargs())
@@ -41,9 +46,11 @@ def random_dataset_page(l):
     assert persistent_ids is not None, 'No values found in creds file for %s' % KEY_PERSISTENT_IDS
     assert len(persistent_ids) > 0, 'No values found in creds file for list %s' % KEY_PERSISTENT_IDS
     
-    random_id = random.choice(persistent_ids) 
+    random_id_info = random.choice(persistent_ids) 
+    
+    pid = random_id_info['id']
 
-    dataset_url = '/dataset.xhtml?persistentId=%s' % random_id
+    dataset_url = '/dataset.xhtml?persistentId=%s' % pid
 
     l.client.get(dataset_url, **get_locust_request_kwargs())
 
