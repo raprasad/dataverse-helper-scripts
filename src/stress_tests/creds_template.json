@@ -1,12 +1,8 @@
 {
-  "xSERVER" : "http://dvn-vm5.hmdc.harvard.edu:8080",
-  "SERVER" : "http://dvn-vm6.hmdc.harvard.edu:8080",
+  "SERVER" : "http://dvn-vm5.hmdc.harvard.edu:8080",
+  "xSERVER" : "http://dvn-vm6.hmdc.harvard.edu:8080",
   "xSERVER" : "https://dataverse.harvard.edu",
   "PERSISTENT_IDS" : [
-                        { "id" : "doi:10.7910/DVN/29236", "note" : "1,577 files"},
-                        { "id" : "doi:10.7910/DVN/29236", "note" : "1,577 files"}
-                    ],
-  "xPERSISTENT_IDS" : [
                       { "id" : "doi:10.7910/DVN/29669", "note" : "1 file"},
                       { "id" : "doi:10.7910/DVN/55LJ9P", "note" : "7 files"},
                       { "id" : "doi:10.7910/DVN/27079", "note" : "54 files"},
@@ -18,11 +14,11 @@
                       { "id" : "doi:10.7910/DVN/27626", "note" : "94 files"}
                     ],
   "USERS" : [
-                 { 
+                 {
                      "username" : "user1",
                      "password" : "some-pw"
                  },
-                 { 
+                 {
                      "username" : "user2",
                      "password" : "some-pw"
                  },

@@ -18,9 +18,9 @@ from locust import HttpLocust, TaskSet
 
 
 class BrowseAndDownloadBehavior(TaskSet):
-    tasks = {homepage: 25,
+    tasks = {homepage: 20,
              random_dataset_page: 25,
-             #harvested_page: 5,
+             harvested_page: 5,
              #profile_page: 5
              #homepage_files_facet: 5, # heavier hit on homepage
              #random_download_file: 5,
