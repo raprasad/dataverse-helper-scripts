@@ -142,7 +142,7 @@ These are basic tests using [locustio](http://docs.locust.io/en/latest/quickstar
 #### Initial Setup: update settings
 
 1. Within ```src/stress_tests```, copy ```creds-template.json``` to ```creds.json``` (in the same folder)
-1. *Change the ```creds.json``` settings appropriately.*
+1. **Change the ```creds.json``` settings appropriately.**
 
 ### Setup (2nd time around)
 
