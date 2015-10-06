@@ -137,8 +137,11 @@ These are basic tests using [locustio](http://docs.locust.io/en/latest/quickstar
 1. Make a virtualenv: ```mkvirtualenv stress_tests```
 1. Install locustio: ```pip install -r requirements/base.txt```
     - This takes a couple of minutes
+
+#### Initial Setup: update settings
+
 1. Within ```src/stress_tests```, copy ```creds-template.json``` to ```creds.json``` (in the same folder)
-1. Change the ```creds.json``` settings appropriately.
+1. *Change the ```creds.json``` settings appropriately.*
 
 ### Setup (2nd time around)
 
