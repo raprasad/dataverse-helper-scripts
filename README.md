@@ -131,6 +131,7 @@ These are basic tests using [locustio](http://docs.locust.io/en/latest/quickstar
 
 - Requires [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/install.html)
     - OS X install: ```sudo pip install virtualenvwrapper```
+    - **Don't forget the Shell Startup File**: https://virtualenvwrapper.readthedocs.org/en/latest/install.html#shell-startup-file
 
 1. Open a Terminal    
 1. cd into ```src/stress_tests```
