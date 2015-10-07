@@ -27,5 +27,11 @@
                      "password" : "some-pw",
                      "email" : "user3@user3.com"
                  }
-             ]
+             ],
+  "API_TEST_INFO" : {
+                     "api_token" : "a Dataverse API token",
+                     "role_definition_point" : "birds",
+                     "role_assignee" : "@spruce",
+                     "role" : "admin"
+}
 }

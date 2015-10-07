@@ -1,5 +1,6 @@
 from stress_settings import *
 import random, string
+import json
 #from bs4 import BeautifulSoup
 
 
@@ -116,6 +117,52 @@ def download_1g_file(l):
 
     l.client.get(download_url, **get_locust_request_kwargs())
 
+def assign_and_revoke_role(l):
+    """
+    Grant then revoke a role using the equivalent of these curl commands:
+
+    1. scripts/search/tests/grant-spruce-admin-on-birds
+    curl -s -X POST -H "Content-type:application/json" -d "{\"assignee\": \"@spruce\",\"role\": \"admin\"}" "http://localhost:8080/api/dataverses/birds/assignments?key=$FINCHKEY"
+
+    2. scripts/search/tests/revoke-spruce-admin-on-birds
+    curl -s -X DELETE "http://localhost:8080/api/dataverses/$BIRDS_DATAVERSE/assignments/$SPRUCE_ADMIN_ON_BIRDS?key=$FINCHKEY"
+    """
+
+    # get parameters from setting file
+
+    dataverse = get_creds_info('API_TEST_INFO')['role_definition_point']
+    # finch key (owns birds dataverse)
+    key = get_creds_info('API_TEST_INFO')['api_token']
+    #username ='@spruce'
+    username = get_creds_info('API_TEST_INFO')['role_assignee']
+    #role = 'admin'
+    role = get_creds_info('API_TEST_INFO')['role']
+
+    # make "grant role" request
+    payload = dict(assignee=username, role=role)
+    #url = '/api/dataverses/{0}/assignments?key={1}'.format(dataverse, key)
+    url = '/api/dataverses/{0}/assignments'.format(dataverse)
+    msg("> grant role assignment: %s " % (url))
+    headers = { 'X-Dataverse-key':key, 'Content-type':'application/json' }
+    r = l.client.post(url, data=json.dumps(payload), headers=headers, **get_locust_request_kwargs())
+    if (r.status_code != 200):
+        msg(r.text)
+        return
+    msg(r.text)
+    rjson = r.json()
+    # example JSON response: {"status":"OK","data":{"id":14,"assignee":"@spruce","roleId":1,"_roleAlias":"admin","definitionPointId":2}}
+    new_id = rjson.get('data',{}).get('id')
+    if new_id is None:
+        msg('No id found in JSON from creating assignment: %s' % r.text)
+        return
+
+    # make "delete role" request
+    #delete_url = '/api/dataverses/{0}/assignments/{1}?key={2}'.format(dataverse, new_id, key)
+    delete_url = '/api/dataverses/{0}/assignments/{1}'.format(dataverse, new_id)
+    r = l.client.delete(delete_url, headers=headers, **get_locust_request_kwargs())
+    #print r.status_code
+    print r.text
+    #print r.json()
 
 
 def random_download_file(l):
