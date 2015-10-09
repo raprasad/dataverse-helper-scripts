@@ -9,6 +9,7 @@ from dataverse_tasks import homepage,\
     random_download_file,\
     profile_page,\
     download_1g_file,\
+    random_search_page,\
     harvested_page
 
 import requests
@@ -21,6 +22,7 @@ class BrowseAndDownloadBehavior(TaskSet):
     tasks = {homepage: 20,
              random_dataset_page: 25,
              harvested_page: 5,
+             random_search_page:70
              #profile_page: 5
              #homepage_files_facet: 5, # heavier hit on homepage
              #random_download_file: 5,

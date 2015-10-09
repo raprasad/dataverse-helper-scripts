@@ -1,6 +1,7 @@
 from stress_settings import *
 import random, string
 import json
+from search_pages import get_random_search_url
 #from bs4 import BeautifulSoup
 
 
@@ -18,6 +19,7 @@ FILE_ID_MAP = dict(k_250=2670610,
 def get_locust_request_kwargs():
     return dict(verify=False,)   # allow a self-signed certificate
 
+
 def login_page_but_no_login(l):
     msg('> login page (but no login)')
     l.client.get('/loginpage.xhtml', **get_locust_request_kwargs())
@@ -26,7 +28,12 @@ def harvested_page(l):
     msg('> harvested_page')
     l.client.get('/dataverse/harvested', **get_locust_request_kwargs())
     #rhttps://dataverse.harvard.edu/dataverse/harvested
-    
+
+def random_search_page(l):
+    search_url = get_random_search_url()
+    msg('> search url: {0}'.format(search_url))
+    l.client.get(search_url, **get_locust_request_kwargs())
+
 def homepage(l):
     msg('> homepage')
     l.client.get('/', **get_locust_request_kwargs())
@@ -43,12 +50,12 @@ def profile_page(l):
 def random_dataset_page(l):
     msg('> random_dataset_page')
 
-    persistent_ids = get_creds_info(KEY_PERSISTENT_IDS)    
+    persistent_ids = get_creds_info(KEY_PERSISTENT_IDS)
     assert persistent_ids is not None, 'No values found in creds file for %s' % KEY_PERSISTENT_IDS
     assert len(persistent_ids) > 0, 'No values found in creds file for list %s' % KEY_PERSISTENT_IDS
-    
-    random_id_info = random.choice(persistent_ids) 
-    
+
+    random_id_info = random.choice(persistent_ids)
+
     pid = random_id_info['id']
 
     dataset_url = '/dataset.xhtml?persistentId=%s' % pid
@@ -59,7 +66,7 @@ def random_dataset_page(l):
 def login_attempt_with_user1_from_creds(l):
 
     username, password = get_user_creds(1)
-    
+
     form_vals = {"loginForm:credentialsContainer2:0:credValue": username,
                  "loginForm:credentialsContainer2:1:sCredValue": password,
                  "loginForm": "loginForm"}
@@ -103,7 +110,7 @@ def login_fail_with_random_user_pw(l):
     r = l.client.post('/loginpage.xhtml?redirectPage=/dataverse.xhtml',
                 form_vals,
                 **get_locust_request_kwargs())
-    
+
     if r.status_code == 200:
         msg('login success!')
     else:
@@ -175,9 +182,9 @@ def random_download_file(l):
 
     rand_selection = random.choice(FILE_ID_MAP.keys())
     #rand_selection = "mb_100"
-        
+
     assert rand_selection in FILE_ID_MAP, "file size key not found.  Valid values: %s" % id_map.keys()
-    
+
     download_url = '/api/access/datafile/%s' % FILE_ID_MAP.get(rand_selection)
 
     msg("> Download file (%s): %s " % (rand_selection, download_url))
