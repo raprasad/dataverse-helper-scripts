@@ -64,3 +64,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+src/poormans-log-reader/test-data/server_dv_only.txt
+
+src/poormans-log-reader/test-data/request_list.txt
