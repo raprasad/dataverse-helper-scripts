@@ -1,6 +1,6 @@
 # dataverse-helper-scripts
 
-This repository contains a variety of not-often-used scripts used for Dataverse related work.
+This repository contains several one-off or not-often-used scripts used for Dataverse related work.
 
 1. [Github Issues to CSV](#github-issues-to-csv) - Pull selected github issues into a CSV file
 2. [EZID DOI update/verify](#ezid-doi-updateverify) - Update EZID target urls for migrated datasets.  Verify that the DOIs point to the correct url.
