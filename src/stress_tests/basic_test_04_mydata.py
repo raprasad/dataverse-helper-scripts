@@ -1,17 +1,5 @@
 from stress_settings import get_creds_info
-from dataverse_tasks import homepage,\
-    random_dataset_page,\
-    login_page_but_no_login,\
-    homepage_files_facet,\
-    login_fail_with_random_user_pw,\
-    login_attempt_with_user1_from_creds,\
-    login_attempt_with_random_user_from_creds,\
-    random_download_file,\
-    profile_page,\
-    download_1g_file,\
-    random_search_page,\
-    harvested_page,\
-    usual_static_resources
+from dataverse_tasks import *
 
 import requests
 requests.packages.urllib3.disable_warnings()
@@ -20,21 +8,21 @@ from locust import HttpLocust, TaskSet
 
 
 class BrowseAndDownloadBehavior(TaskSet):
-    tasks = {homepage: 20,
-             random_dataset_page: 25,
-             harvested_page: 5,
-             random_search_page:20,
-             usual_static_resources: 1
-             #profile_page: 5
+    tasks = {#homepage: 1,
+            #usual_static_resources: 50,
+             #random_dataset_page: 25,
+             #harvested_page: 5,
+             #random_search_page:70,
+             random_mydata_page: 100,
+             #profile_page: 5,
              #homepage_files_facet: 5, # heavier hit on homepage
              #random_download_file: 5,
              #download_1g_file: 1,
             }
 
     def on_start(self):
-        pass
         usual_static_resources(self)
-        #login_attempt_with_random_user_from_creds(self)
+        #login_attempt_with_user1_from_creds(self)
 
 
 class WebsiteUser(HttpLocust):

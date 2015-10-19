@@ -2,6 +2,8 @@ from stress_settings import *
 import random, string
 import json
 from search_pages import get_random_search_url
+from mydata_links import get_random_mydata_url
+
 #from bs4 import BeautifulSoup
 
 
@@ -19,7 +21,6 @@ FILE_ID_MAP = dict(k_250=2670610,
 def get_locust_request_kwargs():
     return dict(verify=False,)   # allow a self-signed certificate
 
-
 def login_page_but_no_login(l):
     msg('> login page (but no login)')
     l.client.get('/loginpage.xhtml', **get_locust_request_kwargs())
@@ -28,6 +29,40 @@ def harvested_page(l):
     msg('> harvested_page')
     l.client.get('/dataverse/harvested', **get_locust_request_kwargs())
     #rhttps://dataverse.harvard.edu/dataverse/harvested
+
+def usual_static_resources(l):
+    """
+    Get the css, js, etc. associated with most pages
+    """
+    resource_links = [
+        '/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap',
+        '/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&v=4.0',
+        '/javax.faces.resource/primefaces.js.xhtml?ln=primefaces&v=4.0',
+        '/javax.faces.resource/primefaces.css.xhtml?ln=primefaces&v=4.0',
+        #'/jquery/jquery-plugins.js.xhtml?ln=primefaces&v=4.0',
+        #'/jquery/jquery-plugins.js.xhtml?ln=primefaces&v=4.0',
+        '/javax.faces.resource/bs/css/bootstrap.css.xhtml?version=4.2',
+        '/javax.faces.resource/css/structure.css.xhtml?version=4.2',
+        '/javax.faces.resource/js/owl.carousel.js.xhtml?version=4.2',
+        '/javax.faces.resource/js/jquery.sharrre.js.xhtml?version=4.2',
+    ]
+    for rlink in resource_links:
+        l.client.get(rlink, **get_locust_request_kwargs())
+
+def random_mydata_page(l):
+
+    #r = l.client.get('/dataverseuser.xhtml?selectTab=dataRelatedToMe', **get_locust_request_kwargs())
+    #print r.text
+    #return
+
+    mydata_info = get_random_mydata_url()
+    description, mydata_url = mydata_info
+    mydata_url += "&key={0}".format(get_creds_info('API_TOKEN_FOR_MY_DATA'))
+    msg('> search url: {0}'.format(description))
+    #msg('> search url: {0} - {1}'.format(description, mydata_url))
+    r = l.client.get(mydata_url, **get_locust_request_kwargs())
+    print 'r.status_code', r.status_code
+    print 'r.text', r.text[:200]
 
 def random_search_page(l):
     search_url = get_random_search_url()
@@ -44,8 +79,7 @@ def homepage_files_facet(l):
 
 def profile_page(l):
     msg('> profile_page')
-    l.client.get('/dataverseuser.xhtml', **get_locust_request_kwargs())
-
+    r = l.client.get('/dataverseuser.xhtml', **get_locust_request_kwargs())
 
 def random_dataset_page(l):
     msg('> random_dataset_page')
@@ -70,8 +104,8 @@ def login_attempt_with_user1_from_creds(l):
     form_vals = {"loginForm:credentialsContainer2:0:credValue": username,
                  "loginForm:credentialsContainer2:1:sCredValue": password,
                  "loginForm": "loginForm"}
-
-    r = l.client.post('/loginpage.xhtml?redirectPage=/dataverse.xhtml',
+    #print 'form_vals', form_vals
+    r = l.client.post('/loginpage.xhtml?redirectPage=/dataverseuser.xhtml',
                 form_vals,
                 **get_locust_request_kwargs())
 

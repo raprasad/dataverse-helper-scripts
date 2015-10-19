@@ -13,7 +13,8 @@
                       { "id" : "doi:10.7910/DVN/26134", "note" : "256 files"},
                       { "id" : "doi:10.7910/DVN/27626", "note" : "94 files"}
                     ],
-  "USERS" : [
+ "API_TOKEN_FOR_MY_DATA" : "token-to-use-for-mydata",
+ "USERS" : [
                  {
                      "username" : "user1",
                      "password" : "some-pw"
