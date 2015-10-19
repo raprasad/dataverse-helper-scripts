@@ -77,6 +77,11 @@ def homepage_files_facet(l):
     msg('> homepage (q=&types=files)')
     l.client.get('/?q=&types=files', **get_locust_request_kwargs())
 
+def homepage_all_dvfacets(l):
+    msg('> homepage (q=&types=files)')
+    l.client.get('/?q=&types=files', **get_locust_request_kwargs())
+    #?q=&types=dataverses%3Adatasets%3Afiles&sort=dateSort&order=desc&page=1
+
 def profile_page(l):
     msg('> profile_page')
     r = l.client.get('/dataverseuser.xhtml', **get_locust_request_kwargs())
