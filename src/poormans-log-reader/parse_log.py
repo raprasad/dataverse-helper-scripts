@@ -14,12 +14,16 @@ class LogReader:
     def __init__(self, log_fname, **kwargs):
         self.log_fname = log_fname
         self.hr_cnts = {}   # { hr : cnt }
-        self.selected_minute = kwargs.get('selected_minute', None)
+        self.selected_hour = kwargs.get('selected_hour', None)
         self.list_requests = kwargs.get('list_requests', False)
+        self.count_static_files = kwargs.get('count_static_files', False)
         self.request_list = []
         self.read_lines()
 
     def skip_this_line(self, line):
+        if self.count_static_files is True:
+            return False
+            
         fline = line.lower()
         for skip_it in self.STRINGS_TO_SKIP:
             if fline.find(skip_it) > -1:
@@ -42,11 +46,25 @@ class LogReader:
         #print len(self.request_list)
         #for k, v in unique_requests.items():
         #    print v, k
-        print len(unique_requests)
+        #print len(unique_requests)
 
         keys = unique_requests.keys()
         keys.sort()
         open('test-data/request_list.txt', 'w').write('\n'.join(keys))
+
+    def show_hr_cnts(self):
+        
+        time_keys = self.hr_cnts.keys()
+        time_keys.sort()
+        print '-' * 40
+        total = 0
+        for tk in time_keys:
+            print '{0} -> {1}'.format(tk, self.hr_cnts.get(tk))
+            total += self.hr_cnts.get(tk, 0)
+            
+        print '-' * 40
+        print 'Total count: {0}'.format(total)
+        print '-' * 40
 
     def read_lines(self):
         line_cnt = 0
@@ -63,7 +81,7 @@ class LogReader:
                 #print line_parts
                 if len(line_parts) >= 3:
 
-                    print line_parts
+                    #print line_parts
 
                     # Pull out the time string
                     # ---------------------------
@@ -73,15 +91,15 @@ class LogReader:
                     # ---------------------------
                     # Group by time string
                     #
-                    if self.selected_minute:    # group by minute
+                    if self.selected_hour:    # group by minutes within an hour
                         hr_sub = tm[:17]
-                        if hr_sub.startswith(self.selected_minute):
+                        if hr_sub.startswith(self.selected_hour):
                             self.hr_cnts[hr_sub] = self.hr_cnts.get(hr_sub, 0) + 1
                             # Save the url called
                             self.add_request_info(line_parts[2])
 
                     else:                       # group by hour
-                        hr_sub = tm[:15]
+                        hr_sub = tm[:14]
                         self.hr_cnts[hr_sub] = self.hr_cnts.get(hr_sub, 0) + 1
                         # Save the url called
                         self.add_request_info(line_parts[2])
@@ -90,13 +108,25 @@ class LogReader:
                 #if line_cnt > 1:
                 #    break
 
+        self.show_hr_cnts()
         if self.list_requests is True:
             self.write_requests()
 
 
 if __name__ == '__main__':
     #log_fname = 'test-data/server_access_log.2015-10-08.txt'
-    log_fname = 'test-data/server_access_log.2015-10-08.txt'
-    #lr = LogReader(log_fname, selected_minute='09/Oct/2015:08')
-    #lr = LogReader(log_fname, list_requests=True)
-    lr = LogReader(log_fname, list_requests=True, selected_minute='09/Oct/2015:08')
+    #log_fname = 'test-data/server_access_log.2015-10-08.txt'
+    log_fname = 'test-data/server_access_log.2015-10-27.txt'
+
+    # Group by hour, show all files
+    #lr = LogReader(log_fname, list_requests=True, count_static_files=True)
+
+    # Group by hour, skip static files and atmosphere calls
+    lr = LogReader(log_fname, list_requests=True)
+    
+    # Group by minutes within a specific hour, skip static files and atmosphere calls
+    #lr = LogReader(log_fname, list_requests=True, selected_hour='27/Oct/2015:12')
+
+    # Group by minutes within a specific hour, include static files
+    #lr = LogReader(log_fname, list_requests=True, selected_hour='27/Oct/2015:12', count_static_files=True)
+    
