@@ -26,7 +26,7 @@ class GithubIssueToCSV(object):
 
         self.csv_writer = None
 
-        self.query_filter_attrs = ('labels', 'assignee', 'creator' )
+        self.query_filter_attrs = ('labels', 'assignee', 'creator', 'state' )
         self.query_str = ''
 
         self.set_query_string_filters(kwargs)
@@ -257,7 +257,7 @@ class GithubIssueToCSV(object):
         #
         pages_dict = self.get_pages_dict_from_headers(r.headers)
         while pages_dict is not None:
-
+            
             if 'next' in pages_dict and not pages_dict['next'] == api_url:
                 page_num += 1
                 api_url = pages_dict['next']
