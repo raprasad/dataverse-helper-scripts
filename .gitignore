@@ -70,3 +70,7 @@ src/poormans-log-reader/test-data/server_dv_only.txt
 src/poormans-log-reader/test-data/request_list.txt
 
 src/poormans-log-reader/test-data/server_access_log.2015-10-08.txt
+
+src/poormans-log-reader/test-data/server_access_log.2015-10-27.txt
+
+src/stress_tests/mydata_links.py
