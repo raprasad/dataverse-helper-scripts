@@ -1,0 +1,6 @@
+id|Long|pkey
+#
+remoteAPIEndpoint|RemoteAPIEndpoint
+apiResult|String
+hasError|boolean
+errorMessage|String

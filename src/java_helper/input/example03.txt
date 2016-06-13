@@ -4,8 +4,13 @@ serviceName|String|unique
 serviceDescription|String
 #
 apiEndpointURL|String|notnull
+#
 apiUsername|String
 apiEncryptedPassword|String
+#
+apiKeyName|String
+apiKey|String
+#
 apiParameters|String
 #
 visualizationURL|String

@@ -4,8 +4,10 @@ class JavaHelper(object):
     def __init__(self, spec_lines):
         assert spec_lines is not None, "spec_lines cannot be None"
         self.spec_lines = spec_lines
+        self.jfield_names = []
         self.jfields = []
         self.getter_setters = []
+        self.json_lines = []
 
         self.process_spec()
 
@@ -16,19 +18,23 @@ class JavaHelper(object):
 
     def process_spec(self):
 
-        for sline in self.spec_lines:
+        for idx, sline in enumerate(self.spec_lines):
             if sline.startswith('#'):
                 continue
             spec_items = sline.split('|')
             spec_items = [x.strip() for x in spec_items]
-            self.process_spec_line(spec_items)
+            self.process_spec_line(spec_items, idx)
 
-    def get_java_lines(self):
+    def get_java_lines(self, includeJSON=True):
 
         # add tab prefix to each line
         outlines = [ '\t%s' % x for x in self.jfields]
         outlines += self.getter_setters
-        return '\n'.join(outlines)
+
+        if includeJSON:
+            return '\n'.join(outlines) + self.format_json_lines()
+        else:
+            return '\n'.join(outlines)
 
     def format_jfield_for_getset(self, jfield):
         """
@@ -36,7 +42,7 @@ class JavaHelper(object):
         """
         return jfield[0].upper() + jfield[1:]
 
-    def process_spec_line(self, spec_items):
+    def process_spec_line(self, spec_items, idx=None):
         assert len(spec_items) in [2, 3],\
             ("The 'spec_items' should have "
              "two or three items, not %s: %s" %\
@@ -47,6 +53,8 @@ class JavaHelper(object):
             jfield, jtype, db_params = spec_items
         else:
             jfield, jtype = spec_items
+
+        self.jfield_names.append(jfield)
 
         if db_params:
             for param in db_params.split(','):
@@ -85,9 +93,66 @@ class JavaHelper(object):
     """.format(self.format_jfield_for_getset(jfield), jtype, jfield)
         self.getter_setters.append(getter_setter)
 
-if __name__=='__main__':
-    content = open('input/example01.txt')
-    #jhelper = JavaHelper(content)
-    #print jhelper.get_java_lines()
+        self.add_json_line(jfield, jtype)
 
-    print JavaHelper.buildJavaLines(content)
+    def add_json_line(self, jfield, jtype):
+        """
+        Add JSON lines
+        """
+
+        if jtype == 'boolean':
+            jline = '\tjsonData.add("{0}", this.{0});'.format(\
+                        jfield)
+        else:
+            default_val = self.get_json_default_val(jtype)
+            jline = ('\n\tif (this.{0}==null){{\n'
+                    '\t   jsonData.add("{0}", {1});\n'
+                    '\t}}else{{\n'
+                    '\t   jsonData.add("{0}", this.{0});\n'
+                    '\t}}').format(jfield, default_val)
+
+        self.json_lines.append(jline)
+
+
+    def get_json_default_val(self, jtype):
+        #if jtype == 'boolean':
+        #    return 'JsonValue.TRUE'
+        if jtype == 'String':
+            #return '""'
+            return 'JsonValue.NULL';
+        elif jtype in ['Long', 'Float', 'Integer']:
+            return 'JsonValue.NULL' #'-99'
+        else:
+            return 'JsonValue.NULL';
+
+    def get_field_names_as_java_list(self):
+
+        attrs = [ '"%s"' % x for x in self.jfield_names]
+
+        return """Arrays.asList(%s);""" % (','.join(attrs))
+
+
+    def format_json_lines(self):
+
+        json_method = """\npublic String asJSON(){
+
+    // Initialize JSON response
+    JsonObjectBuilder jsonData = Json.createObjectBuilder();
+
+    %s
+
+    return jsonData.build().toString();
+
+    }""" % ('\n'.join(self.json_lines))
+
+        return json_method
+
+if __name__=='__main__':
+    content = open('input/example03.txt')
+    jhelper = JavaHelper(content)
+    print jhelper.get_java_lines(includeJSON=False)
+
+    #print JavaHelper.buildJavaLines(content)
+
+    jhelper = JavaHelper(content)
+    #print jhelper.get_field_names_as_java_list()

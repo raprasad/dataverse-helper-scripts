@@ -1,0 +1,1 @@
+-e git+https://github.com/IQSS/dataverse-client-python.git@v0.1.2#egg=dataverse
