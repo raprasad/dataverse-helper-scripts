@@ -8,10 +8,10 @@ from locust import HttpLocust, TaskSet
 
 
 class BrowseAndDownloadBehavior(TaskSet):
-    tasks = {#homepage: 50,
+    tasks = {homepage: 50,
              #homepage_files_facet: 50, # heavier hit on homepage
              #usual_static_resources: 50,
-             #random_dataset_page: 25,
+             random_dataset_page: 25,
              #harvested_page: 5,
              #random_search_page:70,
              random_mydata_page: 100,
@@ -23,7 +23,7 @@ class BrowseAndDownloadBehavior(TaskSet):
     def on_start(self):
         pass
         #usual_static_resources(self)
-        login_attempt_with_user1_from_creds(self)
+        #login_attempt_with_user1_from_creds(self)
 
 
 class WebsiteUser(HttpLocust):
@@ -33,6 +33,6 @@ class WebsiteUser(HttpLocust):
     max_wait = 20000    # max pause before new task
 
 """
-locust -f basic_test_01.py
+locust -f basic_test_04_mydata.py
 http://127.0.0.1:8089/
 """
