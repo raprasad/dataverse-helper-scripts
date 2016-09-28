@@ -1,0 +1,3 @@
+rootDataFileId|Long|bigint
+#
+previousDataFileID|Long|bigint

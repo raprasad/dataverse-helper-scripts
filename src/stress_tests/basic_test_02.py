@@ -44,6 +44,6 @@ class WebsiteUser(HttpLocust):
     max_wait = 20000    # max pause before new task
 
 """
-locust -f basic_test_01.py
+locust -f basic_test_02.py
 http://127.0.0.1:8089/
 """

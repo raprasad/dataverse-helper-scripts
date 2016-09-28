@@ -74,3 +74,7 @@ src/poormans-log-reader/test-data/server_access_log.2015-10-08.txt
 src/poormans-log-reader/test-data/server_access_log.2015-10-27.txt
 
 src/stress_tests/mydata_links.py
+
+src/api_scripts/key_str.txt
+
+src/api_scripts/output/result.html

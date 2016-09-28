@@ -1,0 +1,18 @@
+Test                                    |Success|Fail   |Replace Only Test|Expected Message
+Load null dataset                       |--     |Y      |--             |Dataset cannot be null
+Load dataset by null id                 |--     |Y      |--             |Dataset id cannot be null
+Load dataset by non-existent id         |--     |Y      |--             |No dataset found
+Load good dataset                       |Y      |--     |--             |--
+Load good dataset by id                 |Y      |--     |--             |--
+User w/o Edit Dataset Perms             |--     |Y      |--             |No dataset found
+User w/ Edit Dataset Perms              |Y      |--     |--             |--
+Load new good file, name, content type  |Y      |--     |--             |--
+Load null file input stream             |--     |Y      |--             |File input stream cannot be null
+Load null file name                     |--     |Y      |--             |File name cannot be null
+Load null content type                  |--     |Y      |--             |File content type cannot be null
+Load good file to replace by id         |Y      |--     |Y              |--
+Load file to replace by null id         |--     |Y      |Y              |File id cannot be null
+Load file to replace by non-existent id |--     |Y      |Y              |File id cannot be null
+Load file to replace by id from other dataset |--     |Y      |Y        |File does not belong to this dataset
+Load unpublished file to replace by id  |--     |Y      |Y              |File must be published before can be replaced
+Load deleted file to replace by id (file from previous version)|--     |Y      |Y        |File must be in most recently published Dataset

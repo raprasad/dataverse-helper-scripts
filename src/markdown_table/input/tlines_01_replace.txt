@@ -1,0 +1,22 @@
+Functionality|File Add|File Replace|Return Error Message
+API to Handle multipart/form-data                   |Yes|Yes|Yes
+Verify user and permissions                         |Yes|Yes|Yes
+Retrieve dataset                                    |Yes|Yes|Yes
+Ensure file to replace exists                       |--|Yes|Yes
+Make sure file to replace is published              |--|Yes|Yes
+Send new file to ingestService.createDataFiles(..)  |Yes|Yes|Yes
+Duplicate check (compare checksums)                 |Yes|Yes|Yes
+Does replacement file's content type differ? (send warning message)|--|Yes|Yes
+Does replacement file's extension differ (send warning message)|--|Yes|Yes
+Check for contstraint violations                    |Yes|Yes|Yes
+Optional.  Update Datafile description              |Yes|Yes|--
+Optional.  Update Datafile tags                     |Yes|Yes|--
+Optional.  Update Datafile categories               |Yes|Yes|--
+Add Root Datafile Id (has to happen everywhere - See #2200 chart)    |Yes|Yes|--
+Add Previous Datafile Id (See #2200 chart)          |--|Yes|--
+Send new file to ingestService.addFiles(..)         |Yes|Yes|Yes
+Add Replaced file to delete files list              |--|Yes|--
+Create "UpdateDatasetCommand" with both new file and file to delete|--|Yes|Yes
+Run command                                         |Yes|Yes|Yes
+Send user notifications                             |Yes|Yes|--
+Run ingestService.startIngestJobs(..)               |Yes|Yes|--
