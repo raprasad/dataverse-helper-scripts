@@ -2,6 +2,7 @@ import requests
 import sys
 from datetime import datetime
 import time
+import urllib
 
 def msg(m): print m
 def dashes(): msg('-' * 40)
@@ -108,9 +109,63 @@ def run_replace_loop(orig_id, ds_id):
         time.sleep(2)
         orig_id += 1
 
+def run_get_request(test_name, url_params):
+
+    msgt(test_name)
+
+    if url_params:
+        url_params = "&" + urllib.urlencode(url_params)
+
+    url = '%s/upload/addTest1?key=%s%s' % (url_base, API_KEY, url_params)
+
+    r = requests.get(url)
+
+    if r.status_code == 200:
+        print 'done!'
+    print r.text
+    print r.status_code
+
+def run_api_test_1():
+    msgt('run_api_test_1')
+    good_dataset_id = 10
+
+    # The dataset ID cannot be null.
+    #
+    url_params = dict(loadById=True)
+    run_get_request('The dataset ID cannot be null.', url_params)
+
+    # dataset ID non-existent dataset
+    #
+    url_params = dict(loadById=True, datasetId=-99)
+    run_get_request('dataset ID non-existent dataset', url_params)
+
+    return
+
+    # Dataset id for non-existing dataset
+    #
+    url_params = dict(datasetId=-1)
+    run_get_request('Dataset id for non-existing dataset', url_params)
+
+    # The fileName cannot be null.
+    #
+    url_params = dict(datasetId=good_dataset_id)
+    run_get_request('The fileName cannot be null', url_params)
+
+    # The file content type cannot be null
+    #
+    url_params = dict(datasetId=good_dataset_id,
+                    newFileName='heyhey.txt')
+    run_get_request('The file content type cannot be null', url_params)
+
+    # bad file stream
+    #
+    url_params = dict(datasetId=good_dataset_id,
+                    newFileName='heyhey.txt',
+                    newFileContentType='text/plain')
+    run_get_request('bad file stream', url_params)
 
 
-if __name__ == '__main__':
+def run_command_line_params():
     if len(sys.argv) == 3:
         if sys.argv[1].lower() == 'add':
             run_add(sys.argv[2])
@@ -123,8 +178,12 @@ if __name__ == '__main__':
             run_replace_loop(194, 10)
     else:
         print """
-python test_01.py add [new file name]
-python test_01.py replace [old file id]
-python test_01.py publish [dataset id]
-python test_01.py loop
-"""
+    python test_01.py add [new file name]
+    python test_01.py replace [old file id]
+    python test_01.py publish [dataset id]
+    python test_01.py loop
+    """
+
+if __name__ == '__main__':
+    run_api_test_1()
+    #run_command_line_params()
