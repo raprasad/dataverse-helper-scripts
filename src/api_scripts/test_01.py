@@ -128,7 +128,7 @@ def run_get_request(test_name, url_params):
 def run_api_test_1():
     msgt('run_api_test_1')
     good_dataset_id = 10
-
+    '''
     # The dataset ID cannot be null.
     #
     url_params = dict(loadById=True)
@@ -139,12 +139,11 @@ def run_api_test_1():
     url_params = dict(loadById=True, datasetId=-99)
     run_get_request('dataset ID non-existent dataset', url_params)
 
-    return
-
     # Dataset id for non-existing dataset
     #
     url_params = dict(datasetId=-1)
     run_get_request('Dataset id for non-existing dataset', url_params)
+
 
     # The fileName cannot be null.
     #
@@ -161,8 +160,51 @@ def run_api_test_1():
     #
     url_params = dict(datasetId=good_dataset_id,
                     newFileName='heyhey.txt',
+                    badStreamTest=True,
                     newFileContentType='text/plain')
     run_get_request('bad file stream', url_params)
+    '''
+    # good add file
+    #
+    url_params = dict(datasetId=good_dataset_id,
+                    newFileName='ok1.txt',
+                    newFileContentType='text/plain',
+                    existingTestFileName='003.txt')
+
+    #testFileInputStream
+    run_get_request('good add file', url_params)
+
+    '''
+
+    # replace: null replacement file id
+    #
+    url_params = dict(replaceOperation=True,
+                    datasetId=good_dataset_id,
+                    newFileName='heyhey.txt',
+                    newFileContentType='text/plain')
+    run_get_request('replace: null replacement file id', url_params)
+
+
+    # replace: file to replace in different dataset
+    #
+    url_params = dict(replaceOperation=True,
+                    datasetId=good_dataset_id,
+                    newFileName='heyhey.txt',
+                    newFileContentType='text/plain',
+                    fileToReplaceId=3)
+    run_get_request('replace: file to replace in different dataset', url_params)
+
+
+    # replace: file not found by this id
+    #
+    url_params = dict(replaceOperation=True,
+                    datasetId=good_dataset_id,
+                    newFileName='heyhey.txt',
+                    newFileContentType='text/plain',
+                    fileToReplaceId=-3)
+    run_get_request('replace: file not found by this id', url_params)
+
+    '''
 
 
 def run_command_line_params():
