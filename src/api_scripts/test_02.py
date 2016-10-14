@@ -119,13 +119,16 @@ def run_replace_loop(num_loops, dataset_id, old_file_id, force_replace=False):
 
         # prep other data
         #
-        payload = dict(datasetId=dataset_id,
-                    fileToReplaceId=old_file_id,
+        jData = dict(fileToReplaceId=old_file_id,
                     forceReplace=force_replace)
+
+        payload = dict(jsonData=json.dumps(jData))
 
         # Prep url (currently always the same)
         #
-        url = '%s/upload/replace?key=%s' % (url_base, API_KEY)
+        url = '%s/files/%s/replace?key=%s' % (url_base, old_file_id, API_KEY)
+
+        print 'url', url
 
         # Make the request!
         #
@@ -170,17 +173,23 @@ def run_add_loop(num_loops, dataset_id):
         fname = 'add_%s.txt' % (`x`.zfill(4))
         files = {'file': (fname, file_content)}
 
+        #files = {'file': open('input/test.csv', 'rb')}
+        #files = {'file': open('input/test_01.xlsx', 'rb')}
+
         # prep other data
         #
-        payload = dict(datasetId=dataset_id)
+        payload = dict()
 
         # Prep url (currently always the same)
         #
-        url = '%s/upload/add?key=%s' % (url_base, API_KEY)
+        url = '%s/datasets/%s/add?key=%s' % (url_base, dataset_id, API_KEY)
+        print 'url', url
+        print 'payload', payload
 
         # Make the request!
         #
-        r = requests.post(url, data=payload, files=files)
+        #r = requests.post(url, data=payload, files=files)
+        r = requests.post(url, files=files)
 
         # Turn result into expected JSON
         #
@@ -198,7 +207,7 @@ def run_add_loop(num_loops, dataset_id):
 
         # Sleep
         msg('Sleep...')
-        #time.sleep(2)
+        time.sleep(2)
 
 
 if __name__ == '__main__':
@@ -207,6 +216,7 @@ if __name__ == '__main__':
     #run_replace_test(26, 417)
     #run_replace_test(26, 417, True)
     #run_command_line_params()
-    #run_replace_loop(2, 26, 427)#, force_replace=True)
 
-    run_add_loop(10, 26)
+    run_replace_loop(5, 26, 610)#, force_replace=True)
+
+    #run_add_loop(1, 26)
