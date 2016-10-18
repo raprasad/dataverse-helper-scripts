@@ -78,3 +78,5 @@ src/stress_tests/mydata_links.py
 src/api_scripts/key_str.txt
 
 src/api_scripts/output/result.html
+
+src/test_tabular_files/output/*

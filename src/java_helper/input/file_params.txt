@@ -1,0 +1,5 @@
+id|Long|pkey
+#
+description|String
+tags|List<String>
+tabularTags|List<String>

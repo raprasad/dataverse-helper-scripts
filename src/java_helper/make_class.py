@@ -147,8 +147,10 @@ class JavaHelper(object):
 
         return json_method
 
+
+
 if __name__=='__main__':
-    content = open('input/example_05.txt')
+    content = open('input/file_params.txt')
     jhelper = JavaHelper(content)
     print jhelper.get_java_lines(includeJSON=False)
 

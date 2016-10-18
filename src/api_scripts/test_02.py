@@ -217,6 +217,6 @@ if __name__ == '__main__':
     #run_replace_test(26, 417, True)
     #run_command_line_params()
 
-    run_replace_loop(5, 26, 610)#, force_replace=True)
+    #run_replace_loop(5, 26, 610)#, force_replace=True)
 
-    #run_add_loop(1, 26)
+    run_add_loop(1, 26)
