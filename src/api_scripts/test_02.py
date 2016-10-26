@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import random
 import sys
 import time
 
@@ -119,16 +120,22 @@ def run_replace_loop(num_loops, dataset_id, old_file_id, force_replace=False):
 
         # prep other data
         #
-        jData = dict(fileToReplaceId=old_file_id,
-                    forceReplace=force_replace)
 
-        payload = dict(jsonData=json.dumps(jData))
+        params = dict(
+                    forceReplace=force_replace,
+                    description="Blue skies!",
+                    categories=["Data", "Glue", "Foo", "Blue", "Zoo"],
+                    #dataFileTags = ['Survey', 'Time Series', 'Panel', 'Event']
+                    )
+
+        payload = dict(jsonData=json.dumps(params))
 
         # Prep url (currently always the same)
         #
         url = '%s/files/%s/replace?key=%s' % (url_base, old_file_id, API_KEY)
 
         print 'url', url
+        print 'payload', payload
 
         # Make the request!
         #
@@ -145,7 +152,14 @@ def run_replace_loop(num_loops, dataset_id, old_file_id, force_replace=False):
 
         # Retrieve the new file id from the result
         #
-        old_file_id = result_json.get('data', {}).get('id')
+        files_list = result_json.get('files', None)
+        if not files_list:
+            msgx("Unexpected result.  files_list not found: %s" % r.text)
+
+        if len(files_list) ==0 :
+            msgx("Unexpected result.  files_list is empty: %s" % r.text)
+
+        old_file_id = files_list[0].get('id')
         if old_file_id is None:
             msgx("Unexpected result.  New file id not found: %s" % r.text)
 
@@ -157,7 +171,18 @@ def run_replace_loop(num_loops, dataset_id, old_file_id, force_replace=False):
         msg('Sleep...')
         time.sleep(2)
 
+def get_random_csv_contents(num_cols=10, num_lines=10):
 
+    csv_lines = []
+
+    fieldnames = [ 'col_%s' % x for x in range(1,num_cols+1)]
+    csv_lines.append(','.join(fieldnames))
+
+    for x in range(1, num_lines+1):
+        vals = [ `x` for x in random.sample(range(1, 100), num_cols)]
+        csv_lines.append(','.join(vals))
+
+    return '\n'.join(csv_lines)
 
 def run_add_loop(num_loops, dataset_id):
     assert num_loops > 0, "num_loops must be a number greater than 0"
@@ -167,29 +192,60 @@ def run_add_loop(num_loops, dataset_id):
 
         msgt('%s) add loop' % (x))
 
-        # prep file data
-        #
+
+        # ------------------------
+        # Make a text "file" with the current timestamp
+        # ------------------------
+        """
         file_content = 'content: %s' % datetime.now()
         fname = 'add_%s.txt' % (`x`.zfill(4))
         files = {'file': (fname, file_content)}
+        """
 
-        #files = {'file': open('input/test.csv', 'rb')}
-        #files = {'file': open('input/test_01.xlsx', 'rb')}
+        # ------------------------
+        # Make a random csv "file"
+        # ------------------------
+        file_content = get_random_csv_contents(random.randint(1,10), random.randint(1,10))
+        #file_content = get_random_csv_contents(90, 100000)
+        fname = 'add_%s.csv' % (`x`.zfill(4))
+        files = {'file': (fname, file_content)}
+
+
+        # ------------------------
+        # Add a test shapefile
+        # ------------------------
+        #files = {'file': open('input/income_in_boston_gui.zip', 'rb')}
+
+        # ------------------------
+        # Add a test .zip
+        # ------------------------
+        #files = {'file': open('input/4files.zip', 'rb')}
 
         # prep other data
         #
-        payload = dict()
+        categories = ["Data", "Glue", "Foo", "Blue", "Zoo", "  Data  ", "Data", ""]
+        dataFileTags = ['Survey', 'Time Series', 'Panel', 'Event']
+
+        #tags = [ 'tag_%s' % `x`.zfill(4) for x in range(1, 20) ]
+
+        params = dict(description="Blue skies!",
+                    categories=categories)
+                    #dataFileTags=dataFileTags)
+        payload = dict(jsonData=json.dumps(params))
 
         # Prep url (currently always the same)
         #
         url = '%s/datasets/%s/add?key=%s' % (url_base, dataset_id, API_KEY)
+
+        #url = '%s/datasets/:persistentId/add?key=%s&persistentId=%s' %\
+        #            (url_base, API_KEY, 'doi:10.5072/FK2/6XACVA')
+
         print 'url', url
         print 'payload', payload
 
         # Make the request!
         #
-        #r = requests.post(url, data=payload, files=files)
-        r = requests.post(url, files=files)
+        r = requests.post(url, data=payload, files=files)
 
         # Turn result into expected JSON
         #
@@ -209,14 +265,24 @@ def run_add_loop(num_loops, dataset_id):
         msg('Sleep...')
         time.sleep(2)
 
+def get_dataset_json(dataset_id):
+
+    url = '%s/datasets/%s?key=%s' % (url_base, dataset_id, API_KEY)
+
+    r = requests.get(url)
+
+    msg("response:\n%s" % json.dumps(r.json(), indent=4))
+
+    msgt('status code: %s' % r.status_code )
 
 if __name__ == '__main__':
-    #run_publish_dataset(26)
+    ds_id = 2
     #run_add_test(26)
     #run_replace_test(26, 417)
     #run_replace_test(26, 417, True)
     #run_command_line_params()
 
-    #run_replace_loop(5, 26, 610)#, force_replace=True)
-
-    run_add_loop(1, 26)
+    #run_publish_dataset(ds_id)
+    #run_replace_loop(2, ds_id, 274, force_replace=True)
+    get_dataset_json(ds_id)
+    #run_add_loop(1, ds_id)

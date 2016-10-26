@@ -1,0 +1,9 @@
+id|Long|pkey
+#
+doi|String
+majorVersion|Long
+minorVersion|Long
+datasetId|Long
+datasetVersionId|Long
+dataFile|DataFile
+fileMetadata|FileMetadata
