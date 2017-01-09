@@ -1,0 +1,15 @@
+Component Area|Functionality|Note
+
+Native fileUpload|getMaxFileUploadSizeInBytes|Factor out
+Native fileUpload|handleFileUpload|<f:param ...> in xhtml to split code
+
+Dropbox upload|getMaxFileUploadSizeInBytes|Factor out
+Dropbox upload|handleDropBoxUpload|factor out, <f:param ...> in xhtml to split code
+Dropbox upload|dropBoxKey|Factor out
+
+files table|<p:dataTable..> tag|Add additional render param
+files table|fileMetadatas|potentially split getFileMetadatas() to use AddReplaceHelper
+
+EditDatafilesPage.handleDropBoxUpload / dropBoxSelection /
+
+dropboxUploadBlock|Yes||

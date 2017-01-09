@@ -3,8 +3,9 @@
 - [ ] For file add/replace remove ability to add DataFile tags
   - Leave "logic" in place to use for in #3422 - changing label, description and tags of an existing file
     - For existing files, we can validate whether the file is tabular and can have a DataFile tag
-- [ ] Use native JSON.  e.g. Add new attributes to the native JSON, exclude dataset and dataverse information
-  - [ ] re-jigger ```okResponseGsonObject``` to use the native JSON object builder.  
+- [ ] Use native JSON.
+  - [ ] Add new attributes to the native JSON, exclude dataset and dataverse information
+  - [ ] rework ```okResponseGsonObject``` to use the native JSON object builder.  
     - This is still a new method which take both a ```JsonObjectBuilder``` object _and_ a String ```message```
 - [ ] For add file API endpoint, we now have the dataset object--pass directly to AddReplaceHelper instead of the id
 - [ ] Tech debt: Update existing ```findDatasetOrDie``` method to use error messages in bundles

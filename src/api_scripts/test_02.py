@@ -3,6 +3,7 @@ import json
 import random
 import sys
 import time
+from os.path import join, isdir, isfile
 
 import requests
 
@@ -25,33 +26,6 @@ def run_add(fname='blackbox.txt'):
 
     print r.status_code
     print r.text
-
-
-def run_add_test(dataset_id):
-    msgt('run_upload_test')
-
-    url = '%s/upload/add?key=%s' % (url_base, API_KEY)
-
-    print 'url: ', url
-
-    # prep file data
-    #
-    #files = {'file': open('input/howdy3.txt', 'rb')}
-    files = {'file': open('input/test_01.xlsx', 'rb')}
-
-    # prep other data
-    #
-    payload = dict(datasetId=dataset_id)
-
-    # Make the request!
-    #
-    r = requests.post(url, data=payload, files=files)
-
-    #print r.json()
-    print '-' * 40
-    print r.text
-    print '-' * 40
-    print r.status_code
 
 
 def run_replace_test(dataset_id, old_file_id, force_replace=False):
@@ -104,7 +78,10 @@ def update_input_file():
     fh.write('%s' % datetime.now())
     fh.close()
 
-def run_replace_loop(num_loops, dataset_id, old_file_id, force_replace=False):
+def run_replace_loop_with_publish(num_loops, dataset_id, old_file_id, force_replace=False):
+    run_replace_loop(num_loops, dataset_id, old_file_id, force_replace, True)
+
+def run_replace_loop(num_loops, dataset_id, old_file_id, force_replace=False, publish_after_replace=False):
     assert num_loops > 0, "num_loops must be a number greater than 0"
 
     # Run replace loop multiple times
@@ -152,20 +129,16 @@ def run_replace_loop(num_loops, dataset_id, old_file_id, force_replace=False):
 
         # Retrieve the new file id from the result
         #
-        files_list = result_json.get('files', None)
-        if not files_list:
-            msgx("Unexpected result.  files_list not found: %s" % r.text)
-
-        if len(files_list) ==0 :
-            msgx("Unexpected result.  files_list is empty: %s" % r.text)
-
-        old_file_id = files_list[0].get('id')
-        if old_file_id is None:
-            msgx("Unexpected result.  New file id not found: %s" % r.text)
+        try:
+            old_file_id = result_json['data']['files'][0]['dataFile']['id']
+        except:
+            msgx('Could not find file id: data->files[0]->dataFile->id: \n%s' % r.text)
 
         msg("good replace: %s" % json.dumps(result_json, indent=4))
+
         # Publish
-        run_publish_dataset(dataset_id)
+        if publish_after_replace:
+            run_publish_dataset(dataset_id)
 
         # Sleep
         msg('Sleep...')
@@ -271,18 +244,35 @@ def get_dataset_json(dataset_id):
 
     r = requests.get(url)
 
-    msg("response:\n%s" % json.dumps(r.json(), indent=4))
+    #msg("response:\n%s" % json.dumps(r.json(), indent=4))
+
+    files_only = r.json()['data']['latestVersion']['files']
+    msg("response:\n%s" % json.dumps(files_only, indent=4))
 
     msgt('status code: %s' % r.status_code )
 
+def make_test_csv_files(num_files=10):
+
+
+    for fnum in range(1, num_files+1):
+        file_content = get_random_csv_contents(random.randint(1,10), random.randint(50000,70000))
+        fname = join('output', 'test_csv_%s.csv' % `fnum`.zfill(6))
+        open(fname, 'w').write(file_content)
+        msg('file written: %s' % fname)
+
+
 if __name__ == '__main__':
     ds_id = 2
-    #run_add_test(26)
+    run_add_loop(1, ds_id)
+    #run_replace_loop(1, ds_id, 845, force_replace=True)
+    #run_replace_loop_with_publish(1, ds_id, 845, force_replace=True)
     #run_replace_test(26, 417)
     #run_replace_test(26, 417, True)
     #run_command_line_params()
 
     #run_publish_dataset(ds_id)
-    #run_replace_loop(2, ds_id, 274, force_replace=True)
-    get_dataset_json(ds_id)
-    #run_add_loop(1, ds_id)
+    #get_dataset_json(ds_id)
+
+    #run_replace_loop_with_publish
+
+    #make_test_csv_files(25)

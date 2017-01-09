@@ -1,0 +1,6 @@
+DV Tabular File - Column Type|WorldMap layer - Column Type|Target Layer is Zero Padded?|Geoconnect Action
+Numeric|String|no|Convert numeric to character--make it a string
+Numeric|String|Yes|Convert numeric to character, Adding leading zeros to JoinTarget specified length
+String|String|no|No Action
+String|String|Yes|Adding leading zeros to JoinTarget specified length
+String|Numeric|n/a|__currently no action__
