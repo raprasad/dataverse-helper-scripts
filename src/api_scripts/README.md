@@ -20,7 +20,7 @@ Notes:
 ```python
 if __name__ == '__main__':
   dataset_id = 2    # ID of Dataset to add or replace files
-  run_add_loop(1, dataset_id)  # (number of files to add, dataset_id)
+  run_add_loop(10, dataset_id)  # (number of files to add, dataset_id)
 ```
  - From the command line, run ```python test_02.py```
 

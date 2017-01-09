@@ -235,8 +235,9 @@ def run_add_loop(num_loops, dataset_id):
         #run_publish_dataset(dataset_id)
 
         # Sleep
-        msg('Sleep...')
-        time.sleep(2)
+        seconds = 2
+        msg('Sleep %d seconds...' % seconds)
+        time.sleep(seconds)
 
 def get_dataset_json(dataset_id):
 
@@ -263,7 +264,7 @@ def make_test_csv_files(num_files=10):
 
 if __name__ == '__main__':
     dataset_id = 2    # ID of Dataset to add or replace files
-    run_add_loop(1, dataset_id)  # (number of files to add, dataset_id)
+    run_add_loop(10, dataset_id)  # (number of files to add, dataset_id)
     #run_replace_loop(1, dataset_id, 845, force_replace=True)
     #run_replace_loop_with_publish(1, dataset_id, 845, force_replace=True)
     #run_replace_test(26, 417)
