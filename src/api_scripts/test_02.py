@@ -7,7 +7,7 @@ from os.path import join, isdir, isfile
 
 import requests
 
-def msg(m): print m
+def msg(m): print (m)
 def dashes(): msg('-' * 40)
 def msgt(m): dashes(); msg(m); dashes()
 def msgx(m): msgt(m); sys.exit(0)
@@ -262,16 +262,16 @@ def make_test_csv_files(num_files=10):
 
 
 if __name__ == '__main__':
-    ds_id = 2
-    run_add_loop(1, ds_id)
-    #run_replace_loop(1, ds_id, 845, force_replace=True)
-    #run_replace_loop_with_publish(1, ds_id, 845, force_replace=True)
+    dataset_id = 2    # ID of Dataset to add or replace files
+    run_add_loop(1, dataset_id)  # (number of files to add, dataset_id)
+    #run_replace_loop(1, dataset_id, 845, force_replace=True)
+    #run_replace_loop_with_publish(1, dataset_id, 845, force_replace=True)
     #run_replace_test(26, 417)
     #run_replace_test(26, 417, True)
     #run_command_line_params()
 
-    #run_publish_dataset(ds_id)
-    #get_dataset_json(ds_id)
+    #run_publish_dataset(dataset_id)
+    #get_dataset_json(dataset_id)
 
     #run_replace_loop_with_publish
 
