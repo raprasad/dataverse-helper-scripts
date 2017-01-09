@@ -157,37 +157,73 @@ def get_random_csv_contents(num_cols=10, num_lines=10):
 
     return '\n'.join(csv_lines)
 
-def run_add_loop(num_loops, dataset_id):
+def get_texaco_excerpt():
+    return '''Irene, the shark catcher, saw him first. Then Sonore, the capresse, hair whitened by something other than age, saw him come. But only when Marie-Clemence, whose tongue, it is true, is televised news, appeared was everyone brought up to speed.'''
+
+def run_add_loop(num_loops, dataset_id, **kwargs):
+    """
+    Optional kwargs:
+
+    filename_prefix - Defaults to "add_". Ignored for 'use_test_shapefile'
+
+    description - Defaults to Texaco excerpt
+
+    categories - list of category strings.  If not specified, uses a default list of categories
+
+    use_csv_file - boolean. Creates a random csv file to test tabular ingest
+
+    use_test_shapefile - boolean. Uses the shapefile "income_in_boston_gui.zip"
+
+    publish_after_add - boolean.  defaults to False
+
+    tags - list of dataFileTags.  For testing b/c this will always fail
+
+    """
+
     assert num_loops > 0, "num_loops must be a number greater than 0"
 
-    # Run replace loop multiple times
+    # ----------------------------
+    # Prepare args
+    # ----------------------------
+    filename_prefix = kwargs.get('filename_prefix', 'add_')
+    description = kwargs.get('description', get_texaco_excerpt())
+    publish_after_add = kwargs.get('publish_after_add', False)
+
+    if kwargs.has_key('categories'):
+        categories = kwargs.get('categories', None)
+    else:
+        categories = ["Data", "Glue", "Foo", "Blue", "Zoo", "  Data  ", "Data", ""]
+
+    tags = kwargs.get('tags', None)
+
+    use_csv_file = kwargs.get('use_csv_file', False)
+    use_test_shapefile = kwargs.get('use_test_shapefile', False)
+
+    # ----------------------------
+    # Run add loop multiple times
+    # ----------------------------
     for x in range(1, num_loops+1):
 
         msgt('%s) add loop' % (x))
 
 
         # ------------------------
-        # Make a text "file" with the current timestamp
-        # ------------------------
-        """
-        file_content = 'content: %s' % datetime.now()
-        fname = 'add_%s.txt' % (`x`.zfill(4))
-        files = {'file': (fname, file_content)}
-        """
-
-        # ------------------------
         # Make a random csv "file"
         # ------------------------
-        file_content = get_random_csv_contents(random.randint(1,10), random.randint(1,10))
-        #file_content = get_random_csv_contents(90, 100000)
-        fname = 'add_%s.csv' % (`x`.zfill(4))
-        files = {'file': (fname, file_content)}
-
-
-        # ------------------------
-        # Add a test shapefile
-        # ------------------------
-        #files = {'file': open('input/income_in_boston_gui.zip', 'rb')}
+        if use_csv_file:
+            file_content = get_random_csv_contents(random.randint(1,10), random.randint(1,10))
+            #file_content = get_random_csv_contents(90, 100000)
+            fname = '%s_%s.csv' % (filename_prefix, `x`.zfill(4))
+            files = {'file': (fname, file_content)}
+        elif use_test_shapefile:
+            files = {'file': open('input/income_in_boston_gui.zip', 'rb')}
+        else:
+            # ------------------------
+            # Make a text "file" with the current timestamp
+            # ------------------------
+            file_content = 'content: %s' % datetime.now()
+            fname = '%s_%s.txt' % (filename_prefix, `x`.zfill(4))
+            files = {'file': (fname, file_content)}
 
         # ------------------------
         # Add a test .zip
@@ -196,14 +232,9 @@ def run_add_loop(num_loops, dataset_id):
 
         # prep other data
         #
-        categories = ["Data", "Glue", "Foo", "Blue", "Zoo", "  Data  ", "Data", ""]
-        dataFileTags = ['Survey', 'Time Series', 'Panel', 'Event']
-
-        #tags = [ 'tag_%s' % `x`.zfill(4) for x in range(1, 20) ]
-
-        params = dict(description="Blue skies!",
-                    categories=categories)
-                    #dataFileTags=dataFileTags)
+        params = dict(description=description,
+                    categories=categories,
+                    dataFileTags=tags)
         payload = dict(jsonData=json.dumps(params))
 
         # Prep url (currently always the same)
@@ -231,8 +262,9 @@ def run_add_loop(num_loops, dataset_id):
 
         msg("good add: %s" % json.dumps(result_json, indent=4))
 
-        # Publish
-        #run_publish_dataset(dataset_id)
+        # Publish?
+        if publish_after_add:
+            run_publish_dataset(dataset_id)
 
         # Sleep
         seconds = 2
@@ -264,7 +296,21 @@ def make_test_csv_files(num_files=10):
 
 if __name__ == '__main__':
     dataset_id = 2    # ID of Dataset to add or replace files
-    run_add_loop(10, dataset_id)  # (number of files to add, dataset_id)
+
+    dict_args = dict(filename_prefix='last',
+                    description="""weather report""",
+                    categories=['cloudy', 'sunny day', 'chance of snow'],
+                    publish_after_add=False,
+                    #tags='Survey Event'.split(),  # always fails, used for checking errs
+                    use_csv_file=False,
+                    use_test_shapefile=False,
+                )
+
+    #run_add_loop(2, dataset_id, **dict_args)
+
+    run_add_loop(2, dataset_id)
+
+    # (number of files to add, dataset_id)
     #run_replace_loop(1, dataset_id, 845, force_replace=True)
     #run_replace_loop_with_publish(1, dataset_id, 845, force_replace=True)
     #run_replace_test(26, 417)
