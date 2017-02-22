@@ -3,6 +3,7 @@
 #Attempt to install cga-worldmap:
 # https://github.com/cga-harvard/cga-worldmap
 
+
 # ------------------------------------------------
 # Install vim (for editing)
 # ------------------------------------------------
@@ -15,9 +16,13 @@ sudo apt-get --assume-yes install curl
 
 
 # ------------------------------------------------
-# Pip
+# Pip + virtualenvwrapper
 # ------------------------------------------------
 sudo apt-get -y install python-pip
+sudo pip install virtualenvwrapper
+mkdir ~/.virtualenvs
+export WORKON_HOME=~/.virtualenvs
+
 
 # ------------------------------------------------
 # Install git
@@ -134,6 +139,20 @@ sudo apt-get install -y postgresql postgresql-contrib
 # ------------------------------------------------
 sudo apt-get install -y postgis postgresql-9.1-postgis-2.0
 
+# ------------------------------------------------
+# psycopg2
+#
+# see: http://stackoverflow.com/questions/28253681/you-need-to-install-postgresql-server-dev-x-y-for-building-a-server-side-extensi
+# ------------------------------------------------
+sudo apt-get install --assume-yes python-psycopg2
+sudo apt-get install --assume-yes libpq-dev
+
+# ------------------------------------------------
+# fix for paver fail
+# see: https://github.com/scieloorg/packtools/issues/12
+# ------------------------------------------------
+sudo apt-get install --assume-yes libxml2-dev libxslt1-dev python-dev
+sudo pip install -e git+git://github.com/scieloorg/packtools.git#egg=packtools
 
 # test postgis
 #sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" testit

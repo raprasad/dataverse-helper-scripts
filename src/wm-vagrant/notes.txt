@@ -1,3 +1,5 @@
+Use Ubuntu 14.04 LTS
+
 - Before running vagrant file
 - Load cga-worldmap into directory
   - ```git clone git@github.com:cga-harvard/cga-worldmap.git```

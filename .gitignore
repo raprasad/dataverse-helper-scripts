@@ -82,4 +82,5 @@ src/api_scripts/output/result.html
 src/test_tabular_files/output/*
 
 src/wm-vagrant/.vagrant/*
-src/wm-vagrant/cga*
+src/wm-vagrant/cga-worldmap
+src/wm-vagrant/cga-worldmap/*
