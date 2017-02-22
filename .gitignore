@@ -80,3 +80,6 @@ src/api_scripts/key_str.txt
 src/api_scripts/output/result.html
 
 src/test_tabular_files/output/*
+
+src/wm-vagrant/.vagrant/*
+src/wm-vagrant/cga*
