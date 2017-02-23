@@ -167,17 +167,26 @@ sudo apt-get install -y postgis postgresql-9.3-postgis-2.2
 # ------------------------------------------------
 echo "-- Install psycopg2 --"
 sudo apt-get install --assume-yes python-psycopg2
-#sudo apt-get install --assume-yes libpq-dev
+sudo apt-get install --assume-yes libpq-dev
+
+
+# ------------------------------------------------
+# pre-reqs for Pillow
+# ------------------------------------------------
+echo "-- dependencies for Pillow install --"
+sudo apt-get install --assume-yes libjpeg-dev
+sudo apt-get build-dep --assume-yes python-imaging
 
 # ------------------------------------------------
 # fix for paver fail
 # see: https://github.com/scieloorg/packtools/issues/12
 # ------------------------------------------------
-echo "-- (skip) Install fix for paver fail --"
-#sudo apt-get install --assume-yes libxml2-dev libxslt1-dev #python-dev
+echo "-- dependencies for pip requirements --"
+sudo apt-get install --assume-yes libxml2-dev
+sudo apt-get install --assume-yes libxslt1-dev
+
+#python-dev
 #sudo pip install -e #git+git://github.com/scieloorg/packtools.git#egg=packtools
 
-# test postgis
-#sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" testit
-#sudo su - postgres
+
 echo "--- See post_setup.md ---"

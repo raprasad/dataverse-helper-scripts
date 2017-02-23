@@ -107,7 +107,7 @@ createdb -E UTF8 -U wm_user -T template_postgis wmdata
 ```
 
 ---
-# Update for dbs
+# SKIP!!! Update for dbs
 ---
 sudo -u postgres psql
 \c wm_db
@@ -124,13 +124,18 @@ sudo -u postgres psql
 ```
 cd /vagrant/cga-worldmap/
 git submodule update --init
-
 mkvirtualenv worldmap
 
+# maybe use sudo for next line?
 pip install -r shared/requirements.txt
-# if fails, edit "shared/requirements.txt"
-# comment out "psycopg2"
+```
 
+- Temp django fix before paver build (may have been bad django install):
+  - see item with 11 up votes:  http://stackoverflow.com/questions/31816158/attributeerror-nonetype-object-has-no-attribute-info
+
+- Next install steps
+
+```
 paver build # see note2 below
 
 django-admin.py createsuperuser --settings=geonode.settings
