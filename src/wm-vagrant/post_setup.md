@@ -1,9 +1,17 @@
-#------------------------
-# Update .bashrc
-#------------------------
+
+### SSH into vagrant
+```
+vagrant ssh
+```
+
+### Update .bashrc
+
 - Open the .bashrc:
-  - ```vim /home/vagrant/.bashrc```
-- Add these lines:
+```
+sudo vim /home/vagrant/.bashrc
+```
+
+- Add these lines to the end:
 ```
 . /usr/local/bin/virtualenvwrapper.sh
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre
@@ -11,22 +19,52 @@ export PATH=$PATH:$JAVA_HOME/bin
 export WORKON_HOME=~/.virtualenvs
 ```
 
-#------------------------
-# Update conf file
-# ------------------------   
-  - reference: http://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge
-  - update: ```
-sudo vim /etc/postgresql/9.1/main/pg_hba.conf
-in line: local   all             postgres                                peer
-Change "peer" to "md5"
+### Update pg_hba.conf conf file
+
+- reference: http://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge
+- open pg_hba.conf:
+```
+sudo vim /etc/postgresql/9.3/main/pg_hba.conf
+```
+
+- In 2 lines ending with "peer", change "peer" to "md5"
+
+- Restart postgres:
+```
 sudo service postgresql restart
 ```
 
-# postgres pw update, if needed: http://stackoverflow.com/questions/10845998/i-forgot-the-password-i-entered-during-postgres-installation
+### Update postgres password:
+
+  - http://stackoverflow.com/questions/10845998/i-forgot-the-password-i-entered-during-postgres-installation
+
+- open config:
+```
+sudo vim /etc/postgresql/9.3/main/pg_hba.conf
+```
+
+- Add line to top:
+```
+local  all   all   trust
+```
+
+- Restart postgres:
+```
+sudo service postgresql restart
+```
+
+- Reset pw
+
+```
+psql -U postgres
+ALTER USER postgres with password '123';
+```
+
+- Remove line from top of config and restart server again
 
 
 ---
-# Manual update for encoding
+### Manual update for encoding
 ---
 sudo su postgres
 psql
@@ -35,31 +73,38 @@ drop database Template1;
 create database template1 with owner=postgres encoding='UTF-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
 update pg_database set datistemplate=true where datname='template1';
 
----
-# Add WorldMap tables
----
-# create user
+### Add WorldMap tables
+
+- create user with password: "wm_password"
+
+```
 sudo -u postgres createuser -P -s -E -l wm_user;
-# password: wm_password
+```
 
-#create PostGIS template with legacy GIST operators
-sudo -u postgres createdb -E UTF8 -O wm_user template_postgis
-sudo -u postgres psql -d template_postgis -c "CREATE EXTENSION postgis;"
+### create PostGIS template with legacy GIST operators
 
-# Assumes cga-worldmap clone into /vagrant/ directory
-# git clone git@github.com:cga-harvard/cga-worldmap.git
-#
+```
+sudo su postgres
+createdb -E UTF8 -O wm_user template_postgis
+psql -d template_postgis -c "CREATE EXTENSION postgis;"
+```
+
+- Make sure "cga-worldmap" is cloned into /vagrant/ directory
+  - e.g. git clone git@github.com:cga-harvard/cga-worldmap.git
+
+```
 cd /vagrant/cga-worldmap/
+psql -d template_postgis -f geonode/static/geonode/patches/postgis/legacy_gist.sql
+```
 
-sudo -u postgres psql -d template_postgis -f geonode/static/geonode/patches/postgis/legacy_gist.sql
+### Create worldmap databases
 
-#
+- Make sure you are user "postgres", e.g. sudo su postgres
 
-# create wm_db
-sudo -u postgres createdb -E UTF8 -U wm_user -T template_postgis wm_db
-
-# create wmdata
-sudo -u postgres createdb -E UTF8 -U wm_user -T template_postgis wmdata
+```
+createdb -E UTF8 -U wm_user -T template_postgis wm_db
+createdb -E UTF8 -U wm_user -T template_postgis wmdata
+```
 
 ---
 # Update for dbs
@@ -74,12 +119,10 @@ sudo -u postgres psql
 
 
 
-
----
-# Geonode install steps
----
+### Geonode install steps
 
 ```
+cd /vagrant/cga-worldmap/
 git submodule update --init
 
 mkvirtualenv worldmap
