@@ -4,20 +4,6 @@
 vagrant ssh
 ```
 
-### Update .bashrc
-
-- Open the .bashrc:
-```
-sudo vim /home/vagrant/.bashrc
-```
-
-- Add these lines to the end:
-```
-. /usr/local/bin/virtualenvwrapper.sh
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre
-export PATH=$PATH:$JAVA_HOME/bin
-export WORKON_HOME=~/.virtualenvs
-```
 
 ### Update pg_hba.conf conf file
 
@@ -130,21 +116,54 @@ mkvirtualenv worldmap
 pip install -r shared/requirements.txt
 ```
 
-- Temp django fix before paver build (may have been bad django install):
-  - see item with 11 up votes:  http://stackoverflow.com/questions/31816158/attributeerror-nonetype-object-has-no-attribute-info
+### Jetty config update
 
+- Jetty.xml adjustment for host and port
+
+```
+<Set name="host"><SystemProperty name="jetty.host" default="0.0.0.0"/></Set>
+<Set name="port"><SystemProperty name="jetty.port" default="8080"/></Set>
+```
+
+### Continue on with paver steps
 - Next install steps
 
 ```
+workon worldmap
 paver build # see note2 below
 
 django-admin.py createsuperuser --settings=geonode.settings
 ```
 
+### Start jetty and django separately
 
----
-# PIL ubuntu 12.x
-# http://askubuntu.com/questions/156484/how-do-i-install-python-imaging-library-pil
----
-sudo apt-get build-dep python-imaging
-sudo apt-get install libjpeg62 libjpeg62-dev
+- Start jetty
+
+```
+cd /vagrant/cga-worldmap
+workon worldmap
+paver start_geoserver
+```
+
+- Open: http://localhost:8080  
+  - admin/admin
+
+
+- Start Django in another window
+
+```
+cd /vagrant/cga-worldmap
+workon worldmap
+python manage.py runserver 0.0.0.0:8000
+```
+
+- Open: http://localhost:8000
+  - rp/123
+
+
+
+---- OLD ----
+
+
+- Temp django fix before paver build (may have been bad django install):
+  - see item with 11 up votes:  http://stackoverflow.com/questions/31816158/attributeerror-nonetype-object-has-no-attribute-info

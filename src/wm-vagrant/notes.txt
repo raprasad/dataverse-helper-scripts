@@ -1,4 +1,19 @@
+Jetty.xml adjustment
+---------------------
+<Set name="host"><SystemProperty name="jetty.host" default="0.0.0.0"/></Set>
+<Set name="port"><SystemProperty name="jetty.port" default="8080"/></Set>
+
+
+
+
+---
+
+
 Use Ubuntu 14.04 LTS
+
+
+tail -F /vagrant/cga-worldmap/jetty.log
+tail -F /vagrant/cga-worldmap/django.log
 
 - Before running vagrant file
 - Load cga-worldmap into directory
