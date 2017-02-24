@@ -49,22 +49,28 @@ ALTER USER postgres with password '123';
 - Remove line from top of config and restart server again
 
 
----
-### Manual update for encoding
----
+
+### Manual postgres update for encoding
+
+```
 sudo su postgres
+```
+
+```
 psql
 update pg_database set datistemplate=false where datname='template1';
 drop database Template1;
 create database template1 with owner=postgres encoding='UTF-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
 update pg_database set datistemplate=true where datname='template1';
+```
 
 ### Add WorldMap tables
 
 - create user with password: "wm_password"
 
 ```
-sudo -u postgres createuser -P -s -E -l wm_user;
+sudo -u postgres
+createuser -P -s -E -l wm_user;
 ```
 
 ### create PostGIS template with legacy GIST operators
@@ -86,6 +92,7 @@ psql -d template_postgis -f geonode/static/geonode/patches/postgis/legacy_gist.s
 ### Create worldmap databases
 
 - Make sure you are user "postgres", e.g. sudo su postgres
+- NOTE: For next commands, use password "wm_password"
 
 ```
 createdb -E UTF8 -U wm_user -T template_postgis wm_db
@@ -110,15 +117,25 @@ sudo -u postgres psql
 ```
 cd /vagrant/cga-worldmap/
 git submodule update --init
+source ~/.bashrc
 mkvirtualenv worldmap
+```
 
-# maybe use sudo for next line?
+### Run pip install
+
+- ~~edit: ```pip install -r shared/requirements.txt```~~
+- ~~comment out: ```pip==1.0```~~
+  - ~~e.g. ```#pip==1.0```~~
+
+- Run it:
+
+```  
 pip install -r shared/requirements.txt
 ```
 
 ### Jetty config update
 
-- Jetty.xml adjustment for host and port
+- Jetty.xml adjustment for host and port.  Note host is "0.0.0.0"
 
 ```
 <Set name="host"><SystemProperty name="jetty.host" default="0.0.0.0"/></Set>
@@ -130,7 +147,14 @@ pip install -r shared/requirements.txt
 
 ```
 workon worldmap
+
+#pip install pip==1.0    # revert for paver build script
+
+pip uninstall django
+pip install Django==1.4.13 --no-cache-dir
+
 paver build # see note2 below
+pip install --upgrade pip
 
 django-admin.py createsuperuser --settings=geonode.settings
 ```

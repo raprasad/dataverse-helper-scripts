@@ -84,3 +84,5 @@ src/test_tabular_files/output/*
 src/wm-vagrant/.vagrant/*
 src/wm-vagrant/cga-worldmap
 src/wm-vagrant/cga-worldmap/*
+
+src/wm-vagrant/shared-dataverse-information/
