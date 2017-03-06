@@ -40,6 +40,12 @@ echo "-- Install subversion --"
 sudo apt-get --assume-yes install subversion
 
 # ------------------------------------------------
+# Install xclip
+# ------------------------------------------------
+#echo "-- Install xclip, helpful if adding ssh key to github later --"
+#sudo apt-get --assume-yes install xclip~~
+
+# ------------------------------------------------
 # Java 1.7
 # reference: http://stackoverflow.com/questions/16263556/installing-java-7-on-ubuntu
 # ------------------------------------------------
