@@ -93,6 +93,6 @@ def delete_single_map(datafile_id):
 
 
 if __name__ == '__main__':
-    #test_get_all_map_data()
+    test_get_all_map_data()
     #test_get_single_map(956)
     #delete_single_map(956)
