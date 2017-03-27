@@ -1,0 +1,10 @@
+id|Long|pkey
+#
+fileId|int
+filesize|Long
+checksumValue|String
+checksumType|String
+dataFile|DataFile
+errorFound|boolean
+errorMessage|String
+fileExists|boolean

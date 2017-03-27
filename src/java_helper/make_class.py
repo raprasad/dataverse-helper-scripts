@@ -150,7 +150,7 @@ class JavaHelper(object):
 
 
 if __name__=='__main__':
-    content = open('input/file_version_params.txt')
+    content = open('input/file_checker.txt')
     jhelper = JavaHelper(content)
     print jhelper.get_java_lines(includeJSON=False)
 
