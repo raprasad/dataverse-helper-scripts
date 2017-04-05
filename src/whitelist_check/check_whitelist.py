@@ -122,13 +122,13 @@ class WhitelistChecker(object):
 
 
 def show_instructions():
-    msgt("white list check")
-    msg(('\n\t>python check_whitelist.py (input file) (output file)'
-         '\n\nExample:\n\n\t>python check_whitelist.py whitelist-domains_2017_0405.txt output_2017_0405.csv'
-         '\n\nThe script may be restarted at a specific item:'
-         '\n\n\t>python check_whitelist.py (input file) (output file) (item #/occurrence in whitelist)'
-         '\n\nExample.  Start at 20th item in the whitelist:'
-         '\n\n\t>python check_whitelist.py whitelist-domains_2017_0405.txt output_2017_0405.csv 20'
+    msgt("quick whitelist check")
+    msg(('\nRun this command:\n\n    >python check_whitelist.py (input file) (output file)'
+         '\n\n    Example:\n\n        >python check_whitelist.py whitelist-domains_2017_0405.txt output_2017_0405.csv'
+         '\n\nThe script may be restarted at a specific line number:'
+         '\n\n    >python check_whitelist.py (input file) (output file) (item #/occurrence in whitelist)'
+         '\n\n    Example.  Start at 20th item in the whitelist:'
+         '\n\n        >python check_whitelist.py whitelist-domains_2017_0405.txt output_2017_0405.csv 20'
          '\n'))
 
 if __name__ == '__main__':
