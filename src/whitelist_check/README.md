@@ -12,6 +12,8 @@ The ```check_whitelist.py``` script:
 
 The input file should be placed in the ```input``` directory.
 
+The output file will contain comma-separated-values and be placed in the ```output``` directory.
+
 ### Running the script:
 
 Make sure you have the python [requests](http://docs.python-requests.org/en/master/) library.
