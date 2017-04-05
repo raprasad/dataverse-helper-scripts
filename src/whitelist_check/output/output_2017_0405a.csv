@@ -1,0 +1,124 @@
+url_to_check,200_status_code,message,timestamp
+https://ae0521ba008c6c6dd67f-667e6d5e490a1bc46688be42ea525d83.ssl.cf1.rackcdn.com,False,Failed with status code: 404,2017-04-05 11:16:14
+https://3playmedia.com,False,Failed to connect to site,2017-04-05 11:16:34
+https://altbibl.io,False,Failed to connect to site,2017-04-05 11:16:34
+https://amcharts.com,True,Looks good!,2017-04-05 11:16:35
+https://ap.org,True,Looks good!,2017-04-05 11:16:35
+https://api2.libanswers.com,False,Failed with status code: 404,2017-04-05 11:16:35
+https://app.e2ma.net,True,Looks good!,2017-04-05 11:16:38
+https://appointment-plus.com,True,Looks good!,2017-04-05 11:16:39
+https://arcgis.com,True,Looks good!,2017-04-05 11:16:39
+https://articulate-online.com,True,Looks good!,2017-04-05 11:16:39
+https://bbc.co.uk,True,Looks good!,2017-04-05 11:16:40
+https://bbc.in,True,Looks good!,2017-04-05 11:16:41
+https://blogspot.com,True,Looks good!,2017-04-05 11:16:42
+https://bloomberg.com,True,Looks good!,2017-04-05 11:16:42
+https://brightcove.com,True,Looks good!,2017-04-05 11:16:43
+https://brightcove.net,False,Failed to connect to site,2017-04-05 11:16:43
+https://c-span.org,False,Failed to connect to site,2017-04-05 11:16:53
+https://candidcareer.com,True,Looks good!,2017-04-05 11:16:57
+https://carto.com,True,Looks good!,2017-04-05 11:16:57
+https://cartodb.com,True,Looks good!,2017-04-05 11:16:58
+https://cc.com,False,Failed to connect to site,2017-04-05 11:17:08
+https://cloudciti.es,True,Looks good!,2017-04-05 11:17:08
+https://codepen.io,True,Looks good!,2017-04-05 11:17:09
+https://cognitoforms.com,True,Looks good!,2017-04-05 11:17:09
+https://college.harvard.edu,True,Looks good!,2017-04-05 11:17:10
+https://constantcontact.com,True,Looks good!,2017-04-05 11:17:10
+https://credly.com,True,Looks good!,2017-04-05 11:17:10
+https://ctctcdn.com,False,Failed to connect to site,2017-04-05 11:17:11
+https://donorperfect.net,True,Looks good!,2017-04-05 11:17:11
+https://doodle.com,True,Looks good!,2017-04-05 11:17:12
+https://easychair.org,True,Looks good!,2017-04-05 11:17:12
+https://eventbrite.com,True,Looks good!,2017-04-05 11:17:13
+https://extrazoom.com,False,Failed to connect to site,2017-04-05 11:17:13
+https://facebook.com,True,Looks good!,2017-04-05 11:17:14
+https://flickr.com,True,Looks good!,2017-04-05 11:17:14
+https://flipboard.com,True,Looks good!,2017-04-05 11:17:14
+https://fontawesome.io,False,Failed to connect to site,2017-04-05 11:17:14
+https://forecast.io,True,Looks good!,2017-04-05 11:17:15
+https://gettyimages.com,False,Failed to connect to site,2017-04-05 11:17:15
+https://github.io,True,Looks good!,2017-04-05 11:17:16
+https://gmodules.com,False,Failed to connect to site,2017-04-05 11:17:16
+https://google.com,True,Looks good!,2017-04-05 11:17:17
+https://googleadservices.com,False,Failed with status code: 404,2017-04-05 11:17:17
+https://googleapis.com,False,Failed with status code: 404,2017-04-05 11:17:17
+https://gstatic.com,False,Failed with status code: 404,2017-04-05 11:17:17
+https://huntcal.com,True,Looks good!,2017-04-05 11:17:18
+https://harvard.edu,True,Looks good!,2017-04-05 11:17:18
+https://harvardartmuseums.org,False,Failed to connect to site,2017-04-05 11:17:18
+https://harvarddapa.org,False,Failed to connect to site,2017-04-05 11:17:18
+https://instagram.com,True,Looks good!,2017-04-05 11:17:19
+https://instantcal.com,False,Failed to connect to site,2017-04-05 11:17:19
+https://issuu.com,True,Looks good!,2017-04-05 11:17:19
+https://jotform.com,True,Looks good!,2017-04-05 11:17:20
+https://jsbin.com,True,Looks good!,2017-04-05 11:17:20
+https://jupyter.org,False,Failed to connect to site,2017-04-05 11:17:20
+https://jwplatform.com,False,Failed with status code: 403,2017-04-05 11:17:21
+https://jwpsrv.com,False,Failed with status code: 403,2017-04-05 11:17:22
+https://kaltura.com,True,Looks good!,2017-04-05 11:17:22
+https://knack.com,True,Looks good!,2017-04-05 11:17:23
+https://knackhq.com,True,Looks good!,2017-04-05 11:17:23
+https://knightlab.com,True,Looks good!,2017-04-05 11:17:29
+https://libsyn.com,True,Looks good!,2017-04-05 11:17:29
+https://livestream.com,True,Looks good!,2017-04-05 11:17:30
+https://localhost,False,Failed to connect to site,2017-04-05 11:17:30
+https://lynda.com,True,Looks good!,2017-04-05 11:17:30
+https://lytro.com,True,Looks good!,2017-04-05 11:17:31
+https://mailchimp.com,True,Looks good!,2017-04-05 11:17:31
+https://map.harvard.edu,True,Looks good!,2017-04-05 11:17:31
+https://mapbuildr.com,True,Looks good!,2017-04-05 11:17:32
+https://mapsalive.com,True,Looks good!,2017-04-05 11:17:33
+https://mediaamp.io,False,Failed to connect to site,2017-04-05 11:17:33
+https://mit.edu,True,Looks good!,2017-04-05 11:17:33
+https://mtvnservices.com,False,Failed to connect to site,2017-04-05 11:17:33
+https://my-wasabi.net,False,Failed to connect to site,2017-04-05 11:17:33
+https://ndtv.com,False,Failed to connect to site,2017-04-05 11:17:33
+https://njstatelib.org,True,Looks good!,2017-04-05 11:17:39
+https://npr.org,False,Failed to connect to site,2017-04-05 11:17:39
+https://office.com,True,Looks good!,2017-04-05 11:17:40
+https://ooyala.com,True,Looks good!,2017-04-05 11:17:40
+https://padlet.com,True,Looks good!,2017-04-05 11:17:40
+https://pardot.com,True,Looks good!,2017-04-05 11:17:42
+https://plot.ly,True,Looks good!,2017-04-05 11:17:42
+https://podbean.com,True,Looks good!,2017-04-05 11:17:42
+https://polleverywhere.com,True,Looks good!,2017-04-05 11:17:43
+https://preceden.com,False,Failed to connect to site,2017-04-05 11:17:43
+https://qualtrics.com,False,Failed to connect to site,2017-04-05 11:18:03
+https://radiolab.org,False,Failed to connect to site,2017-04-05 11:18:03
+https://rhumbl.com,True,Looks good!,2017-04-05 11:18:04
+https://sched.org,True,Looks good!,2017-04-05 11:18:04
+https://scribd.com,True,Looks good!,2017-04-05 11:18:05
+https://seethestats.com,True,Looks good!,2017-04-05 11:18:06
+https://service-now.com,True,Looks good!,2017-04-05 11:18:07
+https://sharepoint.com,False,Failed to connect to site,2017-04-05 11:18:27
+https://shinyapps.io,False,Failed to connect to site,2017-04-05 11:18:37
+https://signupgenius.com,False,Failed to connect to site,2017-04-05 11:18:47
+https://sketchfab.com,True,Looks good!,2017-04-05 11:18:47
+https://slaask.com,True,Looks good!,2017-04-05 11:18:48
+https://smithsonianmag.com,False,Failed to connect to site,2017-04-05 11:18:48
+https://smugmug.com,True,Looks good!,2017-04-05 11:18:48
+https://soundcloud.com,True,Looks good!,2017-04-05 11:18:49
+https://statcounter.com,True,Looks good!,2017-04-05 11:18:50
+https://storify.com,True,Looks good!,2017-04-05 11:18:50
+https://surveymonkey.com,False,Failed to connect to site,2017-04-05 11:18:51
+https://ted.com,True,Looks good!,2017-04-05 11:18:52
+https://trumba.com,True,Looks good!,2017-04-05 11:18:53
+https://tumblr.com,True,Looks good!,2017-04-05 11:18:54
+https://twitter.com,True,Looks good!,2017-04-05 11:18:54
+https://vimeo.com,True,Looks good!,2017-04-05 11:18:55
+https://vimeopro.com,True,Looks good!,2017-04-05 11:18:56
+https://wasabi.net,False,Failed to connect to site,2017-04-05 11:19:36
+https://wbur.org,False,Failed to connect to site,2017-04-05 11:19:36
+https://webofstories.com,True,Looks good!,2017-04-05 11:19:37
+https://weforum.org,True,Looks good!,2017-04-05 11:19:38
+https://wildapricot.com,True,Looks good!,2017-04-05 11:19:40
+https://wnyc.org,True,Looks good!,2017-04-05 11:19:41
+https://wunderlist.com,True,Looks good!,2017-04-05 11:19:42
+https://yahoo.com,True,Looks good!,2017-04-05 11:19:43
+https://youcanbook.me,True,Looks good!,2017-04-05 11:19:43
+https://youtube.com,True,Looks good!,2017-04-05 11:19:45
+https://zeemaps.com,True,Looks good!,2017-04-05 11:19:45
+https://zoho.com,True,Looks good!,2017-04-05 11:19:45
+https://zohopublic.com,False,Failed to connect to site,2017-04-05 11:19:55
+https://zotero.org,True,Looks good!,2017-04-05 11:19:57
