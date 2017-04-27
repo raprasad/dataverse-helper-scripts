@@ -129,6 +129,7 @@ createdb -E UTF8 -U wm_user -T template_postgis dataverse
 ### Geonode install steps
 
 ```
+git clone git://github.com/cga-harvard/cga-worldmap.git cga-worldmap
 cd /vagrant/cga-worldmap/
 git submodule update --init
 source ~/.bashrc
