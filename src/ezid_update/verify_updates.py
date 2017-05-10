@@ -29,14 +29,14 @@ def get_creds():
     return (creds_dict['EZID_USERNAME'],
             creds_dict['EZID_PASSWORD'])
 
-class UpdateRunner(object):
+class UpdateCheck(object):
     """Run API updates against EZID"""
 
     def __init__(self, input_file):
         self.cred_info = get_creds()
         self.input_file = input_file
 
-    def run_ez_id_file(self, start_row=1, stop_row=None):
+    def run_ez_id_check(self, start_row=1, stop_row=None):
         assert isfile(self.input_file),\
             "Input file not found: %s" % self.input_file
 
@@ -52,38 +52,55 @@ class UpdateRunner(object):
                     continue    # next loop
 
                 doi = single_row[0]
-                msgt('(%s) Update DOI: %s' % (row_cnt, doi))
-                self.run_single_update(\
+                msgt('(%s) Check DOI: %s' % (row_cnt, doi))
+                self.run_single_check(\
                     doi=doi,
-                    status='unavailable | withdrawn by author')
+                    desired_status='unavailable')
 
 
+    def examine_status(self, doi_info, desired_status):
+        if doi_info is None:
+            return False, 'doi_info is None'
 
-    def run_single_update(self, doi, status):
+        # split into array of lines
+        doi_text = doi_info.strip().split('\n')
+
+        doi_dict = {}
+        for line in doi_text:
+            key, val = line.split(':', 1)
+            doi_dict[key.strip()] = val.strip()
+
+        doi_status = doi_dict.get('_status', 'Not found')
+        doi_status = doi_status.split('|')[0].strip()
+
+        if doi_status == desired_status:
+            return True, 'looks good, status is: %s' % doi_status
+
+        return False, 'status is [%s]' % doi_status
+
+    def run_single_check(self, doi, desired_status):
 
         api_url = 'https://ezid.cdlib.org/id/%s' % (doi)
 
-        payload = ('_target=%s'
-                   '&_status=%s'
-                   '&_export=no') % (api_url, status)
+        r = requests.get(api_url)
 
-        sess_auth = self.cred_info
-
-        msg('api_url: %s' % api_url)
-        msg('payload: %s' % payload)
-        msg('make update...\n')
-        r = requests.post(api_url, data=payload, auth=sess_auth)
-
-        msg('text: %s' % r.text)
+        #msg('text: %s' % r.text)
         msg('status_code: %s' % r.status_code)
 
         if r.status_code != 200:
-            msgx('Failed to update DOI! %s' % doi)
+            msgx('Failed to check DOI! %s' % doi)
 
+        doi_info = r.text
+
+        success, err_msg = self.examine_status(doi_info, desired_status)
+        if success is True:
+            msg('Looks good!')
+        else:
+            msg('!!! Update failed: %s' % err_msg)
 
 if __name__ == '__main__':
     filename = join(CURRENT_DIR, 'input', 'bad_links.csv')
 
-    ur = UpdateRunner(filename)
-    ur.run_ez_id_file(start_row=68, stop_row=None)
+    ur = UpdateCheck(filename)
+    ur.run_ez_id_check(start_row=1, stop_row=10)
     #ur.run_ez_id_file(start_row=12, stop_row=30)
