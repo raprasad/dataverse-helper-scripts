@@ -71,6 +71,8 @@ class UpdateCheck(object):
             doi_dict[key.strip()] = val.strip()
 
         doi_status = doi_dict.get('_status', 'Not found')
+
+        msg('doi_status (raw): %s' % doi_status)
         doi_status = doi_status.split('|')[0].strip()
 
         if doi_status == desired_status:
@@ -102,5 +104,5 @@ if __name__ == '__main__':
     filename = join(CURRENT_DIR, 'input', 'bad_links.csv')
 
     ur = UpdateCheck(filename)
-    ur.run_ez_id_check(start_row=1, stop_row=10)
+    ur.run_ez_id_check(start_row=10, stop_row=20)
     #ur.run_ez_id_file(start_row=12, stop_row=30)
