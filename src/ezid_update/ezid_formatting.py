@@ -6,45 +6,9 @@ from __future__ import print_function
 import re
 
 STATUS_UNAVAILABLE = 'unavailable'
-STATUS_UPDATE_UNAVAILABLE_WITHDRAWN ='unavailable | withdrawn by author'
 STATUS_PUBLIC = 'public'
 
-def anvl_unescape(item_str):
-    """Reverse the ANVL format"""
-    return re.sub("%([0-9A-Fa-f][0-9A-Fa-f])",
-                  lambda m: chr(int(m.group(1), 16)),
-                  item_str)
-
-def reverse_formatting(anvl_str):
-    """Convert an ANVL string to a dict
-    source: https://ezid.cdlib.org/doc/apidoc.html#internal-metadata
-    """
-
-    metadata = dict(tuple(self.anvl_unescape(v).strip()\
-                    for v in l.split(":", 1)) \
-                    for l in anvl_str.decode("UTF-8").splitlines())
-
-    return metadata
-
-def anvl_escape(item_str):
-    """
-    Escape the string for ANVL formatting
-    example source: https://ezid.cdlib.org/doc/apidoc.html#internal-metadata
-    """
-    return re.sub("[%:\r\n]", lambda c: "%%%02X" % ord(c.group(0)), item_str)
-
-
-def format_for_request(metadata_dict):
-    """
-    Convert a dict to an ANVL string.
-    DOI updates are in the ANVL format as described here:
-    https://ezid.cdlib.org/doc/apidoc.html#internal-metadata
-    """
-    formatted_lines = ["%s: %s" %\
-                       (self.anvl_escape(name), self.anvl_escape(value))\
-                       for name, value in metadata_dict.items()]
-    return '\n'.join(formatted_lines).encode("UTF-8")
-
+STATUS_UPDATE_UNAVAILABLE_WITHDRAWN ='unavailable | withdrawn by author'
 
 def examine_status(doi_info, desired_status):
     """Given an EZID response, examine it to see if the status is correct
