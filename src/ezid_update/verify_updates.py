@@ -18,9 +18,10 @@ from helper_utils.msg_util import msg, msgt, msgx
 class UpdateCheck(object):
     """Run API updates against EZID"""
 
-    def __init__(self, input_file):
+    def __init__(self, input_file, **kwargs):
         self.cred_info = get_creds()
         self.input_file = input_file
+        self.show_full_results = kwargs.get('show_full_results', False)
 
     def run_ez_id_check(self, start_row=1, stop_row=None):
         assert isfile(self.input_file),\
@@ -51,7 +52,8 @@ class UpdateCheck(object):
 
         r = requests.get(api_url)
 
-        #msg('text: %s' % r.text)
+        if self.show_full_results:
+            msg('%s' % r.text)
         msg('status_code: %s' % r.status_code)
 
         if r.status_code != 200:
@@ -68,6 +70,8 @@ class UpdateCheck(object):
 if __name__ == '__main__':
     filename = join(CURRENT_DIR, 'input', 'bad_links.csv')
 
-    ur = UpdateCheck(filename)
-    ur.run_ez_id_check(start_row=1)#, stop_row=30)
+    check_args = dict(show_full_results=False)
+
+    ur = UpdateCheck(filename, **check_args)
+    ur.run_ez_id_check(start_row=2)#, stop_row=20)
     #ur.run_ez_id_file(start_row=12, stop_row=30)

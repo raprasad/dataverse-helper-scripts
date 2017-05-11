@@ -5,8 +5,8 @@ import csv
 import subprocess
 
 from ezid_formatting import STATUS_UNAVAILABLE,\
-    format_for_request,\
-    examine_status
+    STATUS_PUBLIC,\
+    STATUS_UPDATE_UNAVAILABLE_WITHDRAWN
 from creds_reader import get_creds
 #
 # Pull in util scripts
@@ -44,42 +44,11 @@ class UpdateRunner(object):
                 else:
                     self.run_single_update(\
                         doi=doi,
-                        status=STATUS_UNAVAILABLE)
-                #    status='unavailable | withdrawn by author')
+                        status=STATUS_UPDATE_UNAVAILABLE_WITHDRAWN)
 
                 if stop_row and row_cnt >= stop_row:
                     msgx('Stopping at row: %s' % row_cnt)
 
-
-
-
-    def run_single_update_sep_attributes(self, doi):
-        """Test in case ANVL formatting fails.  Run each
-        attribute update as a separate command"""
-
-
-        api_url = 'https://ezid.cdlib.org/id/%s' % (doi)
-
-        update1 = '_target:%s' % api_url
-        update2 = '_status: unavailable | Withdrawn'
-
-        for update_str in [update1, update2]:
-
-            msg('api_url: %s' % api_url)
-            msg('payload: %s' % update_str)
-            msg('make update...')
-
-            r = requests.post(api_url,
-                              data=update_str,
-                              auth=self.cred_info)
-
-            #msg('headers: %s' % r.headers)
-            msg('text: %s' % r.text)
-            msg('status_code: %s' % r.status_code)
-
-            if r.status_code != 200:
-                msgx('Failed to update DOI! %s' % doi)
-            msg('-----')
 
 
     def run_single_update_with_curl(self, doi, status):
@@ -112,25 +81,30 @@ class UpdateRunner(object):
         msg(cmd2_output)
 
 
+
     def run_single_update(self, doi, status):
-        #return self.run_single_update_sep_attributes(doi)
+        """Run an EZID update to change target, status, and export"""
 
         api_url = 'https://ezid.cdlib.org/id/%s' % (doi)
 
         metadata_update_dict = dict(_target=api_url,
-                                    _status=status,)
-                                    #_export='no')
+                                    _status=status,
+                                    _export='no')
 
-        doi_update_str = format_for_request(metadata_update_dict)
+        string_pairs = ['%s:%s' % (key, val)\
+                        for key, val in metadata_update_dict.items()]
+        doi_update_str = '\n'.join(string_pairs)
 
         msg('api_url: %s' % api_url)
-        msg('payload: %s' % doi_update_str)
+        msg('payload:\n %s' % doi_update_str)
         msg('make update...\n')
         #msgx('reverse: %s' % reverse_formatting(doi_update_str))
 
+        headers = {'Content-type': 'text/plain'}
         r = requests.post(api_url,
                           data=doi_update_str,
-                          auth=self.cred_info)
+                          auth=self.cred_info,
+                          headers=headers)
 
         #msg('headers: %s' % r.headers)
         msg('text: %s' % r.text)
@@ -139,31 +113,11 @@ class UpdateRunner(object):
         if r.status_code != 200:
             msgx('Failed to update DOI! %s' % doi)
 
-    def run_single_check(self, doi, desired_status):
-
-        api_url = 'https://ezid.cdlib.org/id/%s' % (doi)
-
-        r = requests.get(api_url)
-
-        #msg('text: %s' % r.text)
-        msg('status_code: %s' % r.status_code)
-
-        if r.status_code != 200:
-            msgx('Failed to check DOI! %s' % doi)
-
-        doi_info = r.text
-
-        success, err_msg = examine_status(doi_info, desired_status)
-        if success is True:
-            msg('Looks good!')
-        else:
-            msg('!!! Update failed: %s' % err_msg)
 
 if __name__ == '__main__':
     filename = join(CURRENT_DIR, 'input', 'bad_links.csv')
 
 
-    ur = UpdateRunner(filename, **dict(use_curl=True))
-    ur.run_ez_id_file(start_row=103)#, stop_row=31)
-
-    #ur.run_ez_id_file(start_row=12, stop_row=30)
+    #ur = UpdateRunner(filename, **dict(use_curl=True))
+    ur = UpdateRunner(filename)
+    ur.run_ez_id_file(start_row=10, stop_row=100)

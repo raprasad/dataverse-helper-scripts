@@ -6,7 +6,8 @@ from __future__ import print_function
 import re
 
 STATUS_UNAVAILABLE = 'unavailable'
-
+STATUS_UPDATE_UNAVAILABLE_WITHDRAWN ='unavailable | withdrawn by author'
+STATUS_PUBLIC = 'public'
 
 def anvl_unescape(item_str):
     """Reverse the ANVL format"""
