@@ -69,5 +69,5 @@ if __name__ == '__main__':
     filename = join(CURRENT_DIR, 'input', 'bad_links.csv')
 
     ur = UpdateCheck(filename)
-    ur.run_ez_id_check(start_row=103)#, stop_row=30)
+    ur.run_ez_id_check(start_row=1)#, stop_row=30)
     #ur.run_ez_id_file(start_row=12, stop_row=30)
