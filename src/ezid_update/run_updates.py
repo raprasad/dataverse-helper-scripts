@@ -1,10 +1,13 @@
 from os.path import abspath, dirname, isfile, join
-import re
 import sys
-import json
 import requests
 import csv
+import subprocess
 
+from ezid_formatting import STATUS_UNAVAILABLE,\
+    format_for_request,\
+    examine_status
+from creds_reader import get_creds
 #
 # Pull in util scripts
 CURRENT_DIR = dirname(abspath(__file__))
@@ -12,34 +15,13 @@ sys.path.append(dirname(CURRENT_DIR))
 
 from helper_utils.msg_util import msg, msgt, msgx
 
-
-
-def get_creds():
-    """Get the API creds from 'creds.json'"""
-
-    creds_fname = join(dirname(abspath(__file__)), 'creds.json')
-
-    assert isfile(creds_fname),\
-        'File not found: %s' % creds_fname
-
-    creds_content = open(creds_fname, 'r').read()
-
-    try:
-        creds_dict = json.loads(creds_content)
-    except ValueError:
-        msgx('Creds file not valid JSON: %s' % creds_content)
-
-    return (creds_dict['EZID_USERNAME'],
-            creds_dict['EZID_PASSWORD'])
-
-STATUS_UNAVAILABLE = 'unavailable'
-
 class UpdateRunner(object):
     """Run API updates against EZID"""
 
-    def __init__(self, input_file):
+    def __init__(self, input_file, **kwargs):
         self.cred_info = get_creds()
         self.input_file = input_file
+        self.run_update_with_curl = kwargs.get('use_curl', False)
 
     def run_ez_id_file(self, start_row=1, stop_row=None):
         assert isfile(self.input_file),\
@@ -56,9 +38,13 @@ class UpdateRunner(object):
 
                 doi = single_row[0]
                 msgt('(%s) Update DOI: %s' % (row_cnt, doi))
-                self.run_single_update(\
-                    doi=doi,
-                    status=STATUS_UNAVAILABLE)
+
+                if self.run_update_with_curl:
+                    self.run_single_update_with_curl(doi, STATUS_UNAVAILABLE)
+                else:
+                    self.run_single_update(\
+                        doi=doi,
+                        status=STATUS_UNAVAILABLE)
                 #    status='unavailable | withdrawn by author')
 
                 if stop_row and row_cnt >= stop_row:
@@ -66,46 +52,68 @@ class UpdateRunner(object):
 
 
 
-    def anvl_unescape(self, item_str):
-        """Reverse the ANVL format
-        example source: https://ezid.cdlib.org/doc/apidoc.html#internal-metadata
-        """
-        return re.sub("%([0-9A-Fa-f][0-9A-Fa-f])",
-                      lambda m: chr(int(m.group(1), 16)),
-                      item_str)
 
-    def reverse_formatting(self, anvl_str):
-        """Convert an ANVL string to a dict
-        source: https://ezid.cdlib.org/doc/apidoc.html#internal-metadata
-        """
-
-        metadata = dict(tuple(self.anvl_unescape(v).strip()\
-                        for v in l.split(":", 1)) \
-                        for l in anvl_str.decode("UTF-8").splitlines())
-
-        return metadata
-
-    def anvl_escape(self, item_str):
-        """
-        Escape the string for ANVL formatting
-        example source: https://ezid.cdlib.org/doc/apidoc.html#internal-metadata
-        """
-        return re.sub("[%:\r\n]", lambda c: "%%%02X" % ord(c.group(0)), item_str)
+    def run_single_update_sep_attributes(self, doi):
+        """Test in case ANVL formatting fails.  Run each
+        attribute update as a separate command"""
 
 
-    def format_for_request(self, metadata_dict):
-        """
-        Convert a dict to an ANVL string.
-        DOI updates are in the ANVL format as described here:
-        https://ezid.cdlib.org/doc/apidoc.html#internal-metadata
-        """
-        formatted_lines = ["%s: %s" %\
-                           (self.anvl_escape(name), self.anvl_escape(value))\
-                           for name, value in metadata_dict.items()]
-        return '\n'.join(formatted_lines).encode("UTF-8")
+        api_url = 'https://ezid.cdlib.org/id/%s' % (doi)
+
+        update1 = '_target:%s' % api_url
+        update2 = '_status: unavailable | Withdrawn'
+
+        for update_str in [update1, update2]:
+
+            msg('api_url: %s' % api_url)
+            msg('payload: %s' % update_str)
+            msg('make update...')
+
+            r = requests.post(api_url,
+                              data=update_str,
+                              auth=self.cred_info)
+
+            #msg('headers: %s' % r.headers)
+            msg('text: %s' % r.text)
+            msg('status_code: %s' % r.status_code)
+
+            if r.status_code != 200:
+                msgx('Failed to update DOI! %s' % doi)
+            msg('-----')
+
+
+    def run_single_update_with_curl(self, doi, status):
+        """Run the update as 2 separate curl commands"""
+
+        api_url = 'https://ezid.cdlib.org/id/%s' % (doi)
+
+        curl_cmd1 = ("curl -u {0}:{1} -X POST -H"
+                    " 'Content-Type: text/plain' --data-binary"
+                    " '_target:{2}' {2}").format(\
+                        self.cred_info[0],
+                        self.cred_info[1],
+                        api_url)
+
+        curl_cmd1_args = ['bash','-c', curl_cmd1]
+        msg('\nrun command: %s\n' % curl_cmd1)
+        cmd1_output = subprocess.check_output(curl_cmd1_args, shell=False)
+        msg(cmd1_output)
+
+        curl_cmd2 = ("curl -u {0}:{1} -X POST -H"
+                    " 'Content-Type: text/plain' --data-binary"
+                    " '_status:  unavailable | Withdrawn' {2}").format(\
+                        self.cred_info[0],
+                        self.cred_info[1],
+                        api_url)
+
+        msg('\nrun command: %s\n' % curl_cmd2)
+        curl_cmd2_args = ['bash','-c', curl_cmd2]
+        cmd2_output = subprocess.check_output(curl_cmd2_args, shell=False)
+        msg(cmd2_output)
 
 
     def run_single_update(self, doi, status):
+        #return self.run_single_update_sep_attributes(doi)
 
         api_url = 'https://ezid.cdlib.org/id/%s' % (doi)
 
@@ -113,28 +121,49 @@ class UpdateRunner(object):
                                     _status=status,)
                                     #_export='no')
 
-        doi_update_str = self.format_for_request(metadata_update_dict)
-
-
-        sess_auth = self.cred_info
+        doi_update_str = format_for_request(metadata_update_dict)
 
         msg('api_url: %s' % api_url)
         msg('payload: %s' % doi_update_str)
         msg('make update...\n')
-        #msgx('reverse: %s' % self.reverse_formatting(doi_update_str))
+        #msgx('reverse: %s' % reverse_formatting(doi_update_str))
 
-        r = requests.post(api_url, data=doi_update_str, auth=sess_auth)
+        r = requests.post(api_url,
+                          data=doi_update_str,
+                          auth=self.cred_info)
 
+        #msg('headers: %s' % r.headers)
         msg('text: %s' % r.text)
         msg('status_code: %s' % r.status_code)
 
         if r.status_code != 200:
             msgx('Failed to update DOI! %s' % doi)
 
+    def run_single_check(self, doi, desired_status):
+
+        api_url = 'https://ezid.cdlib.org/id/%s' % (doi)
+
+        r = requests.get(api_url)
+
+        #msg('text: %s' % r.text)
+        msg('status_code: %s' % r.status_code)
+
+        if r.status_code != 200:
+            msgx('Failed to check DOI! %s' % doi)
+
+        doi_info = r.text
+
+        success, err_msg = examine_status(doi_info, desired_status)
+        if success is True:
+            msg('Looks good!')
+        else:
+            msg('!!! Update failed: %s' % err_msg)
 
 if __name__ == '__main__':
     filename = join(CURRENT_DIR, 'input', 'bad_links.csv')
 
-    ur = UpdateRunner(filename)
-    ur.run_ez_id_file(start_row=10, stop_row=302)
+
+    ur = UpdateRunner(filename, **dict(use_curl=True))
+    ur.run_ez_id_file(start_row=103)#, stop_row=31)
+
     #ur.run_ez_id_file(start_row=12, stop_row=30)

@@ -4,6 +4,9 @@ import json
 import requests
 import csv
 
+from creds_reader import get_creds
+from ezid_formatting import STATUS_UNAVAILABLE,\
+    examine_status
 #
 # Pull in util scripts
 CURRENT_DIR = dirname(abspath(__file__))
@@ -11,23 +14,6 @@ sys.path.append(dirname(CURRENT_DIR))
 
 from helper_utils.msg_util import msg, msgt, msgx
 
-def get_creds():
-    """Get the API creds from 'creds.json'"""
-
-    creds_fname = join(dirname(abspath(__file__)), 'creds.json')
-
-    assert isfile(creds_fname),\
-        'File not found: %s' % creds_fname
-
-    creds_content = open(creds_fname, 'r').read()
-
-    try:
-        creds_dict = json.loads(creds_content)
-    except ValueError:
-        msgx('Creds file not valid JSON: %s' % creds_content)
-
-    return (creds_dict['EZID_USERNAME'],
-            creds_dict['EZID_PASSWORD'])
 
 class UpdateCheck(object):
     """Run API updates against EZID"""
@@ -45,8 +31,6 @@ class UpdateCheck(object):
             row_cnt = 0
             for single_row in doi_reader:
                 row_cnt += 1
-                if stop_row and row_cnt >= stop_row:
-                    msgx('Stopping at row: %s' % row_cnt)
 
                 if row_cnt == 1 or row_cnt < start_row:
                     continue    # next loop
@@ -57,28 +41,9 @@ class UpdateCheck(object):
                     doi=doi,
                     desired_status='unavailable')
 
+                if stop_row and row_cnt >= stop_row:
+                    msgx('Stopping at row: %s' % row_cnt)
 
-    def examine_status(self, doi_info, desired_status):
-        if doi_info is None:
-            return False, 'doi_info is None'
-
-        # split into array of lines
-        doi_text = doi_info.strip().split('\n')
-
-        doi_dict = {}
-        for line in doi_text:
-            key, val = line.split(':', 1)
-            doi_dict[key.strip()] = val.strip()
-
-        doi_status = doi_dict.get('_status', 'Not found')
-
-        msg('doi_status (raw): %s' % doi_status)
-        doi_status = doi_status.split('|')[0].strip()
-
-        if doi_status == desired_status:
-            return True, 'looks good, status is: %s' % doi_status
-
-        return False, 'status is [%s]' % doi_status
 
     def run_single_check(self, doi, desired_status):
 
@@ -94,7 +59,7 @@ class UpdateCheck(object):
 
         doi_info = r.text
 
-        success, err_msg = self.examine_status(doi_info, desired_status)
+        success, err_msg = examine_status(doi_info, desired_status)
         if success is True:
             msg('Looks good!')
         else:
@@ -104,5 +69,5 @@ if __name__ == '__main__':
     filename = join(CURRENT_DIR, 'input', 'bad_links.csv')
 
     ur = UpdateCheck(filename)
-    ur.run_ez_id_check(start_row=10, stop_row=20)
+    ur.run_ez_id_check(start_row=103)#, stop_row=30)
     #ur.run_ez_id_file(start_row=12, stop_row=30)
