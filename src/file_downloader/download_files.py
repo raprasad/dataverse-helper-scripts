@@ -38,7 +38,7 @@ def get_api_key():
     return creds_dict['DV_API_KEY']
 
 
-class FileRetreiver(object):
+class FileRetriever(object):
     """
     Iterate through a list of file ids,
     retrieve the file from Dataverse,
@@ -188,7 +188,7 @@ if __name__ == '__main__':
     extra_kwargs = dict(extension_type = '.xls',
                         input_start_line=36041)
 
-    file_retriever = FileRetreiver(get_api_key(),
+    file_retriever = FileRetriever(get_api_key(),
                                  input_file,
                                  ddi_output_dir,
                                  **extra_kwargs)
