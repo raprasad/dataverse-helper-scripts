@@ -17,7 +17,7 @@ from helper_utils.msg_util import msg, msgt, msgx
 
 class UpdateRunner(object):
     """Run API updates against EZID"""
-
+    """Run API updates against EZID"""
     def __init__(self, input_file, **kwargs):
         self.cred_info = get_creds()
         self.input_file = input_file
