@@ -1,7 +1,7 @@
 
-## Using Primefaces components vs. API/JSON/Template
+# Using Primefaces components vs. API/JSON/Template
 
-  - **Question**: Is your component working for you or are you working for your component?
+**Question**: Is your component working for you or are you working for your component?
 
 ### Use a Primefaces component when:
 
