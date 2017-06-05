@@ -1,14 +1,14 @@
 
-# Using Primefaces components vs. API/JSON/Template
+## Using Primefaces components vs. API/JSON/Template
 
   - **Question**: Is your component working for you or are you working for your component?
 
-## Use a Primefaces component when:
+### Use a Primefaces component when:
 
 1. Component matches design or can be tweaked via css, built-in styles
 1. Component is performant
 
-## Avoid component when:
+### Avoid component when:
 
 1. Changing component design becomes main task.
 1. Making component performant adds high overhead/complexity
@@ -18,7 +18,7 @@
 
 ---
 
-# Comparison of API/JSON/Template vs. Primefaces Component
+## Comparison of API/JSON/Template vs. Primefaces Component
 
 
 
@@ -36,8 +36,9 @@
 |10|Widely used paradigm|**Yes**|**No**\*|\*Industry shift to microservices, other frameworks, Oracle pulling resources, fewer programmers in their 20s, etc.|
 |11|Selenium Automated Testing|**Yes**|**No**\*|\*Requires significant programming (time prohibitive)|
 
+---
 
-# Consistency
+## Consistency
 
 There is something to be said for using Primefaces components because they are consistent with other parts of the system.  __However__, that view should be factored in with the points in the chart above and, more importantly, with a longer term strategic view of the system if the goals include:
   - Having more API endpoints
