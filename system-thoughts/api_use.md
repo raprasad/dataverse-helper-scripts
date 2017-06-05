@@ -1,7 +1,7 @@
 
 # Using Primefaces components vs. API/JSON/Template
 
-**Question**: Is your component working for you or are you working for your component?
+  - **Question**: Is your component working for you or are you working for your component?
 
 ## Use a Primefaces component when:
 
@@ -18,19 +18,11 @@
 
 ---
 
-<<<<<<< Updated upstream
-## Comparison of API/JSON/Template vs. Primefaces Component
-
-|#|Capability/Process|API/JSON/Template (server or browser based)|Primefaces Component|Note|
----|:---:|:---:|:---:|---
-|1|**Development Time**|**Medium**|**High**\*|\* When the component does *not* fit the given task. |
-=======
 # Comparison of API/JSON/Template vs. Primefaces Component
 
 |#|Capability/Process|API/JSON/Template (server or browser based)|Primefaces Component|Note|
 ---|:---:|:---:|:---:|---
 |1|**Dev Time**|**Medium**|**High**||
->>>>>>> Stashed changes
 |2|**Automated Testing** (Rest Assured)|**Yes**|**No**|
 |3|**HTML Customization**|**Easy/Medium**\*|**Difficult**\*\*|\*Many tools available or raw HTML (Java templating, jquery, datatables, angular, react, etc, etc)  \*\*Design limited to Primeface components. (ref: dataset page file listing)|
 |4|**Troubleshooting**: Business Logic/Design Separate|**Yes**\*|**No**|\*Easier to identify issues, especially with automated testing of business logic.  Right away "50% easier" -- easily determine whether issue is in business logic or template|
