@@ -40,7 +40,7 @@ For a more in-depth discussion, short and long-term views should be applied, wei
 |6|**Code reuse**|**High**\*|**Low/Medium**\*\*|\*API endpoints/templates can be re-used. \*\*Components tightly tied to Business Logic|
 |7|Javascript Dependent|**Yes** - if browser based|**Yes**|
 |8|508 Compliance with Forms|**It depends**|**No**|
-|9|Widely used in open source community|**Yes**\*|**No** \*\*|\*More community -> Great pool of potential contributors, stackoverflow, etc) \*\*In 2016 we were believed to be only open source project|
+|9|**Widely used in open source community**|**Yes**\*|**No** \*\*|\*More community -> Great pool of potential contributors, stackoverflow, etc) \*\*In 2016 we were believed to be only open source project|
 |10|Widely used paradigm|**Yes**|**No**\*|\*Industry shift to microservices, other frameworks, Oracle pulling resources, fewer programmers in their 20s, etc.|
 |11|Selenium Automated Testing|**Yes**|**No**\*|\*Requires significant programming (time prohibitive)|
 
