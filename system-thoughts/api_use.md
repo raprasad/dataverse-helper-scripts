@@ -11,7 +11,10 @@
 1. Changing component design becomes main task.
 1. Making component performant adds high overhead/complexity
 
+
 **Summary**: Do what makes sense in the situation rather than forcing code and design to conform to a component
+
+---
 
 # Comparison of API/JSON/Template vs. Primefaces Component
 
