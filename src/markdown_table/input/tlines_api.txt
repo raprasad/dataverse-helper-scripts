@@ -4,7 +4,7 @@ Capability/Process|API/JSON/Template (server or browser based)|Primefaces Compon
 **HTML Customization**|**Easy/Medium**\*|**Difficult**\*\*|\*Many tools available or raw HTML (Java templating, jquery, datatables, angular, react, etc, etc)  \*\*Design limited to Primeface components. (ref: dataset page file listing)
 **Troubleshooting**: Business Logic/Design Separate|**Yes**\*|**No**|\*Easier to identify issues, especially with automated testing of business logic.  Right away "50% easier" -- easily determine whether issue is in business logic or template
 **Performance Tuning**|More choices/Business logic not in component|Often constrained by component|
-**Code reuse**|**High**|**Low/Medium**|\*API endpoints/templates can be re-used. \*\*Components tightly tied to Business Logic
+**Code reuse**|**High**\*|**Low/Medium**\*\*|\*API endpoints/templates can be re-used. \*\*Components tightly tied to Business Logic
 Javascript Dependent|**Yes** - if browser based|**Yes**
 508 Compliance with Forms|**It depends**|**No**
 Widely used in open source community|**Yes**\*|**No** \*\*|\*More community -> more potential contributors, stackoverflow, etc) \*\*In 2016 we were believed to be only open source project
