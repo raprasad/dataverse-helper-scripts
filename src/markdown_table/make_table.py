@@ -50,8 +50,8 @@ def run_as_markdown_table(table_lines, add_line_numbers=False):
             #break
             header_breaks = []
             for x in range(0, len(tl[1:-1].strip().split('|'))):
-                if x==0 and add_line_numbers:
-                    header_breaks.append('---')
+                #if x==0 and add_line_numbers:
+                #    header_breaks.append('---')
                 if x == 0:
                     header_breaks.append('---')
                 else:

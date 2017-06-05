@@ -1,0 +1,12 @@
+Capability/Process|API/JSON/Template (server or browser based)|Primefaces Component|Note
+**Dev Time**|**Medium**|**High**|
+**Automated Testing** (Rest Assured)|**Yes**|**No**
+**HTML Customization**|**Easy/Medium** (Many tools available or raw HTML)|**Difficult**|Design limited to Primeface components. (ref: dataset page file listing)
+**Troubleshooting** / Identifying where problems/bugs exist|Business Logic and Design **Separate** ("50% easier")|Business Logic and Design **Intertwined**|Easier to identify issues, especially with automated testing of business logic.
+**Performance Tuning**|More choices/Business logic not in component|Often constrained by component|
+**Code reuse**|**High**: API endpoints/templates can be re-used|**Low/Medium**: Components tied to Business Logic
+Javascript Dependent|**Yes** - if browser based|**Yes**
+508 Compliance with Forms|**It depends**|**No**
+Widely used in open source community|**Yes** (more potential contributors, more community, stackoverflow,etc)|**No** (2016 we were believed to be only open source project)|
+Widely used paradigm|**Yes**|**No** - Industry shifting away|Industry shift to microservices, other frameworks, Oracle pulling resources, fewer programmers in their 20s, etc.
+Selenium Automated Testing|**Yes**|**No** requires significant programming (time prohibitive)
