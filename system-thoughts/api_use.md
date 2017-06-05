@@ -1,24 +1,34 @@
 
 # Using Primefaces components vs. API/JSON/Template
 
+This document attempts to examine factors when examining the decision whether or not to use a Primefaces component.  
+
   - **Question**: Is your component working for you or are you working for your component?
 
-## Use a Primefaces component when:
+Below are two rules of thumb which may be applied when adding new UI functionality.
+
+## 1. Use a Primefaces component when:
 
 1. Component matches design or can be tweaked via css, built-in styles
 1. Component is performant
 
-## Avoid component when:
+## 2. Avoid component when:
 
 1. Changing component design becomes main task.
 1. Making component performant adds high overhead/complexity
 
 
-**Summary**: Do what makes sense in the situation rather than forcing code and design to conform to a component.
+**Summary for Rules of Thumb**: Do what makes sense in the situation rather than forcing code and design to conform to a component.
 
 ---
 
 # Comparison of API/JSON/Template vs. Primefaces Component
+
+This list compares the use of Primefaces components versus using an approach of businss logic/APIs which return JSON and are then coupled with templates (w/o business logic) or javascript components.
+
+For a more in-depth discussion, short and long-term views should be applied, weighing:
+  - How will the chosen approach help us accomplish tasks now?  
+  - How will the chosen approach effect the project in 1, 2, 5 years?
 
 |#|Capability/Process|API/JSON/Template (server or browser based)|Primefaces Component|Note|
 ---|:---:|:---:|:---:|---
