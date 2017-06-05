@@ -20,18 +20,19 @@
 
 
 |#|Capability/Process|API/JSON/Template (server or browser based)|Primefaces Component|Note|
----|:---:|:---:|:---:|:---:
+---|:---:|:---:|:---:|---
 |1|**Dev Time**|**Medium**|**High**||
 |2|**Automated Testing** (Rest Assured)|**Yes**|**No**|
-|3|**HTML Customization**|**Easy/Medium** (Many tools available or raw HTML)|**Difficult**|Design limited to Primeface components. (ref: dataset page file listing)|
-|4|**Troubleshooting** / Identifying where problems/bugs exist|Business Logic and Design **Separate** ("50% easier")|Business Logic and Design **Intertwined**|Easier to identify issues, especially with automated testing of business logic.|
+|3|**HTML Customization**|**Easy/Medium**\*|**Difficult**\*\*|\*Many tools available or raw HTML (Java templating, jquery, datatables, angular, react, etc, etc)  \*\*Design limited to Primeface components. (ref: dataset page file listing)|
+|4|**Troubleshooting**: Business Logic/Design Separate|**Yes**\*|**No**|\*Easier to identify issues, especially with automated testing of business logic.  Right away "50% easier" -- easily determine whether issue is in business logic or template|
 |5|**Performance Tuning**|More choices/Business logic not in component|Often constrained by component||
-|6|**Code reuse**|**High**: API endpoints/templates can be re-used|**Low/Medium**: Components tied to Business Logic|
+|6|**Code reuse**|**High**|**Low/Medium**|\*API endpoints/templates can be re-used. \*\*Components tightly tied to Business Logic|
 |7|Javascript Dependent|**Yes** - if browser based|**Yes**|
 |8|508 Compliance with Forms|**It depends**|**No**|
-|9|Widely used in open source community|**Yes** (more potential contributors, more community, stackoverflow,etc)|**No** (2016 we were believed to be only open source project)||
-|10|Widely used paradigm|**Yes**|**No** - Industry shifting away|Industry shift to microservices, other frameworks, Oracle pulling resources, fewer programmers in their 20s, etc.|
-|11|Selenium Automated Testing|**Yes**|**No** requires significant programming (time prohibitive)|
+|9|Widely used in open source community|**Yes**\*|**No** \*\*|\*More community -> more potential contributors, stackoverflow, etc) \*\*In 2016 we were believed to be only open source project|
+|10|Widely used paradigm|**Yes**|**No**\*|\*Industry shift to microservices, other frameworks, Oracle pulling resources, fewer programmers in their 20s, etc.|
+|11|Selenium Automated Testing|**Yes**|**No**\*|\*Requires significant programming (time prohibitive)|
+
 
 # Consistency
 
