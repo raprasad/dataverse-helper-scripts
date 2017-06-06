@@ -54,4 +54,4 @@ There is something to be said for using Primefaces components because they are c
   - Improving automated testing
   - Shifting some parts of the system to separate microservices to improve scalability
 
-- click to enlarge: <a href="https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/api-diagram-01.png?raw=true"><img src="https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/api-diagram-01.png?raw=true" width="200" /></a>
+- click to enlarge: <a href="https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/api-diagram-01.png?raw=true"><img src="https://github.com/IQSS/dataverse-helper-scripts/blob/master/system-thoughts/api-diagram-01.png?raw=true" width="450" /></a>
