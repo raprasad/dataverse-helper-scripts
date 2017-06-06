@@ -150,7 +150,7 @@ class JavaHelper(object):
 
 
 if __name__=='__main__':
-    content = open('input/file_checker.txt')
+    content = open('input/offset.txt')
     jhelper = JavaHelper(content)
     print jhelper.get_java_lines(includeJSON=False)
 
