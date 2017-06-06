@@ -1,3 +1,4 @@
+_(fyi: for internal team discussion, not consensus opinion, etc)_
 
 # Using Primefaces components vs. API/JSON/Template
 
