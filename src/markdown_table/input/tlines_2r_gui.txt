@@ -1,0 +1,5 @@
+GUI Element(s)|Data to Save|Note
+Selected spheres|selected variables|note how 1st three spheres are chosen
+sphere position|is this done elsewhere?|which x/y coordinates should be saved?
+Edges, dependent variables|edges|is this done elsewhere?
+Subset histograms|currently in transformed file|Should this be output to a new preprocess file?  What is the best way to persist this in a session?

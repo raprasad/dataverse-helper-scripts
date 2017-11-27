@@ -18,17 +18,17 @@ from helper_utils.msg_util import *
 INPUT_DIR = join(MARKDOWN_TABLE_DIR, 'input')
 
 
-def run_as_markdown_table(table_lines, add_line_numbers=False):
+def run_as_markdown_table(table_lines,
+                          add_line_numbers=False,
+                          center_cols=False):
 
-    print '\n' * 5
+    dashes()
 
     for cnt, tl in enumerate(table_lines):
         if cnt > 0:
-            print '- [ ] %d) %s' % (cnt, tl.split('|')[0].strip())
+            print ('- [ ] %d) %s' % (cnt, tl.split('|')[0].strip()))
 
-    print '\n' * 2
-    print '---'
-    print '\n' * 2
+    dashes()
 
     table_lines = [x.strip() for x in table_lines if len(x.strip())> 0]
 
@@ -54,6 +54,8 @@ def run_as_markdown_table(table_lines, add_line_numbers=False):
                 #    header_breaks.append('---')
                 if x == 0:
                     header_breaks.append('---')
+                elif center_cols is False:
+                    header_breaks.append('---')
                 else:
                     header_breaks.append(':---:')
             #print header_breaks
@@ -61,19 +63,19 @@ def run_as_markdown_table(table_lines, add_line_numbers=False):
 
 
     print ''
-    print '\n'.join(fmt_lines)
+    msgt('\n'.join(fmt_lines))
 
-    print '\n' * 5
+    msg('\n' * 5)
 
 
 def make_md_table_from_file(fname):
 
     if not isfile(fname):
-        print 'file not found! ', fname
+        print('file not found! ', fname)
 
     flines = open(fname, 'r').readlines()
     flines = [x.strip() for x in flines if len(x.strip()) > 0]
-    run_as_markdown_table(flines, True)
+    run_as_markdown_table(flines, True, center_cols=False)
 
 def list_input_files():
 
@@ -81,7 +83,7 @@ def list_input_files():
     msgt("Choose a file number.")
     for f in os.listdir(INPUT_DIR):
         cnt += 1
-        print '%d) %s' % (cnt, f)
+        print ('%d) %s' % (cnt, f))
     dashes()
     if cnt == 0:
         msg("Sorry!  No input files found in: %s" % INPUT_DIR)
@@ -106,5 +108,5 @@ if __name__ == '__main__':
         #make_md_table_from_file(sys.argv[1])
     else:
         list_input_files()
-        print 'python make_table.py [filename]'
-        print 'e.g. python make_table.py [tlines_01_replace.txt]'
+        print ('python make_table.py [filename]')
+        print ('e.g. python make_table.py [tlines_01_replace.txt]')

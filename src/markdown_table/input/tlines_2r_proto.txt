@@ -1,0 +1,5 @@
+RPC Call|Results|Embed Results|File
+CreatePipelines|stream PipelineCreateResult|Yes|req_pipeline_create.py
+GetCreatePipelineResults|stream PipelineCreateResult|Yes|(not implemented yet)
+ExecutePipeline|stream PipelineExecuteResult|Yes|req_execute_pipeline.py
+GetExecutePipelineResults|stream PipelineExecuteResult|Yes|req_get_execute_pipeline.py
